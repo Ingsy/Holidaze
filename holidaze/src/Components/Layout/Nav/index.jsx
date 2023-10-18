@@ -39,6 +39,11 @@ function Navbar() {
                 Register
               </Link>
             </li>
+            <li className="nav-item">
+              <Link to="/Login" className="nav-link">
+                Login
+              </Link>
+            </li>
           </ul>
           <form className="d-flex" role="search">
             <input
