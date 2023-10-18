@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import styles from "./VenueList.module.css";
 
-function VenueList({}) {
+function VenueList() {
   const [venues, setVenues] = useState([]);
   const [loading, setLoading] = useState(true);
 
@@ -40,6 +40,7 @@ function VenueList({}) {
               Max Guests: {venue.maxGuests}
             </p>
             <p className={styles.venueRating}>Rating: {venue.rating}</p>
+            <Link to={`/venue/${venue.id}`}>Checkout Venue</Link>
           </div>
         ))
       )}

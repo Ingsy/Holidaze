@@ -1,14 +1,15 @@
 import React, { useState, useEffect } from "react";
 import styles from "./VenueDetails.module.css";
-import StarRating from "../StarRating";
+import { useParams } from "react-router-dom";
 
-function VenueDetails({ match }) {
+function VenueDetails() {
+  const { id } = useParams();
+
   const [venue, setVenue] = useState(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const venueId = match.params.id; // Extract venue ID from the URL parameter
-    const apiUrl = `https://api.noroff.dev/api/v1/holidaze/venues/${venueId}`;
+    const apiUrl = `https://api.noroff.dev/api/v1/holidaze/venues/${id}`;
 
     fetch(apiUrl)
       .then((response) => response.json())
@@ -20,7 +21,7 @@ function VenueDetails({ match }) {
         console.error("Error fetching venue details:", error);
         setLoading(false);
       });
-  }, [match.params.id]);
+  }, [id]);
 
   return (
     <div className={styles.detailsContainer}>
@@ -42,41 +43,23 @@ function VenueDetails({ match }) {
           <p className={styles.venueDescription}>{venue.description}</p>
           <p className={styles.venuePrice}>Price: ${venue.price}</p>
           <p className={styles.venueMaxGuests}>Max Guests: {venue.maxGuests}</p>
-          <span className={styles.rating}>
-            <StarRating rating={parseFloat(venue.rating)} />
-          </span>
+          <p className={styles.rating}>rating: {venue.rating}</p>
           <div className={styles.locationContainer}>
             <p className={styles.locationTitle}>Location:</p>
             <p className={styles.locationInfo}>
-              {venue.location.address}, {venue.location.city},{" "}
-              {venue.location.zip}
+              Address: {venue.location.address}
+            </p>
+            <p className={styles.locationInfo}>City: {venue.location.city}</p>
+            <p className={styles.locationInfo}>Zip: {venue.location.zip}</p>
+            <p className={styles.locationInfo}>
+              Country: {venue.location.country}
             </p>
             <p className={styles.locationInfo}>
-              {venue.location.country}, {venue.location.continent}
+              Continent: {venue.location.continent}
             </p>
             <p className={styles.locationInfo}>
               Latitude: {venue.location.lat}, Longitude: {venue.location.lng}
             </p>
-          </div>
-          <div className={styles.ownerContainer}>
-            <p className={styles.ownerTitle}>Owner:</p>
-            <p className={styles.ownerInfo}>{venue.owner.name}</p>
-            <p className={styles.ownerInfo}>{venue.owner.email}</p>
-            <img
-              src={venue.owner.avatar}
-              alt="Owner Avatar"
-              className={styles.ownerAvatar}
-            />
-          </div>
-          <div className={styles.bookingsContainer}>
-            <p className={styles.bookingsTitle}>Bookings:</p>
-            {venue.bookings.map((booking, index) => (
-              <div key={index} className={styles.bookingInfo}>
-                <p>Date From: {booking.dateFrom}</p>
-                <p>Date To: {booking.dateTo}</p>
-                <p>Guests: {booking.guests}</p>
-              </div>
-            ))}
           </div>
         </>
       )}
