@@ -57,36 +57,3 @@
 .locationInfo {
   margin-top: 5px;
 }
-
-.ownerContainer {
-  margin-top: 20px;
-}
-
-.ownerTitle {
-  font-weight: bold;
-}
-
-.ownerInfo {
-  margin-top: 5px;
-}
-
-.ownerAvatar {
-  width: 100px;
-  height: 100px;
-  object-fit: cover;
-  margin-top: 10px;
-}
-
-.bookingsContainer {
-  margin-top: 20px;
-}
-
-.bookingsTitle {
-  font-weight: bold;
-}
-
-.bookingInfo {
-  margin-top: 10px;
-}
-
-/* Add more styles as needed for other parameters */
