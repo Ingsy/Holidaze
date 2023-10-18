@@ -10,8 +10,18 @@ function RegisterForm() {
     venueManager: false,
   });
 
+  const [error, setError] = useState("");
+
   const handleInputChange = (e) => {
     const { name, value } = e.target;
+
+    const isStudNoroffEmail = /@stud\.noroff\.no$/i.test(value);
+    if (name === "email" && !isStudNoroffEmail) {
+      setError("Please use a valid @stud.noroff.no email address");
+    } else {
+      setError(""); // Clear the error if the email is valid
+    }
+
     setFormData({
       ...formData,
       [name]: value,
@@ -71,6 +81,7 @@ function RegisterForm() {
           required
         />
       </div>
+      {error && <div className="error-message">{error}</div>}
       <div>
         <label htmlFor="password">Password:</label>
         <input
