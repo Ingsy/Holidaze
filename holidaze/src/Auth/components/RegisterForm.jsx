@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { setToken } from "../utils/LocalStorage";
+import { headers } from "../utils/authFetch";
 
 function RegisterForm() {
   const [formData, setFormData] = useState({
@@ -30,6 +31,7 @@ function RegisterForm() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    console.log("Form successfully registered:", formData);
 
     try {
       const response = await fetch(
@@ -37,6 +39,7 @@ function RegisterForm() {
         {
           method: "POST",
           headers: {
+            ...headers(),
             "Content-Type": "application/json",
           },
           body: JSON.stringify(formData),
@@ -48,12 +51,16 @@ function RegisterForm() {
       }
 
       const data = await response.json();
+      console.log("Response Data:", data);
       const token = data.token;
 
       // redirect the user to the login..
       setToken(token);
+
+      console.log("Token:", token);
     } catch (error) {
       console.error("Registration error:", error);
+      console.log("Error caught:", error);
     }
   };
 

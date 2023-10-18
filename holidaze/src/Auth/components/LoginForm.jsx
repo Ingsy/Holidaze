@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { setToken } from "../utils/LocalStorage";
+import { getToken, setToken } from "../utils/LocalStorage";
 
 function LoginForm() {
   const [formData, setFormData] = useState({
@@ -20,7 +20,7 @@ function LoginForm() {
 
     try {
       const response = await fetch(
-        "https://api.noroff.dev/api/v1//holidaze/auth/login",
+        "https://api.noroff.dev/api/v1/holidaze/auth/login",
         {
           method: "POST",
           headers: {
@@ -38,12 +38,15 @@ function LoginForm() {
       const accessToken = data.accessToken;
 
       setToken(accessToken);
-
-      //edirect the user to Profile
     } catch (error) {
       console.error("Login error:", error);
     }
   };
+
+  const existingToken = getToken();
+  if (existingToken) {
+    //redirect to Profile
+  }
 
   return (
     <form onSubmit={handleSubmit}>
