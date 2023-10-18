@@ -1,0 +1,13 @@
+.starRating {
+  display: inline-block;
+  font-size: 24px;
+}
+
+.starEmpty {
+  color: rgb(185, 184, 184);
+  padding: 0 2px;
+}
+
+.starFilled {
+  color: #fdcc04;
+}
