@@ -1,0 +1,92 @@
+.detailsContainer {
+  margin: 20px;
+}
+
+.venueName {
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.photosContainer {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.firstPhoto {
+  width: 300px; /* Larger width for the first photo */
+  height: 200px;
+  object-fit: cover;
+  margin-right: 10px;
+  margin-bottom: 10px;
+}
+
+.photo {
+  width: 200px;
+  height: 200px;
+  object-fit: cover;
+  margin-right: 10px;
+  margin-bottom: 10px;
+}
+
+.venueDescription {
+  margin-top: 10px;
+}
+
+.venuePrice {
+  margin-top: 10px;
+  font-weight: bold;
+}
+
+.venueMaxGuests {
+  margin-top: 10px;
+}
+
+.rating {
+  margin-top: 10px;
+}
+
+.locationContainer {
+  margin-top: 20px;
+}
+
+.locationTitle {
+  font-weight: bold;
+}
+
+.locationInfo {
+  margin-top: 5px;
+}
+
+.ownerContainer {
+  margin-top: 20px;
+}
+
+.ownerTitle {
+  font-weight: bold;
+}
+
+.ownerInfo {
+  margin-top: 5px;
+}
+
+.ownerAvatar {
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+  margin-top: 10px;
+}
+
+.bookingsContainer {
+  margin-top: 20px;
+}
+
+.bookingsTitle {
+  font-weight: bold;
+}
+
+.bookingInfo {
+  margin-top: 10px;
+}
+
+/* Add more styles as needed for other parameters */
