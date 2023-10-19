@@ -1,5 +1,12 @@
+import React from "react";
+import UserProfile from "./UserProfile";
+
 function Profile() {
-  return <div></div>;
+  return (
+    <div>
+      <UserProfile />
+    </div>
+  );
 }
 
 export default Profile;

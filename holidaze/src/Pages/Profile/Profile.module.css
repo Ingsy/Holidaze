@@ -1,0 +1,42 @@
+.profileContainer {
+  display: flex;
+  align-items: center;
+  padding: 20px;
+}
+
+.avatarContainer {
+  flex: 0 0 100px;
+}
+
+.avatar {
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+  border-radius: 50%;
+}
+
+.profileInfo {
+  margin-left: 20px;
+}
+
+.profileName {
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.profileEmail {
+  margin-top: 10px;
+}
+
+.profileType {
+  margin-top: 10px;
+  font-weight: bold;
+}
+
+.profileCounts {
+  margin-left: 40px;
+}
+
+.countValue {
+  font-weight: bold;
+}
