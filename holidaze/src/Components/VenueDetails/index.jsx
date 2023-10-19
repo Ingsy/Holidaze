@@ -9,9 +9,9 @@ function VenueDetails() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const apiUrl = `https://api.noroff.dev/api/v1/holidaze/venues/${id}`;
+    const VenueDetailUrl = `https://api.noroff.dev/api/v1/holidaze/venues/${id}`;
 
-    fetch(apiUrl)
+    fetch(VenueDetailUrl)
       .then((response) => response.json())
       .then((data) => {
         setVenue(data);

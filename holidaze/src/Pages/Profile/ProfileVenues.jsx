@@ -1,16 +1,15 @@
 import React, { useEffect, useState } from "react";
 import styles from "./ProfileVenues.module.css";
+import { ProfileBaseUrl } from "../../Auth/constants";
 
 function ProfileVenues({ loggedInUserName }) {
   const [venuesData, setVenuesData] = useState([]);
 
   // Fetch and display venue-related data
   useEffect(() => {
-    const baseUrl = "https://api.noroff.dev/api/v1/holidaze/profiles/";
+    const userVenuesUrl = `${ProfileBaseUrl}${loggedInUserName}?_venues=true`;
 
-    const apiUrl = `${baseUrl}${loggedInUserName}?_venues=true`;
-
-    fetch(apiUrl)
+    fetch(userVenuesUrl)
       .then((response) => response.json())
       .then((data) => {
         setVenuesData(data);
