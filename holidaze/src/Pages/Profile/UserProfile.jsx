@@ -2,7 +2,7 @@ import React from "react";
 import { useAuth } from "../../Auth/context/AuthContext"; // Import useAuth
 
 function UserProfile() {
-  const { user } = useAuth(); // Access user data using useAuth
+  const { user } = useAuth();
 
   return (
     <div>
