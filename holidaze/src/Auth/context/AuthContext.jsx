@@ -6,7 +6,7 @@ import { load, getToken } from "../utils/LocalStorage";
 const AuthContext = createContext();
 
 const token = load("token") || getToken();
-console.log(token);
+console.log("Token (loaded from localStorage):", token);
 
 export function AuthProvider({ children }) {
   const [user, setUser] = useState(null);
@@ -19,10 +19,10 @@ export function AuthProvider({ children }) {
     }
   }, []);
 
-  const fetchUserData = async (token, userName) => {
+  const fetchUserData = async (token) => {
     try {
       const response = await fetch(
-        `https://api.noroff.dev/api/v1/holidaze/profiles/${userName}`, // Replace with the correct profile name
+        "https://api.noroff.dev/api/v1/holidaze/me",
         {
           headers: {
             ...headers(),
@@ -30,8 +30,6 @@ export function AuthProvider({ children }) {
           },
         }
       );
-
-      console.log(response);
 
       if (!response.ok) {
         console.error("Error fetching user data:", response.status);
@@ -46,7 +44,11 @@ export function AuthProvider({ children }) {
     }
   };
 
-  return <AuthContext.Provider value={user}>{children}</AuthContext.Provider>;
+  return (
+    <AuthContext.Provider value={{ user, token }}>
+      {children}
+    </AuthContext.Provider>
+  );
 }
 
 export function useAuth() {

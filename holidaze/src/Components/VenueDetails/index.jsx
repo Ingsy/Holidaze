@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from "react";
+import BookingForm from "../Booking";
 import styles from "./VenueDetails.module.css";
+import modalStyles from "./modal.module.css";
 import { useParams } from "react-router-dom";
 
 function VenueDetails() {
@@ -7,6 +9,12 @@ function VenueDetails() {
 
   const [venue, setVenue] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [formData, setFormData] = useState({
+    dateFrom: "",
+    dateTo: "",
+    guests: 1,
+  });
 
   useEffect(() => {
     const VenueDetailUrl = `https://api.noroff.dev/api/v1/holidaze/venues/${id}`;
@@ -22,6 +30,20 @@ function VenueDetails() {
         setLoading(false);
       });
   }, [id]);
+
+  const openModal = () => {
+    setIsModalOpen(true);
+  };
+
+  const closeModal = () => {
+    setIsModalOpen(false);
+  };
+
+  const handleBookingSubmit = () => {
+    // Handle the booking here with formData
+    console.log("Booking data:", formData);
+    closeModal();
+  };
 
   return (
     <div className={styles.detailsContainer}>
@@ -61,7 +83,22 @@ function VenueDetails() {
               Latitude: {venue.location.lat}, Longitude: {venue.location.lng}
             </p>
           </div>
+          <button onClick={openModal}>Book this Venue</button>
         </>
+      )}
+      {isModalOpen && (
+        <div className={modalStyles.customModal}>
+          <div className={modalStyles.modalContent}>
+            <BookingForm
+              formData={formData}
+              onFormChange={setFormData}
+              onBookingSubmit={handleBookingSubmit}
+            />
+            <div className={modalStyles.modalButtons}>
+              <button onClick={closeModal}>Close</button>
+            </div>
+          </div>
+        </div>
       )}
     </div>
   );

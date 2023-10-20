@@ -8,3 +8,7 @@ export const UserProfile = `${ProfileBaseUrl}/<name>`;
 export const ProfileVenuesUrl = `${ProfileBaseUrl}?_venues=true`;
 export const ProfileBookingsUrl = `${ProfileBaseUrl}?_bookings=true`;
 export const UpdateProfileMedia = `${UserProfile}/media`;
+
+export const BookingBaseUrl = `${API_HOLIDAZE_URL}/bookings`;
+export const BookingCustomerUrl = `${BookingBaseUrl}?_customer=true`;
+export const BookingVenueUrl = `${BookingBaseUrl}?_venue=true`;

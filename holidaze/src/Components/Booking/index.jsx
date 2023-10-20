@@ -1,13 +1,56 @@
-import React, { useState } from "react";
+import React from "react";
+import { useAuth } from "../../Auth/context/AuthContext";
 
-function BookingForm() {
-  const [dateFrom, setDateFrom] = useState("");
-  const [dateTo, setDateTo] = useState("");
-  const [guests, setGuests] = useState(1); // Default to 1 guest
+function BookingForm({
+  formData,
+  onFormChange,
+  onBookingSubmit,
+  venueId,
+  maxGuests,
+}) {
+  const user = useAuth();
 
   const handleFormSubmit = (e) => {
     e.preventDefault();
-    // Handle form submission here, e.g., make an API request to create a new booking
+
+    if (user && user.token) {
+      if (formData.guests > maxGuests) {
+        console.error("Number of guests exceeds the maximum allowed.");
+        return;
+      }
+
+      const bookingData = {
+        dateFrom: formData.dateFrom,
+        dateTo: formData.dateTo,
+        guests: formData.guests,
+        venueId: venueId,
+      };
+
+      fetch("https://api.noroff.dev/api/v1/holidaze/bookings", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${user.token}`,
+        },
+        body: JSON.stringify(bookingData),
+      })
+        .then((response) => {
+          if (response.ok) {
+            return response.json();
+          } else {
+            throw new Error("Failed to create booking");
+          }
+        })
+        .then((data) => {
+          console.log("Booking created:", data);
+          onBookingSubmit();
+        })
+        .catch((error) => {
+          console.error("Booking creation error:", error);
+        });
+    } else {
+      console.error("User not authenticated or token unavailable.");
+    }
   };
 
   return (
@@ -18,8 +61,10 @@ function BookingForm() {
         <input
           type="date"
           id="dateFrom"
-          value={dateFrom}
-          onChange={(e) => setDateFrom(e.target.value)}
+          value={formData.dateFrom}
+          onChange={(e) =>
+            onFormChange({ ...formData, dateFrom: e.target.value })
+          }
           required
         />
 
@@ -27,8 +72,10 @@ function BookingForm() {
         <input
           type="date"
           id="dateTo"
-          value={dateTo}
-          onChange={(e) => setDateTo(e.target.value)}
+          value={formData.dateTo}
+          onChange={(e) =>
+            onFormChange({ ...formData, dateTo: e.target.value })
+          }
           required
         />
 
@@ -36,13 +83,14 @@ function BookingForm() {
         <input
           type="number"
           id="guests"
-          value={guests}
-          onChange={(e) => setGuests(e.target.value)}
+          value={formData.guests}
+          onChange={(e) =>
+            onFormChange({ ...formData, guests: e.target.value })
+          }
           min="1"
+          max={maxGuests}
           required
         />
-
-        {/* Additional fields for user information (name, email, etc.) can be added here */}
 
         <button type="submit">Book Now</button>
       </form>
