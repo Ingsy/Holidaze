@@ -36,8 +36,10 @@ function LoginForm() {
 
       const data = await response.json();
       const accessToken = data.accessToken;
+      const userName = data.name;
 
       setToken(accessToken);
+      console.log("User Name:", userName);
     } catch (error) {
       console.error("Login error:", error);
     }
