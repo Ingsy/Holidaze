@@ -19,10 +19,10 @@ export function AuthProvider({ children }) {
     }
   }, []);
 
-  const fetchUserData = async (token) => {
+  const fetchUserData = async (token, userName) => {
     try {
       const response = await fetch(
-        "https://api.noroff.dev/api/v1/holidaze/me",
+        `https://api.noroff.dev/api/v1/holidaze/profiles`,
         {
           headers: {
             ...headers(),
@@ -32,8 +32,11 @@ export function AuthProvider({ children }) {
       );
 
       if (!response.ok) {
-        console.error("Error fetching user data:", response.status);
-        throw Error("User data retrieval failed.");
+        const errorData = await response.json();
+        console.error("Error fetching user data - API error:", errorData);
+        throw Error(
+          `User data retrieval failed with status ${response.status}`
+        );
       }
 
       const userData = await response.json();
