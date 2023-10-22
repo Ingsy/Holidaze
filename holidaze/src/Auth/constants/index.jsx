@@ -12,3 +12,5 @@ export const UpdateProfileMedia = `${UserProfile}/media`;
 export const BookingBaseUrl = `${API_HOLIDAZE_URL}/bookings`;
 export const BookingCustomerUrl = `${BookingBaseUrl}?_customer=true`;
 export const BookingVenueUrl = `${BookingBaseUrl}?_venue=true`;
+
+export const CreateVenueUrl = `${API_HOLIDAZE_URL}/venues`;
