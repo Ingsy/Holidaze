@@ -4,7 +4,7 @@ import styles from "./VenueDetails.module.css";
 import modalStyles from "./modal.module.css";
 import { useParams } from "react-router-dom";
 
-function VenueDetails() {
+function VenueDetails({ venueId }) {
   const { id } = useParams();
 
   const [venue, setVenue] = useState(null);
@@ -40,7 +40,6 @@ function VenueDetails() {
   };
 
   const handleBookingSubmit = () => {
-    // Handle the booking here with formData
     console.log("Booking data:", formData);
     closeModal();
   };
@@ -52,37 +51,53 @@ function VenueDetails() {
       ) : (
         <>
           <h2 className={styles.venueName}>{venue.name}</h2>
-          <div className={styles.photosContainer}>
-            {venue.media.map((photo, index) => (
-              <img
-                key={index}
-                src={photo}
-                alt={`Venue ${index + 1}`}
-                className={index === 0 ? styles.firstPhoto : styles.photo}
-              />
-            ))}
-          </div>
           <p className={styles.venueDescription}>{venue.description}</p>
           <p className={styles.venuePrice}>Price: ${venue.price}</p>
-          <p className={styles.venueMaxGuests}>Max Guests: {venue.maxGuests}</p>
-          <p className={styles.rating}>rating: {venue.rating}</p>
-          <div className={styles.locationContainer}>
-            <p className={styles.locationTitle}>Location:</p>
-            <p className={styles.locationInfo}>
-              Address: {venue.location.address}
+          {venue.maxGuests !== undefined && (
+            <p className={styles.venueMaxGuests}>
+              Max Guests: {venue.maxGuests}
             </p>
-            <p className={styles.locationInfo}>City: {venue.location.city}</p>
-            <p className={styles.locationInfo}>Zip: {venue.location.zip}</p>
-            <p className={styles.locationInfo}>
-              Country: {venue.location.country}
-            </p>
-            <p className={styles.locationInfo}>
-              Continent: {venue.location.continent}
-            </p>
-            <p className={styles.locationInfo}>
-              Latitude: {venue.location.lat}, Longitude: {venue.location.lng}
-            </p>
-          </div>
+          )}
+          {venue.media && venue.media.length > 0 && (
+            <div className={styles.photosContainer}>
+              {venue.media.map((photo, index) => (
+                <img
+                  key={index}
+                  src={photo}
+                  alt={`Venue ${index + 1}`}
+                  className={index === 0 ? styles.firstPhoto : styles.photo}
+                />
+              ))}
+            </div>
+          )}
+          {venue.rating !== undefined && (
+            <p className={styles.rating}>Rating: {venue.rating}</p>
+          )}
+          {venue.location && venue.location.address && (
+            <div className={styles.locationContainer}>
+              <p className={styles.locationTitle}>Location:</p>
+              <p className={styles.locationInfo}>
+                Address: {venue.location.address}
+              </p>
+              <p className={styles.locationInfo}>City: {venue.location.city}</p>
+              <p className={styles.locationInfo}>Zip: {venue.location.zip}</p>
+              <p className={styles.locationInfo}>
+                Country: {venue.location.country}
+              </p>
+              {venue.location.continent && (
+                <p className={styles.locationInfo}>
+                  Continent: {venue.location.continent}
+                </p>
+              )}
+              {venue.location.lat !== undefined &&
+                venue.location.lng !== undefined && (
+                  <p className={styles.locationInfo}>
+                    Latitude: {venue.location.lat}, Longitude:{" "}
+                    {venue.location.lng}
+                  </p>
+                )}
+            </div>
+          )}
           <button onClick={openModal}>Book this Venue</button>
         </>
       )}
