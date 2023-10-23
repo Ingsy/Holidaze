@@ -1,12 +1,16 @@
 import React, { useState } from "react";
 import { CreateVenueUrl } from "../../Auth/constants";
 import { headers } from "../../Auth/utils/authFetch";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faTrash } from "@fortawesome/free-solid-svg-icons";
+import styles from "./Create.module.css";
 
 function CreateVenue() {
   const [venueData, setVenueData] = useState({
     name: "",
     description: "",
     media: [],
+    mediaPreviews: [],
     price: 0,
     maxGuests: 0,
     rating: 0,
@@ -29,10 +33,18 @@ function CreateVenue() {
 
   const handleMediaChange = (e) => {
     const { value } = e.target;
-    setVenueData({
-      ...venueData,
-      media: [...venueData.media, value],
-    });
+    const updatedMedia = [...venueData.media, value];
+
+    const image = new Image();
+    image.src = value;
+    image.onload = () => {
+      const updatedPreviews = [...venueData.mediaPreviews, image.src];
+      setVenueData({
+        ...venueData,
+        media: updatedMedia,
+        mediaPreviews: updatedPreviews,
+      });
+    };
   };
 
   const handleRemoveMedia = (index) => {
@@ -103,11 +115,13 @@ function CreateVenue() {
   };
 
   return (
-    <div>
-      <h2>Create Venue</h2>
+    <div className={styles.formContainer}>
+      <h2 className={styles.formTitle}>Create Venue</h2>
       <form onSubmit={handleSubmit}>
-        <div className="form-group">
-          <label htmlFor="name">Name:</label>
+        <div className={styles.formGroup}>
+          <label htmlFor="name" className={styles.label}>
+            Name:
+          </label>
           <input
             type="text"
             id="name"
@@ -115,20 +129,26 @@ function CreateVenue() {
             value={venueData.name}
             onChange={handleInputChange}
             required
+            className={styles.input}
           />
         </div>
-        <div className="form-group">
-          <label htmlFor="description">Description:</label>
+        <div className={styles.formGroup}>
+          <label htmlFor="description" className={styles.label}>
+            Description:
+          </label>
           <textarea
             id="description"
             name="description"
             value={venueData.description}
             onChange={handleInputChange}
             required
+            className={styles.textarea}
           />
         </div>
-        <div className="form-group">
-          <label htmlFor="price">Price:</label>
+        <div className={styles.formGroup}>
+          <label htmlFor="price" className={styles.label}>
+            Price:
+          </label>
           <input
             type="number"
             id="price"
@@ -136,10 +156,13 @@ function CreateVenue() {
             value={venueData.price}
             onChange={handleInputChange}
             required
+            className={styles.input}
           />
         </div>
-        <div className="form-group">
-          <label htmlFor="maxGuests">Max Guests:</label>
+        <div className={styles.formGroup}>
+          <label htmlFor="maxGuests" className={styles.label}>
+            Max Guests:
+          </label>
           <input
             type="number"
             id="maxGuests"
@@ -147,78 +170,91 @@ function CreateVenue() {
             value={venueData.maxGuests}
             onChange={handleInputChange}
             required
+            className={styles.input}
           />
         </div>
-        {/* Add the media input field */}
-        <div className="form-group">
-          <label htmlFor="media">Media (Image URLs):</label>
+
+        <div className={styles.formGroup}>
+          <label htmlFor="media" className={styles.label}>
+            Media (Image URLs):
+          </label>
           <input
             type="text"
             id="media"
             name="media"
-            value={""} // Add a value to handle user input
+            value={""}
             onChange={handleMediaChange}
+            className={styles.input}
           />
         </div>
-
-        {/* Display the added media items */}
-        <div className="form-group">
-          <label>Media Items:</label>
+        <div className={styles.formGroup}>
+          <label className={styles.label}>Media Items:</label>
           {venueData.media.map((mediaItem, index) => (
-            <div key={index}>
-              <span>{mediaItem}</span>
-              <button type="button" onClick={() => handleRemoveMedia(index)}>
-                Remove
+            <div key={index} className={styles.mediaItemContainer}>
+              {venueData.mediaPreviews[index] && (
+                <img
+                  src={venueData.mediaPreviews[index]}
+                  alt="Media Preview"
+                  className={styles.mediaPreview}
+                />
+              )}
+              <span className={styles.mediaItem}>{mediaItem}</span>
+              <button
+                type="button"
+                onClick={() => handleRemoveMedia(index)}
+                className={styles.CheckoutActionButton}
+              >
+                <FontAwesomeIcon icon={faTrash} className={styles.TrashIcon} />
               </button>
             </div>
           ))}
         </div>
-
-        <div className="form-group">
-          <label>Optional Metadata:</label>
-          <div className="form-check">
+        <div className={styles.formGroup}>
+          <label className={styles.label}>Optional Metadata:</label>
+          <div className={styles.formCheck}>
             <input
               type="checkbox"
-              className="form-check-input"
+              className={styles.formCheckInput}
               name="wifi"
               checked={venueData.meta.wifi}
               onChange={handleCheckboxChange}
             />
-            <label className="form-check-label">Wi-Fi</label>
+            <label className={styles.formCheckLabel}>Wi-Fi</label>
           </div>
-          <div className="form-check">
+          <div className={styles.formCheck}>
             <input
               type="checkbox"
-              className="form-check-input"
+              className={styles.formCheckInput}
               name="parking"
               checked={venueData.meta.parking}
               onChange={handleCheckboxChange}
             />
-            <label className="form-check-label">Parking</label>
+            <label className={styles.formCheckLabel}>Parking</label>
           </div>
-          <div className="form-check">
+          <div className={styles.formCheck}>
             <input
               type="checkbox"
-              className="form-check-input"
+              className={styles.formCheckInput}
               name="breakfast"
               checked={venueData.meta.breakfast}
               onChange={handleCheckboxChange}
             />
-            <label className="form-check-label">Breakfast</label>
+            <label className={styles.formCheckLabel}>Breakfast</label>
           </div>
-          <div className="form-check">
+          <div className={styles.formCheck}>
             <input
               type="checkbox"
-              className="form-check-input"
+              className={styles.formCheckInput}
               name="pets"
               checked={venueData.meta.pets}
               onChange={handleCheckboxChange}
             />
-            <label className="form-check-label">Pets Allowed</label>
+            <label className={styles.formCheckLabel}>Pets Allowed</label>
           </div>
         </div>
-
-        <button type="submit">Create Venue</button>
+        <button type="submit" className={styles.submitButton}>
+          Create Venue
+        </button>
       </form>
     </div>
   );
