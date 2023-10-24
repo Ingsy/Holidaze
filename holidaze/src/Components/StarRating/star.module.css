@@ -4,10 +4,10 @@
 }
 
 .starEmpty {
-  color: rgb(185, 184, 184);
+  color: #dddddd;
   padding: 0 2px;
 }
 
 .starFilled {
-  color: #fdcc04;
+  color: #f39237;
 }

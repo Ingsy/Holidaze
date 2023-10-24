@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import styles from "./VenueList.module.css";
+import StarRating from "../StarRating";
+
+const placeholderImageUrl = "https://picsum.photos/200/300";
 
 function VenueList() {
   const [venues, setVenues] = useState([]);
@@ -36,18 +39,29 @@ function VenueList() {
                 <h2 className={`${styles.venueName} text-center`}>
                   {venue.name}
                 </h2>
-                {venue.media.length > 0 && (
+                {venue.media.length > 0 ? (
                   <img
-                    src={venue.media[0]} // Display the first media URL
+                    src={venue.media[0]}
                     alt={`Venue Media`}
                     className={styles.media}
                   />
+                ) : (
+                  <img
+                    src={placeholderImageUrl}
+                    alt={`No Media Available`}
+                    className={styles.media}
+                  />
                 )}
-                <p className={styles.venuePrice}>Price: ${venue.price}</p>
+                <p className={styles.venuePrice}>${venue.price} night</p>
+                {venue.location.city && venue.location.country && (
+                  <p className={styles.venueLocation}>
+                    {venue.location.city}, {venue.location.country}
+                  </p>
+                )}
                 <p className={styles.venueMaxGuests}>
                   Max Guests: {venue.maxGuests}
                 </p>
-                <p className={styles.venueRating}>Rating: {venue.rating}</p>
+                <StarRating rating={venue.rating} />
 
                 <Link to={`/venue/${venue.id}`}>Checkout Venue</Link>
               </div>
