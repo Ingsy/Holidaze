@@ -1,7 +1,6 @@
 import React from "react";
 import { useAuth } from "../../../Auth/context/AuthContext";
 import styles from "./UserProfile.module.css";
-import ToggleVenueManager from "../ToggleVenueManager/Toggle";
 
 function UserProfile() {
   const { user } = useAuth();
@@ -15,7 +14,6 @@ function UserProfile() {
           <p className={styles.profileItem}>Email: {user.email}</p>
           <p className={styles.profileItem}>
             Role: {user.venueManager ? "Venue Manager" : "Regular User"}
-            <ToggleVenueManager />
           </p>
           <img className={styles.avatar} src={user.avatar} alt="User Avatar" />
           {/* Add more user profile details here */}

@@ -40,6 +40,7 @@ function LoginForm() {
 
       setToken(accessToken);
       console.log("User Name:", userName);
+      console.log("Access Token:", accessToken);
     } catch (error) {
       console.error("Login error:", error);
     }
