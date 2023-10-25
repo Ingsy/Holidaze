@@ -1,10 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
-import styles from "./VenueList.module.css";
-import StarRating from "../StarRating";
-
-const placeholderImageUrl = "https://picsum.photos/200/300";
-
+import VenueGrid from "../VenueGrid";
 function VenueList() {
   const [venues, setVenues] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -27,50 +22,7 @@ function VenueList() {
     fetchData();
   }, []);
 
-  return (
-    <div className={styles.container}>
-      {loading ? (
-        <p>Loading...</p>
-      ) : (
-        <div className="row">
-          {venues.map((venue) => (
-            <div key={venue.id} className="col-lg-3 col-md-4 col-sm-12">
-              <div className={styles.venueCard}>
-                <h2 className={`${styles.venueName} text-center`}>
-                  {venue.name}
-                </h2>
-                {venue.media.length > 0 ? (
-                  <img
-                    src={venue.media[0]}
-                    alt={`Venue Media`}
-                    className={styles.media}
-                  />
-                ) : (
-                  <img
-                    src={placeholderImageUrl}
-                    alt={`No Media Available`}
-                    className={styles.media}
-                  />
-                )}
-                <p className={styles.venuePrice}>${venue.price} night</p>
-                {venue.location.city && venue.location.country && (
-                  <p className={styles.venueLocation}>
-                    {venue.location.city}, {venue.location.country}
-                  </p>
-                )}
-                <p className={styles.venueMaxGuests}>
-                  Max Guests: {venue.maxGuests}
-                </p>
-                <StarRating rating={venue.rating} />
-
-                <Link to={`/venue/${venue.id}`}>Checkout Venue</Link>
-              </div>
-            </div>
-          ))}
-        </div>
-      )}
-    </div>
-  );
+  return <VenueGrid venues={venues} loading={loading} />;
 }
 
 export default VenueList;
