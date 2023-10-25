@@ -1,36 +1,35 @@
-import React, { useEffect, useState } from "react";
-import styles from "./ProfileVenues.module.css";
-import { ProfileBaseUrl } from "../../Auth/constants";
+import { ProfileVenuesUrl } from "../../Auth/constants";
+import React, { useState, useEffect } from "react";
+import VenueGrid from "../../Components/VenueGrid";
 
-function ProfileVenues({ loggedInUserName }) {
-  const [venuesData, setVenuesData] = useState([]);
+function ProfileVenues() {
+  const [venues, setVenues] = useState([]);
+  const [loading, setLoading] = useState(true);
 
-  // Fetch and display venue-related data
   useEffect(() => {
-    const userVenuesUrl = `${ProfileBaseUrl}${loggedInUserName}?_venues=true`;
+    async function fetchData() {
+      try {
+        const response = await fetch(ProfileVenuesUrl);
+        if (response.ok) {
+          const data = await response.json();
+          setVenues(data);
+          setLoading(false);
+        } else {
+          throw new Error("Failed to fetch users venues");
+        }
+      } catch (error) {
+        console.error("Error fetching data:", error);
+        setLoading(false);
+      }
+    }
 
-    fetch(userVenuesUrl)
-      .then((response) => response.json())
-      .then((data) => {
-        setVenuesData(data);
-      })
-      .catch((error) => {
-        console.error("Error fetching venue data:", error);
-      });
-  }, [loggedInUserName]);
+    fetchData();
+  }, []);
 
   return (
-    <div className={styles.venuesContainer}>
-      <h3>Venues for {loggedInUserName}</h3>
-      <ul>
-        {venuesData.map((venue) => (
-          <li key={venue.id}>
-            <strong>{venue.name}</strong>
-            <p>{venue.description}</p>
-            {/* Display other venue-related data */}
-          </li>
-        ))}
-      </ul>
+    <div>
+      <h1>Your Venues</h1>
+      <VenueGrid venues={venues} loading={loading} />
     </div>
   );
 }

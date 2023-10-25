@@ -5,7 +5,7 @@ export const API_HOLIDAZE_URL = `${API_HOST_URL}${API_BASE_URL}${API_HOLIDAZE_BA
 
 export const ProfileBaseUrl = `${API_HOLIDAZE_URL}/profiles`;
 export const UserProfile = `${ProfileBaseUrl}/<name>`;
-export const ProfileVenuesUrl = `${ProfileBaseUrl}?_venues=true`;
+export const ProfileVenuesUrl = `${ProfileBaseUrl}?_owner=true`;
 export const ProfileBookingsUrl = `${ProfileBaseUrl}?_bookings=true`;
 export const UpdateProfileMedia = `${UserProfile}/media`;
 
