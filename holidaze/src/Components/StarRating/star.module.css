@@ -1,13 +1,15 @@
 .starRating {
   display: inline-block;
-  font-size: 24px;
-}
-
-.starEmpty {
-  color: #dddddd;
-  padding: 0 2px;
+  font-size: 20px;
 }
 
 .starFilled {
-  color: #f39237;
+  color: #f8cb18;
+  margin-right: 5px;
+}
+
+.ratingText {
+  color: #a4a2a2;
+  font-size: 14px;
+  margin-right: 5px;
 }

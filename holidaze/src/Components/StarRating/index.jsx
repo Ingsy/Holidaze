@@ -2,16 +2,12 @@ import React from "react";
 import styles from "./star.module.css";
 
 function StarRating({ rating }) {
-  return rating < 1 ? null : (
+  const ratingText = rating !== null ? `${rating}/5` : "0/5";
+
+  return (
     <div className={styles.starRating}>
-      {[...Array(5)].map((_, i) => (
-        <span
-          key={i}
-          className={i < rating ? styles.starFilled : styles.starEmpty}
-        >
-          &#9733;
-        </span>
-      ))}
+      <span className={styles.starFilled}>&#9733;</span>
+      <span className={styles.ratingText}>{ratingText}</span>
     </div>
   );
 }

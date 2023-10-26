@@ -14,10 +14,12 @@ function VenueGrid({ venues, loading }) {
       ) : (
         <div className="row">
           {venues.map((venue) => (
-            <div key={venue.id} className="col-lg-3 col-md-4 col-sm-12">
-              <div className={styles.venueCard}>
+            <div key={venue.id} className="col-lg-3 col-md-4 col-sm-6 col-12">
+              <div className={styles.venueCard} tabIndex="0">
                 <h2 className={`${styles.venueName} text-center`}>
-                  {venue.name}
+                  {venue.name.length > 30
+                    ? `${venue.name.substring(0, 30)}...`
+                    : venue.name}
                 </h2>
                 {venue.media.length > 0 ? (
                   <img
@@ -32,23 +34,32 @@ function VenueGrid({ venues, loading }) {
                     className={styles.media}
                   />
                 )}
-                <p className={styles.venuePrice}>${venue.price} night</p>
-                {venue.location.city && venue.location.country && (
+                <div className={`d-flex ${styles.venueInfo}`}>
+                  <p className={`flex-grow-1 ${styles.venuePrice}`}>
+                    ${venue.price} night
+                  </p>
+                  <StarRating rating={venue.rating} />
+                </div>
+                {venue.location.city && venue.location.country ? (
                   <p className={styles.venueLocation}>
                     {venue.location.country}, {venue.location.city}
                   </p>
+                ) : (
+                  <p className={styles.venueLocation}>Exciting Location</p>
                 )}
                 <p className={styles.venueMaxGuests}>
-                  Max Guests: {venue.maxGuests}
+                  Accommodates: {venue.maxGuests} guests
                 </p>
-                <StarRating rating={venue.rating} />
 
-                <Link
-                  to={`/venue/${venue.id}`}
-                  className={ButtonsAndLinks.Link}
-                >
-                  Checkout Venue
-                </Link>
+                <div className="mt-auto text-center">
+                  <Link
+                    to={`/venue/${venue.id}`}
+                    className={ButtonsAndLinks.Link}
+                    tabIndex="0"
+                  >
+                    Checkout Venue
+                  </Link>
+                </div>
               </div>
             </div>
           ))}

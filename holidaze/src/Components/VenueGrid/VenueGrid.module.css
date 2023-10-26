@@ -20,24 +20,26 @@
 .venueName {
   font-size: 16px;
   font-weight: bold;
-  color: #333;
+  color: #848282;
   margin-bottom: 10px;
 }
 
-.venueDescription {
-  color: #666;
+.venueInfo {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
+p {
+  margin: 0;
+}
+
+.venueMaxGuests,
+.venueLocation,
 .venuePrice {
-  color: #8c92ac;
-}
-
-.venueMaxGuests {
-  color: #8c92ac;
-}
-
-.venueRating {
-  color: #f39237;
+  color: #848282;
+  font-size: 14px;
+  margin-top: 5px;
 }
 
 .media {
