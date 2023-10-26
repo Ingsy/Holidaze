@@ -12,13 +12,15 @@
 
   .BaseButton{
     color: White;
-    background-color: Yellow-color;
-    border-radius: 4px;
-    padding: 10px 20px;
+    background-color: #F8C143;
+    border-radius: 8px;
+    padding: 0.5rem 1rem;
     cursor: pointer;
     font-size: 16px;
+    border:none;
+    font-weight: bold;
 
     &:hover {
-      background-color: DarkYellow-color;
+      color: #000000;
     }
   }
