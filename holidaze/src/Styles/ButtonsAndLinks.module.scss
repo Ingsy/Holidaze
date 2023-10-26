@@ -1,8 +1,24 @@
+@import "./colors.module.scss";
+
+
 .Link {
-    color: #F39237; 
+    color: Yellow-color !important; 
     text-decoration: none;
   
     &:hover {
       text-decoration: underline; 
+    }
+  }
+
+  .BaseButton{
+    color: White;
+    background-color: Yellow-color;
+    border-radius: 4px;
+    padding: 10px 20px;
+    cursor: pointer;
+    font-size: 16px;
+
+    &:hover {
+      background-color: DarkYellow-color;
     }
   }
