@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from "react";
 import BookingForm from "../Booking";
 import styles from "./VenueDetails.module.css";
-import modalStyles from "./modal.module.css";
 import { useParams } from "react-router-dom";
+import BaseButton from "../Buttons";
+import Modal from "../Modal";
 
 function VenueDetails({ venueId }) {
   const { id } = useParams();
@@ -45,37 +46,73 @@ function VenueDetails({ venueId }) {
   };
 
   return (
-    <div className={styles.detailsContainer}>
+    <div
+      className={styles.detailsContainer}
+      style={{ backgroundColor: "#F2F2F2" }}
+    >
       {loading ? (
         <p>Loading...</p>
       ) : (
         <>
           <h2 className={styles.venueName}>{venue.name}</h2>
+          <div className={styles.header}>
+            <div className={styles.titleLine}></div>
+          </div>
+
           <p className={styles.venueDescription}>{venue.description}</p>
           <p className={styles.venuePrice}>Price: ${venue.price}</p>
+
           {venue.maxGuests !== undefined && (
             <p className={styles.venueMaxGuests}>
               Max Guests: {venue.maxGuests}
             </p>
           )}
-          {venue.media && venue.media.length > 0 && (
+          {venue.media && (
             <div className={styles.photosContainer}>
-              {venue.media.map((photo, index) => (
-                <img
-                  key={index}
-                  src={photo}
-                  alt={`Venue ${index + 1}`}
-                  className={index === 0 ? styles.firstPhoto : styles.photo}
-                />
-              ))}
+              <img
+                src={venue.media[0]}
+                alt={`Venue 1`}
+                className={styles.firstPhoto}
+              />
+              {venue.media.length > 1 ? (
+                <div className={styles.smallPhotosContainer}>
+                  {venue.media.slice(1).map((photo, index) => (
+                    <div key={index} className={styles.smallPhoto}>
+                      <img src={photo} alt={`Venue ${index + 2}`} />
+                    </div>
+                  ))}
+                </div>
+              ) : null}
+              {/* Conditional rendering for placeholder images */}
+              {venue.media.length < 4 ? (
+                <div className={styles.smallPhotosContainer}>
+                  {venue.media.length < 3 ? (
+                    <div className={styles.smallPhoto}>
+                      <img
+                        src="https://picsum.photos/seed/picsum/200/300"
+                        alt="Placeholder 1"
+                      />
+                    </div>
+                  ) : null}
+                  {venue.media.length < 2 ? (
+                    <div className={styles.smallPhoto}>
+                      <img
+                        src="https://picsum.photos/seed/picsum/200/300"
+                        alt="Placeholder 2"
+                      />
+                    </div>
+                  ) : null}
+                </div>
+              ) : null}
             </div>
           )}
+
           {venue.rating !== undefined && (
             <p className={styles.rating}>Rating: {venue.rating}</p>
           )}
+
           {venue.location && venue.location.address && (
             <div className={styles.locationContainer}>
-              <p className={styles.locationTitle}>Location:</p>
               <p className={styles.locationInfo}>
                 Address: {venue.location.address}
               </p>
@@ -98,22 +135,22 @@ function VenueDetails({ venueId }) {
                 )}
             </div>
           )}
-          <button onClick={openModal}>Book this Venue</button>
+
+          <div className={styles.bottomLine}></div>
+
+          <BaseButton onClick={openModal} className={styles.bookButton}>
+            Book Venue
+          </BaseButton>
         </>
       )}
       {isModalOpen && (
-        <div className={modalStyles.customModal}>
-          <div className={modalStyles.modalContent}>
-            <BookingForm
-              formData={formData}
-              onFormChange={setFormData}
-              onBookingSubmit={handleBookingSubmit}
-            />
-            <div className={modalStyles.modalButtons}>
-              <button onClick={closeModal}>Close</button>
-            </div>
-          </div>
-        </div>
+        <Modal isOpen={isModalOpen} onClose={closeModal}>
+          <BookingForm
+            formData={formData}
+            onFormChange={setFormData}
+            onBookingSubmit={handleBookingSubmit}
+          />
+        </Modal>
       )}
     </div>
   );
