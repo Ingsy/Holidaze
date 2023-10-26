@@ -1,0 +1,25 @@
+.toggleContainer {
+  position: relative;
+  width: 54px;
+  height: 24px;
+  background-color: #ffffff; 
+  border: 2px solid #848282; 
+  border-radius: 30px; 
+  margin-top: 20px;
+}
+
+.toggleSlider {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 20px;
+  height: 20px;
+  background-color: #848282; /* Set the slider color */ /* Initial border color */
+  border-radius: 50%; /* Make it a circle */
+  transition: 0.3s;
+}
+
+.toggleContainer.active .toggleSlider {
+  left: 30px; /* Slide to the right when active */
+  background-color: #F8C143; /* Change slider color to yellow when active */
+}

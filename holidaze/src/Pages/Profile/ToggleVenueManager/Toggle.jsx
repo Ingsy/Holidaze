@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { UpdateVenueManager } from "./venueManagerToggle";
-import styles from "./Toggle.module.css";
+import styles from "./Toggle.module.scss";
 
 function ToggleVenueManager({ userName, isVenueManager }) {
   const [venueManager, setVenueManager] = useState(isVenueManager);
@@ -13,23 +13,16 @@ function ToggleVenueManager({ userName, isVenueManager }) {
   };
 
   return (
-    <div>
+    <div className={styles.toggleWrapper}>
       <div
-        className={`${styles.formCheck} ${styles.formSwitch} ${styles.formCheck}`}
+        className={`${styles.toggleContainer} ${
+          venueManager ? styles.active : ""
+        }`}
       >
-        <input
-          type="checkbox"
-          className={`${styles.formCheckInput} ${styles.formCheckInput}`}
-          id="venueManagerSwitch"
-          checked={venueManager}
-          onChange={handleToggle}
-        />
-        <label
-          className={`${styles.formCheckLabel} ${styles.formCheckLabel}`}
-          htmlFor="venueManagerSwitch"
-        >
-          Venue Manager
-        </label>
+        <div className={styles.toggleSlider} onClick={handleToggle}></div>
+      </div>
+      <div className={styles.toggleText}>
+        <label>{venueManager ? "Venue Manager" : "Regular User"}</label>
       </div>
     </div>
   );
