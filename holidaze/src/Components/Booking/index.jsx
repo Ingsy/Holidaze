@@ -1,5 +1,7 @@
 import React from "react";
 import { useAuth } from "../../Auth/context/AuthContext";
+import BaseButton from "../Buttons";
+import styles from "./Booking.module.scss";
 
 function BookingForm({
   formData,
@@ -54,45 +56,50 @@ function BookingForm({
   };
 
   return (
-    <div>
-      <h2>Book a Venue</h2>
+    <div className={styles.bookingFormContainer}>
+      <h2>Book Venue</h2>
       <form onSubmit={handleFormSubmit}>
-        <label htmlFor="dateFrom">Check-in date:</label>
-        <input
-          type="date"
-          id="dateFrom"
-          value={formData.dateFrom}
-          onChange={(e) =>
-            onFormChange({ ...formData, dateFrom: e.target.value })
-          }
-          required
-        />
-
-        <label htmlFor="dateTo">Check-out date:</label>
-        <input
-          type="date"
-          id="dateTo"
-          value={formData.dateTo}
-          onChange={(e) =>
-            onFormChange({ ...formData, dateTo: e.target.value })
-          }
-          required
-        />
-
-        <label htmlFor="guests">Number of guests:</label>
-        <input
-          type="number"
-          id="guests"
-          value={formData.guests}
-          onChange={(e) =>
-            onFormChange({ ...formData, guests: e.target.value })
-          }
-          min="1"
-          max={maxGuests}
-          required
-        />
-
-        <button type="submit">Book Now</button>
+        <div className={styles.formGroup}>
+          <label htmlFor="dateFrom">Check-in date:</label>
+          <input
+            type="date"
+            id="dateFrom"
+            value={formData.dateFrom}
+            onChange={(e) =>
+              onFormChange({ ...formData, dateFrom: e.target.value })
+            }
+            required
+          />
+        </div>
+        <div className={styles.formGroup}>
+          <label htmlFor="dateTo">Check-out date:</label>
+          <input
+            type="date"
+            id="dateTo"
+            value={formData.dateTo}
+            onChange={(e) =>
+              onFormChange({ ...formData, dateTo: e.target.value })
+            }
+            required
+          />
+        </div>
+        <div className={styles.formGroup}>
+          <label htmlFor="guests">Number of guests:</label>
+          <input
+            type="number"
+            id="guests"
+            value={formData.guests}
+            onChange={(e) =>
+              onFormChange({ ...formData, guests: e.target.value })
+            }
+            min="1"
+            max={maxGuests}
+            required
+          />
+        </div>
+        <div className={styles.formGroup}>
+          <BaseButton type="submit">Book Now</BaseButton>
+        </div>
       </form>
     </div>
   );
