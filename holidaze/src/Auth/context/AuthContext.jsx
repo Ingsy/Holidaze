@@ -19,7 +19,7 @@ export function AuthProvider({ children }) {
     }
   }, []);
 
-  const fetchUserData = async (token, userName) => {
+  const fetchUserData = async (token) => {
     try {
       const response = await fetch(
         `https://api.noroff.dev/api/v1/holidaze/profiles`,
@@ -46,9 +46,15 @@ export function AuthProvider({ children }) {
       return null;
     }
   };
+  const updateUserRole = (newUserRole) => {
+    setUser((prevUser) => ({
+      ...prevUser,
+      venueManager: newUserRole,
+    }));
+  };
 
   return (
-    <AuthContext.Provider value={{ user, token }}>
+    <AuthContext.Provider value={{ user, token, updateUserRole }}>
       {children}
     </AuthContext.Provider>
   );
