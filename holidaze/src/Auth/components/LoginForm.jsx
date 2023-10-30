@@ -38,7 +38,7 @@ function LoginForm() {
       const accessToken = data.accessToken;
       const userName = data.name;
 
-      setToken(accessToken);
+      setToken(accessToken, userName);
       console.log("User Name:", userName);
       console.log("Access Token:", accessToken);
     } catch (error) {

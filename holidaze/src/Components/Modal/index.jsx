@@ -10,9 +10,12 @@ const Modal = ({ isOpen, onClose, children }) => {
   return (
     <div className={styles.customModal}>
       <div className={styles.modalContent}>
-        <button className={styles.closeButton} onClick={onClose}>
-          X
-        </button>
+        <div className={styles.closeButtonContainer}>
+          <button className={styles.closeButton} onClick={onClose}>
+            X
+          </button>
+          <p className={styles.closeText}>Close</p>
+        </div>
         {children}
       </div>
     </div>

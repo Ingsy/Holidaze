@@ -57,7 +57,7 @@ function RegisterForm() {
       const userName = data.name;
 
       // redirect the user to the login..
-      setToken(token);
+      setToken(token, userName);
 
       console.log("Token:", token);
       console.log("User Name:", userName);

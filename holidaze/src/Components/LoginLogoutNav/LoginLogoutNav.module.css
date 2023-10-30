@@ -1,0 +1,18 @@
+.LoginButton {
+  color: grey;
+  border: none;
+  cursor: pointer;
+  font-size: small;
+}
+
+h2 {
+  color: grey;
+  font-size: 25px;
+}
+
+.componentWrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 10px; /* Reduced padding */
+}

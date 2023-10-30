@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import styles from "./Nav.modules.css";
+import styles from "./Nav.modules.scss";
+import LoginLogoutVenueManager from "../../LoginLogoutNav";
 
 function Navbar() {
   return (
@@ -8,8 +9,12 @@ function Navbar() {
       className={`navbar navbar-expand-lg bg-body-tertiary ${styles.navbar}`}
     >
       <div className="container-fluid">
-        <Link to="/" className="navbar-brand">
-          Navbar
+        <Link to="/" className={styles.navBrand}>
+          <img
+            src="/Holidaze.png"
+            alt="Logo"
+            className="d-inline-block align-top"
+          />
         </Link>
         <button
           className="navbar-toggler"
@@ -34,6 +39,7 @@ function Navbar() {
                 Profile
               </Link>
             </li>
+
             <li className="nav-item">
               <Link to="/Register" className="nav-link">
                 Register
@@ -44,11 +50,8 @@ function Navbar() {
                 Login
               </Link>
             </li>
-            <li className="nav-item">
-              <Link to="/Logout" className="nav-link">
-                Logout
-              </Link>
-            </li>
+
+            <LoginLogoutVenueManager />
           </ul>
           <form className="d-flex" role="search">
             <input
