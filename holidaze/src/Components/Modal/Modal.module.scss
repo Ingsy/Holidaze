@@ -14,8 +14,10 @@
       padding: 20px;
       border-radius: 8px;
       box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
-      width: 400px;
+      max-width: 490px;
       position: relative;
+      min-width: 380px;
+      
   
       h2 {
         margin: 0;

@@ -1,6 +1,8 @@
 import React from "react";
 import PropTypes from "prop-types";
 import styles from "./Modal.module.scss";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faXmark } from "@fortawesome/free-solid-svg-icons";
 
 const Modal = ({ isOpen, onClose, children }) => {
   if (!isOpen) {
@@ -11,9 +13,12 @@ const Modal = ({ isOpen, onClose, children }) => {
     <div className={styles.customModal}>
       <div className={styles.modalContent}>
         <div className={styles.closeButtonContainer}>
-          <button className={styles.closeButton} onClick={onClose}>
-            X
-          </button>
+          <FontAwesomeIcon
+            icon={faXmark}
+            className={styles.closeButton}
+            onClick={onClose}
+          />
+
           <p className={styles.closeText}>Close</p>
         </div>
         {children}
