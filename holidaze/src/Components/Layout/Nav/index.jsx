@@ -1,19 +1,17 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import styles from "./Nav.modules.scss";
-import LoginLogoutVenueManager from "../../LoginLogoutNav";
 
+import LoginLogoutVenueManager from "../../LoginLogoutNav";
+import styles from "./Nav.modules.scss";
 function Navbar() {
   return (
-    <nav
-      className={`navbar navbar-expand-lg bg-body-tertiary ${styles.navbar}`}
-    >
+    <nav className="navbar navbar-expand-lg bg-body-tertiary">
       <div className="container-fluid">
         <Link to="/" className={styles.navBrand}>
           <img
             src="/Holidaze.png"
             alt="Logo"
-            className="d-inline-block align-top"
+            className={`${styles.navBrand} d-inline-block align-top`}
           />
         </Link>
         <button

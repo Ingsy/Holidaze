@@ -57,7 +57,7 @@ function BookingForm({
 
   return (
     <div className={styles.bookingFormContainer}>
-      <h2>Book Venue</h2>
+      <h2 className="text-center">Book Venue</h2>
       <form onSubmit={handleFormSubmit}>
         <div className={styles.formGroup}>
           <label htmlFor="dateFrom">Check-in date:</label>

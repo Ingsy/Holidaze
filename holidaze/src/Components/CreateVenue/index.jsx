@@ -37,7 +37,7 @@ function CreateVenue() {
   const [showAlert, setShowAlert] = useState(false);
   const [alertContent, setAlertContent] = useState({ message: "", type: "" });
   const [createdVenueId, setCreatedVenueId] = useState(null);
-  const Navigate = useNavigate;
+  const navigate = useNavigate();
 
   const handleMediaChange = (e) => {
     const { value } = e.target;
@@ -134,7 +134,7 @@ function CreateVenue() {
         const { id } = responseJson;
         setCreatedVenueId(id);
 
-        Navigate(`/venue/${id}`);
+        navigate(`/venue/${id}`);
 
         setAlertContent({
           message: "Venue created successfully!",
