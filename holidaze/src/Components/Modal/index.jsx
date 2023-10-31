@@ -18,7 +18,6 @@ const Modal = ({ isOpen, onClose, children }) => {
             className={styles.closeButton}
             onClick={onClose}
           />
-
           <p className={styles.closeText}>Close</p>
         </div>
         {children}
