@@ -2,13 +2,12 @@ import React, { useState } from "react";
 import { headers } from "../../../Auth/utils/authFetch";
 import styles from "./Avatar.module.css";
 import Modal from "../../../Components/Modal";
-import { getUserName } from "../../../Auth/utils/LocalStorage";
+import { UpdateProfileMedia } from "../../../Auth/constants";
 
 function UpdateAvatar() {
   const [avatarUrl, setAvatarUrl] = useState("");
   const [error, setError] = useState("");
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const userName = getUserName();
 
   const openModal = () => {
     setIsModalOpen(true);
@@ -25,7 +24,6 @@ function UpdateAvatar() {
         return;
       }
 
-      const AvatarUrl = `https://api.noroff.dev/api/v1/holidaze/profiles/${userName}/media`;
       const requestOptions = {
         method: "PUT",
         headers: headers(),
@@ -34,7 +32,7 @@ function UpdateAvatar() {
         }),
       };
 
-      const response = await fetch(AvatarUrl, requestOptions);
+      const response = await fetch(UpdateProfileMedia, requestOptions);
 
       if (!response.ok) {
         throw new Error(" Plese try again");

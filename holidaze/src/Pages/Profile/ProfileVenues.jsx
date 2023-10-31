@@ -1,6 +1,7 @@
-import { ProfileVenuesUrl } from "../../Auth/constants";
 import React, { useState, useEffect } from "react";
 import VenueGrid from "../../Components/VenueGrid";
+import { ProfileVenuesUrl } from "../../Auth/constants";
+import { headers } from "../../Auth/utils/authFetch";
 
 function ProfileVenues() {
   const [venues, setVenues] = useState([]);
@@ -9,13 +10,22 @@ function ProfileVenues() {
   useEffect(() => {
     async function fetchData() {
       try {
-        const response = await fetch(ProfileVenuesUrl);
-        if (response.ok) {
+        const requestOptions = {
+          method: "GET", // Use the appropriate HTTP method
+          headers: headers(), // Include the Authorization header with the token
+        };
+
+        const response = await fetch(ProfileVenuesUrl, requestOptions);
+
+        if (!response.ok) {
+          // Handle the error
+          const errorData = await response.json();
+          console.error("Error:", errorData);
+        } else {
+          // Process the response
           const data = await response.json();
           setVenues(data);
           setLoading(false);
-        } else {
-          throw new Error("Failed to fetch users venues");
         }
       } catch (error) {
         console.error("Error fetching data:", error);
