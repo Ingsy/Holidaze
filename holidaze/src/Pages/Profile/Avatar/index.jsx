@@ -48,7 +48,7 @@ function UpdateAvatar() {
   };
 
   return (
-    <div className={`${styles.updateForm} text-center`}>
+    <div className={`${styles.updateForm}`}>
       <button onClick={openModal} className={styles.updateButton}>
         Update Avatar
       </button>

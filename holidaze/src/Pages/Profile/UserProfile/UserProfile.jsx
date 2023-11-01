@@ -1,13 +1,16 @@
 import React, { useEffect, useState } from "react";
 import { useAuth } from "../../../Auth/context/AuthContext";
-import styles from "./UserProfile.module.scss";
 import Collapse from "../../../Components/Collapse";
+import ProfileVenues from "../ProfileVenues";
+import CreateVenue from "../../../Components/CreateVenue";
+import ProfileBookings from "../ProfileBookings";
+import UpdateAvatar from "../Avatar";
+import styles from "./Profile.module.scss";
 
 function UserProfile() {
   const { user, token } = useAuth();
-  console.log("User in UserProfile:", user);
-  console.log("Token in UserProfile:", token);
   const [loading, setLoading] = useState(true);
+  const [openSection, setOpenSection] = useState(null);
 
   useEffect(() => {
     if (user && token) {
@@ -52,50 +55,95 @@ function UserProfile() {
   };
 
   return (
-    <div className={`container ${styles.profile}`}>
+    <div className="container text-center">
       {loading ? (
         <p className={styles.loading}>Loading user profile...</p>
       ) : user ? (
         <div className="row">
-          <div className="col">
-            <h2 className={styles.profileName}>Welcome {user.name}</h2>
-            <div className={styles.titleLine}></div>
-          </div>
-          <div className="col">
-            <div className={`${styles.containerLeft} row`}>
-              <div className="col-md-4">
-                <Collapse title="Create Venue">
-                  <ul>
-                    <li>Create Venue content goes here</li>
-                  </ul>
-                </Collapse>
-                <Collapse title="Your Venues">
-                  <ul>
-                    <li>Your Venues content goes here</li>
-                  </ul>
-                </Collapse>
-                <Collapse title="Your Bookings">
-                  <ul>
-                    <li>Your Bookings content goes here</li>
-                  </ul>
-                </Collapse>
+          <div className={`${styles.ProfileContainer} col-12`}>
+            <div className="col-12">
+              <h2 className={`${styles.nameContainer} text-end`}>
+                {user.name}
+                <div className={styles.titleLine}></div>
+              </h2>
+            </div>
+            <div className={`${styles.ProfileInfoContainer} text-center`}>
+              <div className="col-12 col-md-4">
+                <button onClick={() => setOpenSection("createVenue")}>
+                  Create Venue
+                </button>
+                <button onClick={() => setOpenSection("yourVenues")}>
+                  Your Venues
+                </button>
+                <button
+                  onClick={() => {
+                    setOpenSection("yourBookings");
+                  }}
+                >
+                  Your Bookings
+                </button>
               </div>
-              <div className="col-md-4">
-                <img
-                  className={styles.avatar}
-                  src={user.avatar}
-                  alt="User Avatar"
-                />
+              <div className="col-12 col-md-4">
+                <div className={styles.AvatarImg}>
+                  <img src={user.avatar} alt="User Avatar" />
+                </div>
               </div>
-              <div className="col-md-4">
-                <ul>
+              <div className="col-12 col-md-4">
+                <ul className={styles.UserInfoContainer}>
                   <li>Email: {user.email}</li>
                   <li>
                     Role: {user.venueManager ? "Venue Manager" : "Regular User"}
                   </li>
-                  <li>Edit Avatar</li>
+                  <li>
+                    <UpdateAvatar />
+                  </li>
                 </ul>
               </div>
+            </div>
+          </div>
+          <div className={`${styles.containerCollapse} text-center col`}>
+            <div className="col-12">
+              {openSection === "createVenue" && (
+                <Collapse
+                  title="Create Venue"
+                  isCollapsed={openSection !== "createVenue"}
+                  onToggle={() => {
+                    console.log("Toggled 'Create Venue' section");
+                    setOpenSection("createVenue");
+                  }}
+                >
+                  <CreateVenue />
+                </Collapse>
+              )}
+            </div>
+            <div className="col-12">
+              {openSection === "yourVenues" && (
+                <Collapse
+                  title="Your Venues"
+                  isCollapsed={openSection !== "yourVenues"}
+                  onToggle={() => {
+                    console.log("Toggled 'Your Venues' section");
+                    setOpenSection("yourVenues");
+                  }}
+                >
+                  <ProfileVenues />
+                </Collapse>
+              )}
+            </div>
+            <div className="col-12"></div>
+            <div className="col-12">
+              {openSection === "yourBookings" && (
+                <Collapse
+                  title="Your Bookings"
+                  isCollapsed={openSection !== "yourBookings"}
+                  onToggle={() => {
+                    console.log("Toggled 'Your Bookings' section");
+                    setOpenSection("yourBookings");
+                  }}
+                >
+                  <ProfileBookings />
+                </Collapse>
+              )}
             </div>
           </div>
         </div>

@@ -1,0 +1,76 @@
+.detailsContainer {
+    background-color: #864242;
+    max-width: 820px;
+    border-radius: 0 0 0 40px;
+    margin: 20px !important;
+    padding: 20px;
+    position: relative; /* Ensure proper positioning */
+  
+    button {
+      &:focus {
+        outline: none;
+      }
+    }
+  }
+
+  .ProfileContainer{
+    background-color: #F2F2F2;
+    border-radius: 0 0 0 30px;
+    max-width: 800px;
+    max-height: 400px;
+    margin: 20px;
+  }
+  
+  .ProfileInfoContainer {
+    padding: 20px;
+    display: flex;
+    flex-direction: row;
+    margin-top: 20px;
+    margin-bottom: 20px;
+  }
+
+  @media (max-width: 768px) {
+    .ProfileInfoContainer {
+      /* Column layout for small devices */
+      flex-direction: column;
+    }
+  }
+
+  .nameContainer{
+font-size: 20px;
+padding: 20px;
+color: black;
+
+  }
+
+  .titleLine{
+border: solid 2px #F8C143;
+margin-top: 10px;
+  }
+
+  .UserInfoContainer{
+    list-style-type: none;
+    text-align: left;
+  }
+
+  .AvatarImg{
+    
+    display: flex;
+    justify-content: center; 
+    border-radius: 0 0 0 30px;
+    width: 100%;
+    overflow: hidden;
+    max-height: 200px;
+    max-width: 200px;
+  }
+
+
+  .AvatarImg img{
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: cover;
+  }
+
+  .containerCollapse{
+max-width: 800px;
+  }

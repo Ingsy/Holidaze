@@ -38,7 +38,6 @@ function ProfileVenues() {
 
   return (
     <div>
-      <h1>Your Venues</h1>
       <VenueGrid venues={venues} loading={loading} />
     </div>
   );
