@@ -12,7 +12,9 @@ const token = load("token") || getToken();
 console.log("Token (loaded from localStorage):", token);
 
 export function AuthProvider({ children }) {
-  const [user, setUser] = useState(null);
+  const [user, setUser] = useState({
+    token: load("token") || getToken(),
+  });
 
   useEffect(() => {
     if (token) {
@@ -48,6 +50,7 @@ export function AuthProvider({ children }) {
             name: userData.name,
             email: userData.email,
             avatar: userData.avatar,
+            venueManager: userData.venueManager,
           }));
           console.log("User state after update:", user);
         })
@@ -67,7 +70,7 @@ export function AuthProvider({ children }) {
   };
 
   return (
-    <AuthContext.Provider value={{ user, token, updateUserRole }}>
+    <AuthContext.Provider value={{ user, updateUserRole }}>
       {children}
     </AuthContext.Provider>
   );
