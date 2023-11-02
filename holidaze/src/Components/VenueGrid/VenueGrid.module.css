@@ -10,11 +10,13 @@
 .venueCard {
   margin-bottom: 20px;
   min-height: 500px;
+  min-width: 250px;
   max-height: 500px;
   padding: 10px;
   background-color: white;
   border-radius: 8px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  margin-left: 10px;
 }
 
 .venueName {
@@ -37,9 +39,9 @@ p {
 .venueMaxGuests,
 .venueLocation,
 .venuePrice {
-  color: #848282;
-  font-size: 14px;
-  margin-top: 5px;
+  color: #000000;
+  font-size: 16px;
+  margin-top: 10px;
 }
 
 .media {
@@ -49,4 +51,40 @@ p {
   min-height: 300px;
   object-fit: cover;
   border-radius: 8px;
+}
+
+.YourVenueCard {
+  margin-bottom: 20px;
+  min-width: 200px;
+  max-width: 200px;
+  max-height: 500px;
+  padding: 10px;
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  margin-left: 10px;
+}
+
+.YourMedia {
+  width: 100%;
+  max-height: 100px;
+  min-height: 100px;
+  max-width: 150px;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+.Link {
+  margin-top: 10px;
+  color: #ff7700;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.YourVenueLocation,
+.YourVenuePrice {
+  color: #000000;
+  font-size: 12px;
+  margin-top: 10px;
+  margin-bottom: 10px;
 }
