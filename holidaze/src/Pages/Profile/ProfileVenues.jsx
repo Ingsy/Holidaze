@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import VenueGrid from "../../Components/VenueGrid";
+import YourVenueGrid from "../../Components/VenueGrid/YourVenueGrid";
 import { ProfileVenuesUrl } from "../../Auth/constants";
 import { headers } from "../../Auth/utils/authFetch";
 
@@ -38,7 +38,7 @@ function ProfileVenues() {
 
   return (
     <div>
-      <VenueGrid venues={venues} loading={loading} />
+      <YourVenueGrid venues={venues} loading={loading} />
     </div>
   );
 }

@@ -59,7 +59,7 @@ function UserProfile() {
       {loading ? (
         <p className={styles.loading}>Loading user profile...</p>
       ) : user ? (
-        <div className="row">
+        <div className="row d-flex align-items-center justify-content-center">
           <div className={`${styles.ProfileContainer} col-12`}>
             <div className="col-12">
               <h2 className={`${styles.nameContainer} text-end`}>
@@ -68,14 +68,21 @@ function UserProfile() {
               </h2>
             </div>
             <div className={`${styles.ProfileInfoContainer} text-center`}>
-              <div className="col-12 col-md-4">
-                <button onClick={() => setOpenSection("createVenue")}>
+              <div className={`${styles.ButtonContainer} col-12 col-md-4 mb-4`}>
+                <button
+                  className={styles.Button}
+                  onClick={() => setOpenSection("createVenue")}
+                >
                   Create Venue
                 </button>
-                <button onClick={() => setOpenSection("yourVenues")}>
+                <button
+                  className={styles.Button}
+                  onClick={() => setOpenSection("yourVenues")}
+                >
                   Your Venues
                 </button>
                 <button
+                  className={styles.Button}
                   onClick={() => {
                     setOpenSection("yourBookings");
                   }}
@@ -83,21 +90,19 @@ function UserProfile() {
                   Your Bookings
                 </button>
               </div>
-              <div className="col-12 col-md-4">
+              <div className="col-12 col-md-4 mb-4 d-flex align-items-center justify-content-center">
                 <div className={styles.AvatarImg}>
                   <img src={user.avatar} alt="User Avatar" />
                 </div>
               </div>
-              <div className="col-12 col-md-4">
-                <ul className={styles.UserInfoContainer}>
-                  <li>Email: {user.email}</li>
-                  <li>
-                    Role: {user.venueManager ? "Venue Manager" : "Regular User"}
-                  </li>
-                  <li>
-                    <UpdateAvatar />
-                  </li>
-                </ul>
+              <div className={`${styles.ButtonContainer} col-12 col-md-4 mb-4`}>
+                <div className="mb-3">{user.email}</div>
+                <div className="mb-3">
+                  Role: {user.venueManager ? "Venue Manager" : "Regular User"}
+                </div>
+                <div>
+                  <UpdateAvatar />
+                </div>
               </div>
             </div>
           </div>
@@ -116,13 +121,12 @@ function UserProfile() {
                 </Collapse>
               )}
             </div>
-            <div className="col-12">
+            <div className="col">
               {openSection === "yourVenues" && (
                 <Collapse
                   title="Your Venues"
                   isCollapsed={openSection !== "yourVenues"}
                   onToggle={() => {
-                    console.log("Toggled 'Your Venues' section");
                     setOpenSection("yourVenues");
                   }}
                 >
@@ -130,14 +134,12 @@ function UserProfile() {
                 </Collapse>
               )}
             </div>
-            <div className="col-12"></div>
             <div className="col-12">
               {openSection === "yourBookings" && (
                 <Collapse
                   title="Your Bookings"
                   isCollapsed={openSection !== "yourBookings"}
                   onToggle={() => {
-                    console.log("Toggled 'Your Bookings' section");
                     setOpenSection("yourBookings");
                   }}
                 >

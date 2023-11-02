@@ -17,8 +17,9 @@
     background-color: #F2F2F2;
     border-radius: 0 0 0 30px;
     max-width: 800px;
-    max-height: 400px;
     margin: 20px;
+    max-height: 80vh;
+    overflow-y: auto;
   }
   
   .ProfileInfoContainer {
@@ -31,7 +32,6 @@
 
   @media (max-width: 768px) {
     .ProfileInfoContainer {
-      /* Column layout for small devices */
       flex-direction: column;
     }
   }
@@ -48,15 +48,25 @@ border: solid 2px #F8C143;
 margin-top: 10px;
   }
 
-  .UserInfoContainer{
-    list-style-type: none;
-    text-align: left;
+
+  .ButtonContainer{
+display: flex;
+flex-direction: column;
+justify-content: space-around;
+align-items: center;
+font-weight: bold;
+  }
+
+  .Button{
+    border: none;
+    width: 150px;
+    background-color: transparent;
+    font-weight: bold;
+    margin-bottom: 10px;
   }
 
   .AvatarImg{
-    
     display: flex;
-    justify-content: center; 
     border-radius: 0 0 0 30px;
     width: 100%;
     overflow: hidden;
@@ -73,4 +83,5 @@ margin-top: 10px;
 
   .containerCollapse{
 max-width: 800px;
+margin-bottom: 100px;
   }
