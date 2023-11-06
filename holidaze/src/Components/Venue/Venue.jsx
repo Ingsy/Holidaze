@@ -5,10 +5,9 @@ import { useParams } from "react-router-dom";
 import BaseButton from "../Buttons";
 import Modal from "../Modal";
 import StarRating from "../StarRating";
-import { updateVenue, deleteVenue } from "./venueAPI";
+import { deleteVenue } from "./venueAPI";
 import { useAuth } from "../../Auth/context/AuthContext";
 import Alert from "../Alert";
-import { CreateVenue } from "../CreateVenue";
 import { VenueUpdate } from "./VenueUpdate";
 
 function Venue({ existingVenueData }) {
@@ -200,11 +199,27 @@ function Venue({ existingVenueData }) {
           </div>
         )}
 
-        <p className={styles.venuePrice}>Price: ${venue.price}</p>
+        <p className={styles.venuePrice}>${venue.price} night</p>
         {venue.maxGuests !== undefined && (
-          <p className={styles.venueMaxGuests}>Max Guests: {venue.maxGuests}</p>
+          <p className={styles.venueMaxGuests}>
+            {" "}
+            Accommodates: {venue.maxGuests} guests
+          </p>
         )}
-        <p className={styles.venueDescription}>{venue.description}</p>
+        <p className={styles.venueDescription}>
+          Description: {venue.description}
+        </p>
+        <div className="mt-3">
+          <p>Amenities:</p>
+          {Object.entries(venue.meta).map(([key, value]) => {
+            if (value) {
+              return (
+                <p key={key}>{key.charAt(0).toUpperCase() + key.slice(1)}</p>
+              );
+            }
+            return null;
+          })}
+        </div>
         {venue.rating !== undefined && (
           <div className="text-end">
             <StarRating rating={venue.rating} />
@@ -234,7 +249,7 @@ function Venue({ existingVenueData }) {
       )}
 
       {isUserOwner && (
-        <div className="text-center mt-4">
+        <div className="text-center m-3">
           <BaseButton onClick={handleUpdate} className={styles.bookButton}>
             Update Venue
           </BaseButton>

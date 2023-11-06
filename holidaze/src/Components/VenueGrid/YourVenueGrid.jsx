@@ -13,7 +13,10 @@ function VenueGrid({ venues, loading }) {
       ) : (
         <div className="row">
           {venues.map((venue) => (
-            <div key={venue.id} className="row">
+            <div
+              key={venue.id}
+              className="col d-flex justify-content-center align-items-center"
+            >
               <div className={styles.YourVenueCard} tabIndex="0">
                 <h2 className={`${styles.venueName} text-center`}>
                   {venue.name.length > 30
@@ -22,13 +25,13 @@ function VenueGrid({ venues, loading }) {
                 </h2>
                 {venue.media.length > 0 ? (
                   <img
-                    src={venue.media[0]} // You can add width and height attributes here to make the image smaller
+                    src={venue.media[0]}
                     alt={`Venue Media`}
                     className={styles.YourMedia}
                   />
                 ) : (
                   <img
-                    src={placeholderImageUrl} // Use the same placeholder image
+                    src={placeholderImageUrl}
                     alt={`No Media Available`}
                     className={styles.YourMedia}
                     width="150"
