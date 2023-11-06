@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { CreateVenueUrl } from "../../Auth/constants";
 import { headers } from "../../Auth/utils/authFetch";
 import { Link, useNavigate } from "react-router-dom";
@@ -8,7 +8,8 @@ import styles from "./Create.module.scss";
 import Alert from "../Alert";
 import VenueDetails from "../VenueDetails";
 
-function CreateVenue() {
+function CreateVenue({ existingVenueData }) {
+  console.log(existingVenueData);
   const [venueData, setVenueData] = useState({
     name: "",
     description: "",
@@ -37,7 +38,30 @@ function CreateVenue() {
   const [showAlert, setShowAlert] = useState(false);
   const [alertContent, setAlertContent] = useState({ message: "", type: "" });
   const [createdVenueId, setCreatedVenueId] = useState(null);
+  const [confirmUpdate, setConfirmUpdate] = useState(false);
   const navigate = useNavigate();
+
+  const openCreateVenueForm = (data) => {
+    setVenueData(data);
+    setShowAlert(false);
+  };
+
+  const handleConfirmUpdate = () => {
+    setConfirmUpdate(true);
+    setShowAlert(false);
+    handleSubmit();
+  };
+
+  const handleCancelUpdate = () => {
+    setConfirmUpdate(false);
+    setShowAlert(false);
+  };
+
+  useEffect(() => {
+    if (existingVenueData) {
+      setVenueData(existingVenueData);
+    }
+  }, [existingVenueData]);
 
   const handleMediaChange = (e) => {
     const { value } = e.target;
@@ -47,6 +71,9 @@ function CreateVenue() {
     image.src = value;
     image.onload = () => {
       const updatedPreviews = [...venueData.mediaPreviews, image.src];
+      console.log("Current mediaPreviews:", venueData.mediaPreviews);
+      console.log("Image source:", image.src);
+      console.log("Updated mediaPreviews:", updatedPreviews);
       setVenueData({
         ...venueData,
         media: updatedMedia,
@@ -94,6 +121,8 @@ function CreateVenue() {
     });
   };
 
+  const isUpdating = !!existingVenueData;
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -115,10 +144,30 @@ function CreateVenue() {
       setShowAlert(true);
       return;
     }
+    if (isUpdating && !confirmUpdate) {
+      setAlertContent({
+        message: "Are you happy with your changes?",
+        type: "info",
+        customContent: (
+          <div>
+            <button onClick={handleConfirmUpdate}>Yes</button>
+            <button onClick={handleCancelUpdate}>No</button>
+          </div>
+        ),
+      });
+      setShowAlert(true);
+      return;
+    }
 
     try {
-      const response = await fetch(CreateVenueUrl, {
-        method: "POST",
+      const apiUrl = isUpdating
+        ? `${CreateVenueUrl}/${existingVenueData.id}`
+        : CreateVenueUrl;
+
+      const method = isUpdating ? "PUT" : "POST";
+
+      const response = await fetch(apiUrl, {
+        method,
         headers: headers(),
         body: JSON.stringify(convertedVenueData),
       });
@@ -126,24 +175,31 @@ function CreateVenue() {
       if (!response.ok) {
         const responseBody = await response.json();
         console.log("Error response:", responseBody);
-        setAlertContent({ message: "Create venue failed", type: "error" });
-        setShowAlert(true);
-        throw new Error("Create venue failed");
-      } else {
-        const responseJson = await response.json();
-        const { id } = responseJson;
-        setCreatedVenueId(id);
-
-        navigate(`/venue/${id}`);
-
         setAlertContent({
-          message: "Venue created successfully!",
-          type: "success",
+          message: "Create/update venue failed",
+          type: "error",
         });
         setShowAlert(true);
+        throw new Error("Create/update venue failed");
+      } else {
+        if (isUpdating && confirmUpdate) {
+          navigate(`/venue/${existingVenueData.id}`);
+        } else {
+          const responseJson = await response.json();
+          const { id } = responseJson;
+          setCreatedVenueId(id);
+
+          setAlertContent({
+            message: isUpdating
+              ? "Venue updated successfully!"
+              : "Venue created successfully!",
+            type: "success",
+          });
+          setShowAlert(true);
+        }
       }
     } catch (error) {
-      console.error("Create venue error:", error);
+      console.error("Create/update venue error:", error);
       setAlertContent({ message: "An error occurred", type: "error" });
       setShowAlert(true);
     }
@@ -152,9 +208,13 @@ function CreateVenue() {
   return (
     <div className={styles.formContainer}>
       {showAlert && (
-        <Alert message={alertContent.message} type={alertContent.type} />
+        <Alert message={alertContent.message} type={alertContent.type}>
+          {alertContent.customContent}
+        </Alert>
       )}
-      <h2 className={styles.formTitle}>Rent out your Home</h2>
+      <h2 className={styles.formTitle}>
+        {isUpdating ? "Update Your Venue" : "Rent out your Home"}
+      </h2>
       <form onSubmit={handleSubmit}>
         <div className="row">
           <div className="col-12 col-md-6 col-lg-6">
@@ -231,9 +291,9 @@ function CreateVenue() {
               <label className={styles.label}>Media Items:</label>
               {venueData.media.map((mediaItem, index) => (
                 <div key={index} className={styles.mediaItemContainer}>
-                  {venueData.mediaPreviews[index] && (
+                  {mediaItem && (
                     <img
-                      src={venueData.mediaPreviews[index]}
+                      src={mediaItem}
                       alt="Media Preview"
                       className={styles.mediaPreview}
                     />
@@ -295,7 +355,7 @@ function CreateVenue() {
               />
             </div>
             <div className={styles.formGroup}>
-              <label className={styles.label}>Optional Metadata:</label>
+              <label className={styles.label}>Amenities:</label>
               <div className={styles.formCheck}>
                 <input
                   type="checkbox"
@@ -341,16 +401,20 @@ function CreateVenue() {
         </div>
         <hr />
         <div className="text-center">
-          <button type="submit" className={styles.submitButton}>
-            Create Venue
+          <button
+            type="submit"
+            openCreateVenueForm={openCreateVenueForm}
+            className={styles.submitButton}
+          >
+            {isUpdating ? "Update Venue" : "Create Venue"}
           </button>
-          {/* Conditionally render the link to checkout the new venue */}
-          {createdVenueId && (
+
+          {existingVenueData && (
             <Link
               to={`/venues/${createdVenueId}`}
               className={styles.checkoutLink}
             >
-              Checkout Your New Venue
+              {isUpdating ? "View Updated Venue" : "Checkout Your New Venue"}
             </Link>
           )}
         </div>
