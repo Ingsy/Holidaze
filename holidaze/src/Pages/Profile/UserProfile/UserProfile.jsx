@@ -7,7 +7,7 @@ import ProfileBookings from "../ProfileBookings";
 import UpdateAvatar from "../Avatar";
 import styles from "./Profile.module.scss";
 
-function UserProfile() {
+function UserProfile(openCreateVenueForm) {
   const { user, token } = useAuth();
   const [loading, setLoading] = useState(true);
   const [openSection, setOpenSection] = useState(null);
@@ -52,10 +52,6 @@ function UserProfile() {
     } catch (error) {
       throw error;
     }
-  };
-
-  const openCreateVenueForm = () => {
-    setOpenSection("createVenue");
   };
 
   return (
