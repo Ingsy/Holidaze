@@ -9,7 +9,7 @@ import Home from "./Pages/Home";
 import Login from "./Pages/Login";
 import Register from "./Pages/Register";
 import Profile from "./Pages/Profile";
-import VenueDetails from "./Components/VenueDetails";
+import { Venue } from "./Components/Venue";
 import RouteNotFound from "./Components/Layout/RouteNotFound";
 import Logout from './Pages/Logout';
 
@@ -22,7 +22,7 @@ function App() {
         <Route path="logout" element={<Logout />} />
         <Route path="register" element={<Register />} />
         <Route path="Profile" element={<Profile />} />
-        <Route path="venue/:id" element={<VenueDetails />} />
+        <Route path="venue/:id" element={<Venue />} />
         <Route path="*" element={<RouteNotFound />} />
       </Route>
     </Routes>

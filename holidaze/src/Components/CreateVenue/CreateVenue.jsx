@@ -6,7 +6,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrash } from "@fortawesome/free-solid-svg-icons";
 import styles from "./Create.module.scss";
 import Alert from "../Alert";
-import VenueDetails from "../VenueDetails";
+import { Venue } from "../Venue";
 
 function CreateVenue({ existingVenueData }) {
   console.log(existingVenueData);
@@ -424,7 +424,7 @@ function CreateVenue({ existingVenueData }) {
           )}
         </div>
       </form>
-      {createdVenueId && <VenueDetails venueId={createdVenueId} />}
+      {createdVenueId && <Venue venueId={createdVenueId} />}
     </div>
   );
 }
