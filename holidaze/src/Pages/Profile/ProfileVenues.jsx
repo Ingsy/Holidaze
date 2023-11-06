@@ -3,7 +3,7 @@ import YourVenueGrid from "../../Components/VenueGrid/YourVenueGrid";
 import { ProfileVenuesUrl } from "../../Auth/constants";
 import { headers } from "../../Auth/utils/authFetch";
 
-function ProfileVenues() {
+function ProfileVenues(openCreateVenueForm) {
   const [venues, setVenues] = useState([]);
   const [loading, setLoading] = useState(true);
 
@@ -38,7 +38,11 @@ function ProfileVenues() {
 
   return (
     <div>
-      <YourVenueGrid venues={venues} loading={loading} />
+      <YourVenueGrid
+        venues={venues}
+        loading={loading}
+        openCreateVenueForm={openCreateVenueForm}
+      />
     </div>
   );
 }
