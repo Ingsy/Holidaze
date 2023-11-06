@@ -43,13 +43,13 @@ function CreateVenue({ existingVenueData }) {
 
   const openCreateVenueForm = (data) => {
     setVenueData(data);
-    setShowAlert(false);
+    setShowAlert(true);
   };
 
-  const handleConfirmUpdate = () => {
+  const handleConfirmUpdate = (event) => {
     setConfirmUpdate(true);
     setShowAlert(false);
-    handleSubmit();
+    handleSubmit(event);
   };
 
   const handleCancelUpdate = () => {
@@ -209,7 +209,12 @@ function CreateVenue({ existingVenueData }) {
     <div className={styles.formContainer}>
       {showAlert && (
         <Alert message={alertContent.message} type={alertContent.type}>
-          {alertContent.customContent}
+          {alertContent.customContent && (
+            <div>
+              <button onClick={handleConfirmUpdate}>Yes</button>
+              <button onClick={handleCancelUpdate}>No</button>
+            </div>
+          )}
         </Alert>
       )}
       <h2 className={styles.formTitle}>
