@@ -1,7 +1,7 @@
 import React from "react";
 import styles from "./Alert.module.scss";
 
-function Alert({ message, type }) {
+function Alert({ message, type, children }) {
   return (
     <div
       className={`${styles.alert} ${
@@ -9,6 +9,7 @@ function Alert({ message, type }) {
       }`}
     >
       {message}
+      {children}
     </div>
   );
 }
