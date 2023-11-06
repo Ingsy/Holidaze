@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useAuth } from "../../../Auth/context/AuthContext";
 import Collapse from "../../../Components/Collapse";
 import ProfileVenues from "../ProfileVenues";
-import CreateVenue from "../../../Components/CreateVenue";
+import { CreateVenue } from "../../../Components/CreateVenue";
 import ProfileBookings from "../ProfileBookings";
 import UpdateAvatar from "../Avatar";
 import styles from "./Profile.module.scss";
@@ -52,6 +52,10 @@ function UserProfile() {
     } catch (error) {
       throw error;
     }
+  };
+
+  const openCreateVenueForm = () => {
+    setOpenSection("createVenue");
   };
 
   return (
@@ -117,7 +121,7 @@ function UserProfile() {
                     setOpenSection("createVenue");
                   }}
                 >
-                  <CreateVenue />
+                  <CreateVenue openCreateVenueForm={openCreateVenueForm} />
                 </Collapse>
               )}
             </div>
@@ -130,7 +134,7 @@ function UserProfile() {
                     setOpenSection("yourVenues");
                   }}
                 >
-                  <ProfileVenues />
+                  <ProfileVenues openCreateVenueForm={openCreateVenueForm} />
                 </Collapse>
               )}
             </div>
