@@ -8,10 +8,11 @@ import StarRating from "../StarRating";
 import { updateVenue, deleteVenue } from "./venueAPI";
 import { useAuth } from "../../Auth/context/AuthContext";
 import Alert from "../Alert";
+import { CreateVenue } from "../CreateVenue";
 
-function VenueDetails() {
+function VenueDetails({ existingVenueData }) {
   const { id } = useParams();
-  const { user } = useAuth();
+  const { user, isLoading } = useAuth();
   const [showAlert, setShowAlert] = useState(false);
   const [successMessage, setSuccessMessage] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
@@ -19,6 +20,7 @@ function VenueDetails() {
   const [venue, setVenue] = useState(null);
   const [loading, setLoading] = useState(true);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [editVenue, setEditVenue] = useState(false);
   const [formData, setFormData] = useState({
     dateFrom: "",
     dateTo: "",
@@ -28,8 +30,10 @@ function VenueDetails() {
   const [isUserOwner, setIsUserOwner] = useState(false);
 
   useEffect(() => {
-    fetchVenueDetails(id);
-  }, [id]);
+    if (user) {
+      fetchVenueDetails(id);
+    }
+  }, [id, user]);
 
   const fetchVenueDetails = (venueId) => {
     const fetchUrl = `https://api.noroff.dev/api/v1/holidaze/venues/${venueId}?_owner=true`;
@@ -39,7 +43,7 @@ function VenueDetails() {
       .then((data) => {
         console.log("API Response:", data);
         setVenue(data);
-        setIsUserOwner(data.owner?.email === user?.email);
+        setIsUserOwner(data.owner?.email === user.email);
         setLoading(false);
       })
       .catch((error) => {
@@ -61,17 +65,7 @@ function VenueDetails() {
     closeModal();
   };
 
-  const handleUpdate = (updatedData) => {
-    if (user.token) {
-      updateVenue(id, updatedData, user.token)
-        .then((response) => {
-          console.log("Venue updated successfully.");
-        })
-        .catch((error) => {
-          console.error("Error updating venue:", error);
-        });
-    }
-  };
+  const handleUpdate = () => setEditVenue(true);
 
   const handleDelete = () => {
     if (user.token) {
@@ -103,109 +97,108 @@ function VenueDetails() {
     }
   };
 
+  /* if fetching user form auth0 or venues from api */
+  if (isLoading || loading) return null;
+  /* if editing venue */
+  if (editVenue) return <CreateVenue existingVenueData={venue} />;
+  /* show venue */
   return (
     <div className={`${styles.detailsContainer} mx-auto`}>
-      {loading ? (
-        <p>Loading...</p>
-      ) : (
-        <>
-          <h2 className={`${styles.venueName} text-end`}>{venue.name}</h2>
-          <div className={styles.header}>
-            <div className={styles.titleLine}></div>
-          </div>
+      <>
+        <h2 className={`${styles.venueName} text-end`}>{venue.name}</h2>
+        <div className={styles.header}>
+          <div className={styles.titleLine}></div>
+        </div>
 
-          {venue.media && (
-            <div className="row">
-              <div className="col-12 col-md-6 text-center">
-                <img
-                  src={venue.media[0]}
-                  alt={`Venue 1`}
-                  className={styles.firstPhoto}
-                />
-              </div>
-              <div className="col-12 col-md-3 d-flex justify-content-center flex-wrap flex-md-row">
-                {venue.media.length > 1 ? (
-                  <div className={styles.smallPhotosContainer}>
-                    {venue.media.slice(1).map((photo, index) => (
-                      <div key={index} className={styles.smallPhoto}>
-                        <img src={photo} alt={`Venue ${index + 2}`} />
-                      </div>
-                    ))}
-                  </div>
-                ) : null}
-                {venue.media.length < 4 ? (
-                  <div className={styles.smallPhotosContainer}>
-                    {venue.media.length < 3 ? (
-                      <div className={styles.smallPhoto}>
-                        <img
-                          src="https://picsum.photos/seed/picsum/200/300"
-                          alt="Placeholder 1"
-                        />
-                      </div>
-                    ) : null}
-                    {venue.media.length < 2 ? (
-                      <div className={styles.smallPhoto}>
-                        <img
-                          src="https://picsum.photos/seed/picsum/200/300"
-                          alt="Placeholder 2"
-                        />
-                      </div>
-                    ) : null}
-                    {venue.media.length === 1 ? (
-                      <div className={styles.smallPhoto}>
-                        <img
-                          src="https://picsum.photos/seed/picsum/200/300"
-                          alt="Placeholder 3"
-                        />
-                      </div>
-                    ) : null}
-                  </div>
-                ) : null}
-              </div>
-              <div className="col-12 col-md-3 d-flex flex-column">
-                {venue.location && venue.location.address && (
-                  <div
-                    className={`d-flex flex-column ${styles.locationContainer}`}
-                  >
+        {venue.media && (
+          <div className="row">
+            <div className="col-12 col-md-6 text-center">
+              <img
+                src={venue.media[0]}
+                alt={`Venue 1`}
+                className={styles.firstPhoto}
+              />
+            </div>
+            <div className="col-12 col-md-3 d-flex justify-content-center flex-wrap flex-md-row">
+              {venue.media.length > 1 ? (
+                <div className={styles.smallPhotosContainer}>
+                  {venue.media.slice(1).map((photo, index) => (
+                    <div key={index} className={styles.smallPhoto}>
+                      <img src={photo} alt={`Venue ${index + 2}`} />
+                    </div>
+                  ))}
+                </div>
+              ) : null}
+              {venue.media.length < 4 ? (
+                <div className={styles.smallPhotosContainer}>
+                  {venue.media.length < 3 ? (
+                    <div className={styles.smallPhoto}>
+                      <img
+                        src="https://picsum.photos/seed/picsum/200/300"
+                        alt="Placeholder 1"
+                      />
+                    </div>
+                  ) : null}
+                  {venue.media.length < 2 ? (
+                    <div className={styles.smallPhoto}>
+                      <img
+                        src="https://picsum.photos/seed/picsum/200/300"
+                        alt="Placeholder 2"
+                      />
+                    </div>
+                  ) : null}
+                  {venue.media.length === 1 ? (
+                    <div className={styles.smallPhoto}>
+                      <img
+                        src="https://picsum.photos/seed/picsum/200/300"
+                        alt="Placeholder 3"
+                      />
+                    </div>
+                  ) : null}
+                </div>
+              ) : null}
+            </div>
+            <div className="col-12 col-md-3 d-flex flex-column">
+              {venue.location && venue.location.address && (
+                <div
+                  className={`d-flex flex-column ${styles.locationContainer}`}
+                >
+                  <p className="flex-grow-1">
+                    Address: {venue.location.address}
+                  </p>
+                  <p className="flex-grow-1">City: {venue.location.city}</p>
+                  <p className="flex-grow-1">Zip: {venue.location.zip}</p>
+                  <p className="flex-grow-1">
+                    Country: {venue.location.country}
+                  </p>
+                  {venue.location.continent && (
                     <p className="flex-grow-1">
-                      Address: {venue.location.address}
+                      Continent: {venue.location.continent}
                     </p>
-                    <p className="flex-grow-1">City: {venue.location.city}</p>
-                    <p className="flex-grow-1">Zip: {venue.location.zip}</p>
-                    <p className="flex-grow-1">
-                      Country: {venue.location.country}
-                    </p>
-                    {venue.location.continent && (
+                  )}
+                  {venue.location.lat !== undefined &&
+                    venue.location.lng !== undefined && (
                       <p className="flex-grow-1">
-                        Continent: {venue.location.continent}
+                        Lat: {venue.location.lat}, Long: {venue.location.lng}
                       </p>
                     )}
-                    {venue.location.lat !== undefined &&
-                      venue.location.lng !== undefined && (
-                        <p className="flex-grow-1">
-                          Lat: {venue.location.lat}, Long: {venue.location.lng}
-                        </p>
-                      )}
-                  </div>
-                )}
-              </div>
+                </div>
+              )}
             </div>
-          )}
+          </div>
+        )}
 
-          <p className={styles.venuePrice}>Price: ${venue.price}</p>
-          {venue.maxGuests !== undefined && (
-            <p className={styles.venueMaxGuests}>
-              Max Guests: {venue.maxGuests}
-            </p>
-          )}
-          <p className={styles.venueDescription}>{venue.description}</p>
-          {venue.rating !== undefined && (
-            <p className="text-end">
-              <StarRating rating={venue.rating} />
-            </p>
-          )}
-        </>
-      )}
+        <p className={styles.venuePrice}>Price: ${venue.price}</p>
+        {venue.maxGuests !== undefined && (
+          <p className={styles.venueMaxGuests}>Max Guests: {venue.maxGuests}</p>
+        )}
+        <p className={styles.venueDescription}>{venue.description}</p>
+        {venue.rating !== undefined && (
+          <div className="text-end">
+            <StarRating rating={venue.rating} />
+          </div>
+        )}
+      </>
       {isModalOpen && (
         <Modal isOpen={isModalOpen} onClose={closeModal}>
           <BookingForm
