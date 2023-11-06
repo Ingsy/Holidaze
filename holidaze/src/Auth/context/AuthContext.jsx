@@ -15,6 +15,7 @@ export function AuthProvider({ children }) {
   const [user, setUser] = useState({
     token: load("token") || getToken(),
   });
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     if (token) {
@@ -56,7 +57,8 @@ export function AuthProvider({ children }) {
         })
         .catch((error) => {
           console.error("Error parsing user data:", error);
-        });
+        })
+        .finally(() => setIsLoading(false));
     } catch (error) {
       console.error("Error fetching user data:", error);
     }
@@ -70,7 +72,7 @@ export function AuthProvider({ children }) {
   };
 
   return (
-    <AuthContext.Provider value={{ user, updateUserRole }}>
+    <AuthContext.Provider value={{ user, updateUserRole, isLoading }}>
       {children}
     </AuthContext.Provider>
   );
