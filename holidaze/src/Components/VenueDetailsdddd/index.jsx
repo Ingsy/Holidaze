@@ -223,20 +223,14 @@ function VenueDetails({ existingVenueData }) {
 
       {isUserOwner && (
         <div className="text-center mt-4">
-          <BaseButton onClick={handleUpdate} className={styles.bookButton}>
-            Update Venue
-          </BaseButton>
-          <BaseButton onClick={handleDelete} className={styles.bookButton}>
-            Delete Venue
-          </BaseButton>
+          <BaseButton onClick={handleUpdate}>Update Venue</BaseButton>
+          <BaseButton onClick={handleDelete}>Delete Venue</BaseButton>
         </div>
       )}
 
       {!isUserOwner && (
         <div className="text-center mt-4">
-          <BaseButton onClick={openModal} className={styles.bookButton}>
-            Book Venue
-          </BaseButton>
+          <BaseButton onClick={openModal}>Book Venue</BaseButton>
         </div>
       )}
     </div>

@@ -198,7 +198,7 @@ function Venue({ existingVenueData }) {
             </div>
           </div>
         )}
-
+        <div className={styles.titleLine}></div>
         <p className={styles.venuePrice}>${venue.price} night</p>
         {venue.maxGuests !== undefined && (
           <p className={styles.venueMaxGuests}>

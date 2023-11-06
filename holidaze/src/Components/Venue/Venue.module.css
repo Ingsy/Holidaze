@@ -3,7 +3,7 @@
   max-width: 820px;
   border-radius: 0 0 0 40px;
   margin: 20px !important;
-  padding: 20px;
+  padding: 40px;
 }
 
 .header {
@@ -78,6 +78,7 @@
   justify-content: space-between;
   height: 100%;
   max-height: 350px;
+  margin-left: 13px;
 }
 
 .bottomLine {
