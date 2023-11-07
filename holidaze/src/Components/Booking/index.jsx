@@ -1,73 +1,59 @@
-import React from "react";
-import { useAuth } from "../../Auth/context/AuthContext";
+import React, { useState } from "react";
 import BaseButton from "../Buttons";
 import styles from "./Booking.module.scss";
+import { useAuth } from "../../Auth/context/AuthContext";
 
-function BookingForm({
+const defaultBookingData = {
+  dateFrom: "",
+  dateTo: "",
+  guests: 0,
+  venue: {
+    id: "",
+  },
+};
+
+export const BookingForm = ({
   formData,
   onFormChange,
   onBookingSubmit,
   venueId,
   maxGuests,
-}) {
+  onSave,
+  onClose,
+}) => {
+  const [booking, setBooking] = useState(formData || defaultBookingData);
   const user = useAuth();
 
-  const handleFormSubmit = (e) => {
-    e.preventDefault();
+  const FormSubmit = (event) => {
+    event.preventDefault();
+    onSave(booking);
+  };
 
-    if (user && user.token) {
-      if (formData.guests > maxGuests) {
-        console.error("Number of guests exceeds the maximum allowed.");
-        return;
-      }
+  const formCancel = (event) => {
+    event.preventDefault();
+    onClose();
+  };
 
-      const bookingData = {
-        dateFrom: formData.dateFrom,
-        dateTo: formData.dateTo,
-        guests: formData.guests,
-        venueId: venueId,
-      };
-
-      fetch("https://api.noroff.dev/api/v1/holidaze/bookings", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${user.token}`,
-        },
-        body: JSON.stringify(bookingData),
-      })
-        .then((response) => {
-          if (response.ok) {
-            return response.json();
-          } else {
-            throw new Error("Failed to create booking");
-          }
-        })
-        .then((data) => {
-          console.log("Booking created:", data);
-          onBookingSubmit();
-        })
-        .catch((error) => {
-          console.error("Booking creation error:", error);
-        });
-    } else {
-      console.error("User not authenticated or token unavailable.");
-    }
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setBooking({
+      ...booking,
+      [name]: value,
+    });
   };
 
   return (
     <div className={styles.bookingFormContainer}>
       <h2 className="text-center">Book Venue</h2>
-      <form onSubmit={handleFormSubmit}>
+      <form onSubmit={FormSubmit}>
         <div className={styles.formGroup}>
           <label htmlFor="dateFrom">Check-in date:</label>
           <input
             type="date"
             id="dateFrom"
-            value={formData.dateFrom}
-            onChange={(e) =>
-              onFormChange({ ...formData, dateFrom: e.target.value })
-            }
+            name="dateFrom"
+            value={booking.dateFrom}
+            onChange={handleInputChange}
             required
           />
         </div>
@@ -76,10 +62,9 @@ function BookingForm({
           <input
             type="date"
             id="dateTo"
-            value={formData.dateTo}
-            onChange={(e) =>
-              onFormChange({ ...formData, dateTo: e.target.value })
-            }
+            name="dateTo"
+            value={booking.dateTo}
+            onChange={handleInputChange}
             required
           />
         </div>
@@ -88,21 +73,27 @@ function BookingForm({
           <input
             type="number"
             id="guests"
-            value={formData.guests}
-            onChange={(e) =>
-              onFormChange({ ...formData, guests: e.target.value })
-            }
+            name="guests"
+            value={booking.guests}
+            onChange={handleInputChange}
             min="1"
             max={maxGuests}
             required
           />
         </div>
-        <div className={styles.formGroup}>
-          <BaseButton type="submit">Book Now</BaseButton>
-        </div>
+        {user ? (
+          <div className={styles.formGroup}>
+            <BaseButton type="submit">Book Now</BaseButton>
+            <BaseButton type="button" onClick={formCancel}>
+              Cancel
+            </BaseButton>
+          </div>
+        ) : (
+          <p>Please log in to book a venue.</p>
+        )}
       </form>
     </div>
   );
-}
+};
 
 export default BookingForm;

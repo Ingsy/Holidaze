@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import BookingForm from "../Booking";
 import styles from "./Venue.module.css";
 import { useParams } from "react-router-dom";
 import BaseButton from "../Buttons";
@@ -9,6 +8,7 @@ import { deleteVenue } from "./venueAPI";
 import { useAuth } from "../../Auth/context/AuthContext";
 import Alert from "../Alert";
 import { VenueUpdate } from "./VenueUpdate";
+import { bookingsCreate } from "../Booking/bookingsCreate";
 
 function Venue({ existingVenueData }) {
   const { id } = useParams();
@@ -228,7 +228,7 @@ function Venue({ existingVenueData }) {
       </>
       {isModalOpen && (
         <Modal isOpen={isModalOpen} onClose={closeModal}>
-          <BookingForm
+          <bookingsCreate
             formData={formData}
             onFormChange={setFormData}
             onBookingSubmit={handleBookingSubmit}
