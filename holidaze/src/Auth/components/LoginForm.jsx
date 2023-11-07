@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import { getToken, setToken } from "../utils/LocalStorage";
+import styles from "../../Components/Venue/VenueForm.module.scss";
+import BaseButton from "../../Components/Buttons";
 
 function LoginForm() {
   const [formData, setFormData] = useState({
@@ -53,8 +55,10 @@ function LoginForm() {
 
   return (
     <form onSubmit={handleSubmit}>
-      <div>
-        <label htmlFor="email">Email:</label>
+      <div className="mt-4">
+        <label htmlFor="email" className={styles.label}>
+          Email:
+        </label>
         <input
           type="email"
           id="email"
@@ -62,10 +66,13 @@ function LoginForm() {
           value={formData.email}
           onChange={handleInputChange}
           required
+          className={styles.input}
         />
       </div>
-      <div>
-        <label htmlFor="password">Password:</label>
+      <div className="mt-3 mb-3">
+        <label htmlFor="password" className={styles.label}>
+          Password:
+        </label>
         <input
           type="password"
           id="password"
@@ -73,9 +80,10 @@ function LoginForm() {
           value={formData.password}
           onChange={handleInputChange}
           required
+          className={styles.input}
         />
       </div>
-      <button type="submit">Login</button>
+      <BaseButton type="submit">Login</BaseButton>
     </form>
   );
 }

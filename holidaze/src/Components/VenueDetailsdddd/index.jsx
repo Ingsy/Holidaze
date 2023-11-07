@@ -1,14 +1,15 @@
 import React, { useState, useEffect } from "react";
 import BookingForm from "../Booking";
-import styles from "./VenueDetails.module.css";
+
 import { useParams } from "react-router-dom";
 import BaseButton from "../Buttons";
 import Modal from "../Modal";
 import StarRating from "../StarRating";
-import { updateVenue, deleteVenue } from "./venueAPI";
+import { deleteVenue } from "./venueAPI";
 import { useAuth } from "../../Auth/context/AuthContext";
 import Alert from "../Alert";
 import { CreateVenue } from "../CreateVenue";
+import styles from "../../Styles/VenueDetails.module.css";
 
 function VenueDetails({ existingVenueData }) {
   const { id } = useParams();

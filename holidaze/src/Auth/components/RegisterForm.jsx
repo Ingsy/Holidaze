@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { setToken } from "../utils/LocalStorage";
 import { headers } from "../utils/authFetch";
+import styles from "../../Components/Venue/VenueForm.module.scss";
+import BaseButton from "../../Components/Buttons";
 
 function RegisterForm() {
   const [formData, setFormData] = useState({
@@ -70,7 +72,9 @@ function RegisterForm() {
   return (
     <form onSubmit={handleSubmit}>
       <div>
-        <label htmlFor="name">Name:</label>
+        <label htmlFor="name" className={styles.label}>
+          Name:
+        </label>
         <input
           type="text"
           id="name"
@@ -78,10 +82,13 @@ function RegisterForm() {
           value={formData.name}
           onChange={handleInputChange}
           required
+          className={styles.input}
         />
       </div>
       <div>
-        <label htmlFor="email">Email:</label>
+        <label htmlFor="email" className={styles.label}>
+          Email:
+        </label>
         <input
           type="email"
           id="email"
@@ -89,11 +96,14 @@ function RegisterForm() {
           value={formData.email}
           onChange={handleInputChange}
           required
+          className={styles.input}
         />
       </div>
       {error && <div className="error-message">{error}</div>}
       <div>
-        <label htmlFor="password">Password:</label>
+        <label htmlFor="password" className={styles.label}>
+          Password:
+        </label>
         <input
           type="password"
           id="password"
@@ -101,21 +111,26 @@ function RegisterForm() {
           value={formData.password}
           onChange={handleInputChange}
           required
+          className={styles.input}
         />
       </div>
       <div>
-        <label htmlFor="avatar">Avatar (Optional):</label>
+        <label htmlFor="avatar" className={styles.label}>
+          Avatar (Optional):
+        </label>
         <input
           type="url"
           id="avatar"
           name="avatar"
           value={formData.avatar}
           onChange={handleInputChange}
+          className={styles.input}
         />
       </div>
       <div>
         <label htmlFor="venueManager">Venue Manager (Optional):</label>
         <input
+          className="mb-4 mt-3"
           type="checkbox"
           id="venueManager"
           name="venueManager"
@@ -125,7 +140,7 @@ function RegisterForm() {
           }
         />
       </div>
-      <button type="submit">Register</button>
+      <BaseButton type="submit">Register</BaseButton>
     </form>
   );
 }

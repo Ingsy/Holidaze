@@ -1,10 +1,10 @@
 import React from "react";
-import BookingForm from "./BookingForm";
-import { CreateBooking } from "./BookingAPI";
+import BookingForm from "./index";
+import { createBooking } from "./bookingsAPI";
 
 const bookingsCreate = ({ venueId, maxGuests, onBookingSubmit }) => {
-  const handleCreateBooking = (bookingData) => {
-    CreateBooking(bookingData)
+  const handlecreateBooking = (bookingData) => {
+    createBooking(bookingData)
       .then((response) => {
         console.log("Booking created:", response.data);
         onBookingSubmit();
@@ -20,7 +20,7 @@ const bookingsCreate = ({ venueId, maxGuests, onBookingSubmit }) => {
         onBookingSubmit={() => {}}
         venueId={venueId}
         maxGuests={maxGuests}
-        onSave={handleCreateBooking}
+        onSave={handlecreateBooking}
         onClose={() => {}}
       />
     </div>

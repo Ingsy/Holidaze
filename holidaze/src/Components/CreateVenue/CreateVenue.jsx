@@ -5,6 +5,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrash } from "@fortawesome/free-solid-svg-icons";
 import styles from "./Create.module.scss";
+import BaseButton from "../Buttons";
 import Alert from "../Alert";
 import { Venue } from "../Venue";
 
@@ -406,13 +407,13 @@ function CreateVenue({ existingVenueData }) {
         </div>
         <hr />
         <div className="text-center">
-          <button
+          <BaseButton
             type="submit"
             openCreateVenueForm={openCreateVenueForm}
             className={styles.submitButton}
           >
             {isUpdating ? "Update Venue" : "Create Venue"}
-          </button>
+          </BaseButton>
 
           {existingVenueData && (
             <Link

@@ -4,18 +4,16 @@ import { faUser } from "@fortawesome/free-solid-svg-icons";
 import { Link } from "react-router-dom";
 import LogoutButton from "../../Auth/components/Logout";
 import { removeToken } from "../../Auth/utils/LocalStorage";
-import styles from "./LoginLogoutNav.module.css";
+import styles from "./LoginLogoutNav.module.scss";
 import ToggleVenueManager from "../../Pages/Profile/ToggleVenueManager/ToggleVenueManager";
 
 function LoginLogoutVenueManager() {
   const [isLoggedIn, setIsLoggedIn] = useState(false); // State to track login status
 
   const handleLogin = () => {
-    // Check if a token is present in local storage
     const token = localStorage.getItem("token");
 
-    // Set the user as logged in if a token exists
-    setIsLoggedIn(!!token); // true if token exists, false if not
+    setIsLoggedIn(!!token);
   };
 
   const handleLogout = () => {
@@ -28,22 +26,22 @@ function LoginLogoutVenueManager() {
   }, []);
 
   return (
-    <div className={`${styles.componentWrapper} text-center`}>
+    <div>
       {isLoggedIn ? (
-        <div>
-          <h2>
+        <div className={styles.componentWrapper}>
+          <div className={styles.FontLog}>
             <FontAwesomeIcon icon={faUser} />
-          </h2>
-          <LogoutButton onLogout={handleLogout} />
+
+            <LogoutButton onLogout={handleLogout} />
+          </div>
           <ToggleVenueManager />
         </div>
       ) : (
         <div>
-          {/* Display a link to the login page */}
-          <Link to="/login">
-            <button className={styles.LoginButton}>Login</button>
+          <Link className={styles.LoginButton} to="/login">
+            Login
           </Link>
-          <button onClick={() => alert("Please log in or register")}>
+          <button onClick={() => alert("Please login or register")}>
             Toggle Venue Manager
           </button>
         </div>
