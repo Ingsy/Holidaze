@@ -8,7 +8,7 @@ import { deleteVenue } from "./venueAPI";
 import { useAuth } from "../../Auth/context/AuthContext";
 import Alert from "../Alert";
 import { VenueUpdate } from "./VenueUpdate";
-import { bookingsCreate } from "../Booking/bookingsCreate";
+import BookingCreate from "../Booking/BookingCreate";
 
 function Venue({ existingVenueData }) {
   const { id } = useParams();
@@ -228,7 +228,8 @@ function Venue({ existingVenueData }) {
       </>
       {isModalOpen && (
         <Modal isOpen={isModalOpen} onClose={closeModal}>
-          <bookingsCreate
+          <BookingCreate
+            venueId={venue.id}
             formData={formData}
             onFormChange={setFormData}
             onBookingSubmit={handleBookingSubmit}
