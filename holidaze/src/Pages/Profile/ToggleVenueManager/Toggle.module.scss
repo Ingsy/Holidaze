@@ -1,25 +1,34 @@
-.toggleContainer {
-  position: relative;
-  width: 54px;
-  height: 24px;
-  background-color: #ffffff; 
-  border: 2px solid #848282; 
-  border-radius: 30px; 
-  margin-top: 20px;
+.toggleWrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+
+  .toggleContainer {
+    position: relative;
+    width: 45px;
+    height: 19px;
+    background-color: #F8C143;
+    border: 2px solid #a9a9a9;
+    border-radius: 30px;
+    margin-bottom: 5px;
+    margin-top: 8px;
+
+    .toggleSlider {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 15px;
+      height: 15px;
+      background-color: #ffffff;
+      border-radius: 50%;
+      transition: 0.3s;
+
+      &.active {
+        left: 30px;
+        background-color:  #a9a9a9;
+      }
+    }
+  }
 }
 
-.toggleSlider {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 20px;
-  height: 20px;
-  background-color: #848282; /* Set the slider color */ /* Initial border color */
-  border-radius: 50%; /* Make it a circle */
-  transition: 0.3s;
-}
-
-.toggleContainer.active .toggleSlider {
-  left: 30px; /* Slide to the right when active */
-  background-color: #F8C143; /* Change slider color to yellow when active */
-}

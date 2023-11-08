@@ -14,7 +14,6 @@ function ToggleVenueManager({ isVenueManager }) {
     setVenueManager(updatedValue);
     updateUserRole(updatedValue);
 
-    // Update the venueManager status in the database
     const managerUrl = `https://api.noroff.dev/api/v1/holidaze/profiles/${userName}`;
     const requestOptions = {
       method: "PUT",
@@ -48,7 +47,7 @@ function ToggleVenueManager({ isVenueManager }) {
       >
         <div className={styles.toggleSlider} onClick={handleToggle}></div>
       </div>
-      <div className={styles.toggleText}>
+      <div>
         <label>{venueManager ? "Venue Manager" : "Regular User"}</label>
       </div>
     </div>
