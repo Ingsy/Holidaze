@@ -4,12 +4,11 @@ import styles from "./Booking.module.scss";
 import { useAuth } from "../../Auth/context/AuthContext";
 
 const defaultBookingData = {
+  id: "",
   dateFrom: "",
   dateTo: "",
   guests: 0,
-  venue: {
-    id: "",
-  },
+  venue: {},
 };
 
 export const BookingForm = ({
@@ -26,7 +25,20 @@ export const BookingForm = ({
 
   const FormSubmit = (event) => {
     event.preventDefault();
-    onSave(booking);
+
+    // Check if formData and formData.venue are defined
+    if (formData && formData.venue) {
+      const updatedBooking = {
+        ...booking,
+        venueId: venueId,
+        venue: formData.venue,
+      };
+      onSave(updatedBooking, formData);
+    } else {
+      // Handle the case when formData or formData.venue is undefined
+      // You can show an error message or take appropriate action.
+      alert("Form data is missing or invalid. Please check your input.");
+    }
   };
 
   const formCancel = (event) => {
@@ -36,10 +48,13 @@ export const BookingForm = ({
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
-    setBooking({
+    const updatedBooking = {
       ...booking,
       [name]: value,
-    });
+    };
+    setBooking(updatedBooking);
+
+    onFormChange(updatedBooking);
   };
 
   return (
