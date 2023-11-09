@@ -1,10 +1,11 @@
 import React, { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrash } from "@fortawesome/free-solid-svg-icons";
-
-import styles from "./VenueForm.module.scss";
+import BaseButton from "../Buttons";
+import styles from "../../Styles/VenueForm.module.scss";
 
 const defaultVenueData = {
+  id: "",
   name: "",
   description: "",
   media: [],
@@ -30,14 +31,17 @@ const defaultVenueData = {
 };
 
 export const VenueForm = ({ venueData, onSave, onClose }) => {
-  const [venue, setVenue] = useState(
-    venueData || defaultVenueData
-  ); /* Bytt ut med default */
+  const [venue, setVenue] = useState(venueData || defaultVenueData);
 
   const formSubmit = (event) => {
     event.preventDefault();
     event.stopPropagation();
-    onSave(venue);
+    const updatedVenue = {
+      ...venue,
+      price: parseFloat(venue.price),
+      maxGuests: parseInt(venue.maxGuests),
+    };
+    onSave(updatedVenue);
   };
 
   const formCancel = (event) => {
@@ -204,7 +208,6 @@ export const VenueForm = ({ venueData, onSave, onClose }) => {
           </div>
         </div>
         <div className="col-12 col-md-6 col-lg-6">
-          {/* Right side for md and lg devices */}
           <div className={styles.formGroup}>
             <label htmlFor="locationAddress" className={styles.label}>
               Address:
@@ -291,20 +294,20 @@ export const VenueForm = ({ venueData, onSave, onClose }) => {
       </div>
       <hr />
       <div className="text-center">
-        <button
+        <BaseButton
           type="submit"
           onClick={formSubmit}
           className={styles.submitButton}
         >
           Save
-        </button>
-        <button
+        </BaseButton>
+        <BaseButton
           type="submit"
           onClick={formCancel}
           className={styles.submitButton}
         >
           Cancel
-        </button>
+        </BaseButton>
       </div>
     </form>
   );

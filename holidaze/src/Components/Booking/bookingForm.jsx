@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import BaseButton from "../Buttons";
-import styles from "./Booking.module.scss";
+import styles from "../../Styles/Booking.module.scss";
 import { useAuth } from "../../Auth/context/AuthContext";
 
 const defaultBookingData = {
@@ -14,7 +14,6 @@ const defaultBookingData = {
 export const BookingForm = ({
   formData,
   onFormChange,
-  onBookingSubmit,
   venueId,
   maxGuests,
   onSave,
@@ -25,18 +24,19 @@ export const BookingForm = ({
 
   const FormSubmit = (event) => {
     event.preventDefault();
-
+    console.log(formData, venueId);
     // Check if formData and formData.venue are defined
-    if (formData && formData.venue) {
+    if (booking && booking.venue) {
       const updatedBooking = {
         ...booking,
         venueId: venueId,
-        venue: formData.venue,
+        venue: booking.venue,
       };
-      onSave(updatedBooking, formData);
+      onSave(updatedBooking, booking);
     } else {
       // Handle the case when formData or formData.venue is undefined
       // You can show an error message or take appropriate action.
+      console.log(booking);
       alert("Form data is missing or invalid. Please check your input.");
     }
   };
@@ -47,10 +47,10 @@ export const BookingForm = ({
   };
 
   const handleInputChange = (e) => {
-    const { name, value } = e.target;
+    const { name, value, type } = e.target;
     const updatedBooking = {
       ...booking,
-      [name]: value,
+      [name]: type === "number" ? parseInt(value) : value,
     };
     setBooking(updatedBooking);
 

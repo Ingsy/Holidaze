@@ -2,10 +2,12 @@ import React, { useEffect, useState } from "react";
 import { useAuth } from "../../../Auth/context/AuthContext";
 import Collapse from "../../../Components/Collapse";
 import ProfileVenues from "../ProfileVenues";
-import { CreateVenue } from "../../../Components/CreateVenue";
+
 import ProfileBookings from "../ProfileBookings";
 import UpdateAvatar from "../Avatar";
-import styles from "./Profile.module.scss";
+
+import { VenueCreate } from "../../../Components/Venue/VenueCreate";
+import styles from "../../../Styles/Profile.module.scss";
 
 function UserProfile(openCreateVenueForm) {
   const { user, token } = useAuth();
@@ -98,7 +100,7 @@ function UserProfile(openCreateVenueForm) {
               <div className={`${styles.ButtonContainer} col-12 col-md-4 mb-4`}>
                 <div className="mb-3">{user.email}</div>
                 <div className="mb-3">
-                  Role: {user.venueManager ? "Venue Manager" : "Regular User"}
+                  Role: {user.venueManager ? "Venue Manager" : "User"}
                 </div>
                 <div>
                   <UpdateAvatar />
@@ -117,7 +119,7 @@ function UserProfile(openCreateVenueForm) {
                     setOpenSection("createVenue");
                   }}
                 >
-                  <CreateVenue openCreateVenueForm={openCreateVenueForm} />
+                  <VenueCreate openCreateVenueForm={openCreateVenueForm} />
                 </Collapse>
               )}
             </div>

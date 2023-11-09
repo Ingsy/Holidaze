@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import YourVenueGrid from "../../Components/VenueGrid/YourVenueGrid";
+//import YourVenueGrid from "../../Components/VenueGrid/YourVenueGrid";
 import { useHolidaizApi } from "../../Auth/constants";
 import BookingList from "../../Components/Booking/BookingList";
 
@@ -30,7 +30,7 @@ export const ProfileBookings = () => {
 
   return (
     <div>
-      <BookingList bookings={bookings} />
+      <BookingList bookings={bookings} loading={loading} />
     </div>
   );
 };

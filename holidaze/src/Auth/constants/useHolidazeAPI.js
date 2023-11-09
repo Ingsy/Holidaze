@@ -12,13 +12,13 @@ const userName = getUserName();
 export const ProfileBaseUrl = `${API_HOLIDAZE_URL}/profiles`;
 export const UserProfile = `${ProfileBaseUrl}/${userName}`;
 export const ProfileVenuesUrl = `${UserProfile}/venues/?_venues=true`;
-export const ProfileBookingsUrl = `${ProfileBaseUrl}/bookings`;
+export const ProfileBookingsUrl = `${ProfileBaseUrl}/bookings/?_bookings=true`;
 export const UpdateProfileMedia = `${UserProfile}/media`;
 
 export const BookingBaseUrl = `${API_HOLIDAZE_URL}/bookings`;
 export const BookingCustomerUrl = `${BookingBaseUrl}?_customer=true`;
-export const BookingVenueUrl = `${BookingBaseUrl}?_venues=true`;
-export const BookingsByProfile = `${ProfileBaseUrl}?_bookings=true`;
+export const BookingVenueUrl = `${BookingBaseUrl}?_venue=true`;
+export const BookingsByProfile = `${UserProfile}/bookings/?_bookings=true`;
 
 export const CreateVenueUrl = `${API_HOLIDAZE_URL}/venues`;
 const VenueDetailUrl = `https://api.noroff.dev/api/v1/holidaze/venues/`;
