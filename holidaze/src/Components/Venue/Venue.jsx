@@ -4,7 +4,6 @@ import { useParams } from "react-router-dom";
 import BaseButton from "../Buttons";
 import Modal from "../Modal";
 import StarRating from "../StarRating";
-//import { deleteVenue } from "./venueAPI";
 import { useAuth } from "../../Auth/context/AuthContext";
 import Alert from "../Alert";
 import { VenueUpdate } from "./VenueUpdate";
@@ -149,7 +148,7 @@ function Venue({ existingVenueData }) {
                   {venue.media.length < 3 ? (
                     <div className={styles.smallPhoto}>
                       <img
-                        src="https://picsum.photos/seed/picsum/200/300"
+                        src="https://picsum.photos/id/57/200/300"
                         alt="Placeholder 1"
                       />
                     </div>
@@ -157,7 +156,7 @@ function Venue({ existingVenueData }) {
                   {venue.media.length < 2 ? (
                     <div className={styles.smallPhoto}>
                       <img
-                        src="https://picsum.photos/seed/picsum/200/300"
+                        src="https://picsum.photos/id/225/200/300"
                         alt="Placeholder 2"
                       />
                     </div>
@@ -165,7 +164,7 @@ function Venue({ existingVenueData }) {
                   {venue.media.length === 1 ? (
                     <div className={styles.smallPhoto}>
                       <img
-                        src="https://picsum.photos/seed/picsum/200/300"
+                        src="https://picsum.photos/id/292/200/300"
                         alt="Placeholder 3"
                       />
                     </div>
