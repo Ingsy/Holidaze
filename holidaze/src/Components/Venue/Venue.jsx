@@ -4,11 +4,12 @@ import { useParams } from "react-router-dom";
 import BaseButton from "../Buttons";
 import Modal from "../Modal";
 import StarRating from "../StarRating";
-import { deleteVenue } from "./venueAPI";
+//import { deleteVenue } from "./venueAPI";
 import { useAuth } from "../../Auth/context/AuthContext";
 import Alert from "../Alert";
 import { VenueUpdate } from "./VenueUpdate";
 import BookingCreate from "../Booking/BookingCreate";
+import { useHolidaizApi } from "../../Auth/constants";
 
 function Venue({ existingVenueData }) {
   const { id } = useParams();
@@ -67,6 +68,8 @@ function Venue({ existingVenueData }) {
 
   const handleUpdate = () => setEditVenue(true);
 
+  const { venues } = useHolidaizApi();
+
   const handleDelete = () => {
     if (user.token) {
       if (user.venueManager) {
@@ -75,7 +78,8 @@ function Venue({ existingVenueData }) {
         );
 
         if (confirmDelete) {
-          deleteVenue(id, user.token)
+          venues
+            .delete(id, user.token)
             .then((response) => {
               console.log("Venue deleted successfully.");
               setShowAlert(true);
@@ -211,14 +215,16 @@ function Venue({ existingVenueData }) {
         </p>
         <div className="mt-3">
           <p>Amenities:</p>
-          {Object.entries(venue.meta).map(([key, value]) => {
-            if (value) {
-              return (
-                <p key={key}>{key.charAt(0).toUpperCase() + key.slice(1)}</p>
-              );
-            }
-            return null;
-          })}
+          {venue &&
+            venue.meta &&
+            Object.entries(venue.meta).map(([key, value]) => {
+              if (value) {
+                return (
+                  <p key={key}>{key.charAt(0).toUpperCase() + key.slice(1)}</p>
+                );
+              }
+              return null;
+            })}
         </div>
         {venue.rating !== undefined && (
           <div className="text-end">
