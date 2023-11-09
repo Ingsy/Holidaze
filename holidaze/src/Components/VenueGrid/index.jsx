@@ -51,7 +51,7 @@ function VenueGrid({ venues, loading }) {
                   Accommodates: {venue.maxGuests} guests
                 </p>
 
-                <div className="mt-auto text-center">
+                <div className="mt-4 text-center">
                   <Link
                     to={`/venue/${venue.id}`}
                     className={ButtonsAndLinks.Link}

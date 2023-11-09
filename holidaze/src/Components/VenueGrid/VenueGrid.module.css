@@ -22,7 +22,6 @@
 .venueName {
   font-size: 16px;
   font-weight: bold;
-  color: #848282;
   margin-bottom: 10px;
 }
 
@@ -41,7 +40,7 @@ p {
 .venuePrice {
   color: #000000;
   font-size: 16px;
-  margin-top: 10px;
+  margin-top: 5px;
 }
 
 .media {
