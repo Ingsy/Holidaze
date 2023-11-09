@@ -3,7 +3,7 @@ import { BookingForm } from "./bookingForm";
 //import { createBooking } from "./bookingsAPI";
 //import { useNavigate } from "react-router-dom";
 import { useHolidaizApi } from "../../Auth/constants";
-import styles from "./Booking.module.scss";
+import styles from "../../Styles/Booking.module.scss";
 
 export const BookingCreate = ({ onCreateError, venueId, maxGuests }) => {
   console.log("Venue ID in BookingCreate:", venueId);

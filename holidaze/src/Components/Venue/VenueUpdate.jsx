@@ -1,8 +1,8 @@
 import React from "react";
 import { VenueForm } from "./VenueForm";
 import { useNavigate } from "react-router-dom";
-import styles from "./Venue.module.css";
 import { useHolidaizApi } from "../../Auth/constants";
+import styles from "../../Styles/Venue.module.css";
 
 export const VenueUpdate = ({ venueData, onVenueUpdateError, onClose }) => {
   const navigate = useNavigate();

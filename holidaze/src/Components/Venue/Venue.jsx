@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import styles from "./Venue.module.css";
 import { useParams } from "react-router-dom";
 import BaseButton from "../Buttons";
 import Modal from "../Modal";
@@ -9,6 +8,7 @@ import Alert from "../Alert";
 import { VenueUpdate } from "./VenueUpdate";
 import BookingCreate from "../Booking/BookingCreate";
 import { useHolidaizApi } from "../../Auth/constants";
+import styles from "../../Styles/Venue.module.css";
 
 function Venue({ existingVenueData }) {
   const { id } = useParams();

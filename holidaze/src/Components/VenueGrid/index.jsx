@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import styles from "./VenueGrid.module.css";
+import styles from "../../Styles/VenueGrid.module.css";
 import StarRating from "../StarRating";
 import ButtonsAndLinks from "../../Styles/ButtonsAndLinks.module.scss";
 

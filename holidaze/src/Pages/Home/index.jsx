@@ -1,11 +1,11 @@
 import React from "react";
-import VenueList from "../../Components/VenueList";
+import VenueList from "../../Components/Venue/VenueList";
 
 function Home() {
   return (
-    <div>
-      <h2 className="text-center">Venues</h2>
-      <VenueList /> {/* Include the VenueList component here */}
+    <div className="text-center m-2">
+      <h1>Venues</h1>
+      <VenueList />
     </div>
   );
 }

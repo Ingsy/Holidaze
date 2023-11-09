@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { setToken } from "../utils/LocalStorage";
 import { headers } from "../utils/authFetch";
-import styles from "../../Components/Venue/VenueForm.module.scss";
 import BaseButton from "../../Components/Buttons";
+import styles from "../../Styles/VenueForm.module.scss";
 
 function RegisterForm() {
   const [formData, setFormData] = useState({

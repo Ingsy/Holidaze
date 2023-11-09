@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { headers } from "../../../Auth/utils/authFetch";
-import styles from "./Toggle.module.scss";
 import { getUserName } from "../../../Auth/utils/LocalStorage";
 import { useAuth } from "../../../Auth/context/AuthContext";
+import styles from "../../../Styles/Toggle.module.scss";
 
 function ToggleVenueManager({ isVenueManager }) {
   const [venueManager, setVenueManager] = useState(isVenueManager);
@@ -48,7 +48,7 @@ function ToggleVenueManager({ isVenueManager }) {
         <div className={styles.toggleSlider} onClick={handleToggle}></div>
       </div>
       <div>
-        <label>{venueManager ? "Venue Manager" : "Regular User"}</label>
+        <label>{venueManager ? "Venue Manager" : "User"}</label>
       </div>
     </div>
   );

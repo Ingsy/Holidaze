@@ -2,7 +2,7 @@ import React from "react";
 import { BookingForm } from "./bookingForm";
 import { useNavigate } from "react-router-dom";
 import { useHolidaizApi } from "../../Auth/constants";
-import styles from "./Booking.module.css";
+import styles from "../../Styles/Booking.module.scss";
 
 export const BookingUpdate = ({
   bookingData,

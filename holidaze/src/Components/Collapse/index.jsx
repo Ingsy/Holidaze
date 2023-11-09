@@ -1,6 +1,6 @@
 import React from "react";
-import styles from "./Collapse.module.scss";
 import CloseButton from "../Buttons/closeButton";
+import styles from "../../Styles/Collapse.module.scss";
 
 function Collapse({ title, isCollapsed, onToggle, children }) {
   const handleToggle = () => {

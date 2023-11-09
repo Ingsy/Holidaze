@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { headers } from "../../../Auth/utils/authFetch";
-import styles from "./Avatar.module.css";
 import Modal from "../../../Components/Modal";
 import { UpdateProfileMedia } from "../../../Auth/constants";
+import styles from "../../../Styles/Avatar.module.css";
 
 function UpdateAvatar() {
   const [avatarUrl, setAvatarUrl] = useState("");

@@ -1,6 +1,6 @@
 import React from "react";
 import { removeToken } from "../utils/LocalStorage";
-import styles from "./Logout.module.scss";
+import styles from "../../Styles/Logout.module.scss";
 
 function LogoutButton() {
   const handleLogout = () => {

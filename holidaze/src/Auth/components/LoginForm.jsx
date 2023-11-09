@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { getToken, setToken } from "../utils/LocalStorage";
-import styles from "../../Components/Venue/VenueForm.module.scss";
 import BaseButton from "../../Components/Buttons";
+import styles from "../../Styles/VenueForm.module.scss";
 
 function LoginForm() {
   const [formData, setFormData] = useState({
