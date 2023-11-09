@@ -18,3 +18,5 @@ export const BookingCustomerUrl = `${BookingBaseUrl}?_customer=true`;
 export const BookingVenueUrl = `${BookingBaseUrl}?_venues=true`;
 
 export const CreateVenueUrl = `${API_HOLIDAZE_URL}/venues`;
+
+export * from "./useHolidazeAPI";
