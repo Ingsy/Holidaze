@@ -1,13 +1,13 @@
 import React from "react";
 import { BookingForm } from "./bookingForm";
-import { createBooking } from "./bookingsAPI";
-import { useNavigate } from "react-router-dom";
+//import { createBooking } from "./bookingsAPI";
+//import { useNavigate } from "react-router-dom";
 import { useHolidaizApi } from "../../Auth/constants";
 import styles from "./Booking.module.scss";
 
 export const BookingCreate = ({ onCreateError, venueId, maxGuests }) => {
   console.log("Venue ID in BookingCreate:", venueId);
-  const navigate = useNavigate();
+  //const navigate = useNavigate();
   const { bookings } = useHolidaizApi();
 
   const handleFormChange = (formData) => {

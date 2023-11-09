@@ -20,7 +20,7 @@ export const BookingCustomerUrl = `${BookingBaseUrl}?_customer=true`;
 export const BookingVenueUrl = `${BookingBaseUrl}?_venues=true`;
 
 export const CreateVenueUrl = `${API_HOLIDAZE_URL}/venues`;
-
+const VenueDetailUrl = `https://api.noroff.dev/api/v1/holidaze/venues/`;
 
 const getConfig = () => {
     return {
@@ -44,10 +44,10 @@ export const useHolidaizApi = () => {
             delete: (venueId, bookingId) => axios.post(`${BookingBaseUrl}${venueId}/${bookingId}`, getConfig()).then(response => response.data)
         },
         // TODO: Replace with actual URL and params/data
-        venue: {
-            create: (data) => axios.post(`${BookingBaseUrl}`, data, getConfig()),
-            update: (venueId, bookingId, updatedData) => axios.put(`${BookingBaseUrl}${venueId}/${bookingId}`, updatedData, getConfig()).then(response => response.data),
-            delete: deleteVenueBiggerFunction
+        venues: {
+            create: (data) => axios.post(`${VenueDetailUrl}`, data, getConfig()),
+            update: (venueId, updatedData) => axios.put(`${VenueDetailUrl}${venueId}`, updatedData, getConfig()).then(response => response.data),
+            delete: (venueId) => axios.delete(`${VenueDetailUrl}${venueId}`, getConfig()).then(response => response.data)
         }
     }
 }
@@ -57,7 +57,6 @@ const deleteVenueBiggerFunction = (venueId, bookingId) => {
     // Show confirm dialogue
     return axios.post(`${BookingBaseUrl}${venueId}/${bookingId}`, getConfig()).then(response => response.data)
 }
-
 
 
 /*
