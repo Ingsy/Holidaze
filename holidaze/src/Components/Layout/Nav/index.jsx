@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import LoginLogoutVenueManager from "../../LoginLogoutNav";
-import styles from "./Nav.modules.scss";
+import styles from "../../../Styles/Nav.modules.scss";
 
 function Navbar() {
   return (
@@ -28,29 +28,31 @@ function Navbar() {
           <span className="navbar-toggler-icon"></span>
         </button>
         <div className="collapse navbar-collapse" id="navbarSupportedContent">
-          <ul className="navbar-nav me-auto mb-2 mb-lg-0">
-            <li className="nav-item">
+          <ul className="navbar-nav d-flex align-items-center justify-content-center justify-content-lg-start me-auto mb-2 mb-lg-0">
+            <li className="nav-item  mx-3">
               <Link to="/" className="nav-link active" aria-current="page">
                 Home
               </Link>
             </li>
-            <li className="nav-item">
+            <li className="nav-item mx-3">
               <Link to="/Profile" className="nav-link">
                 Profile
               </Link>
             </li>
 
-            <li className="nav-item">
+            <li className="nav-item mx-3">
               <Link to="/Register" className="nav-link">
                 Register
               </Link>
             </li>
-            <li className="nav-item">
+            <li className="nav-item mx-3">
               <Link to="/Login" className="nav-link">
                 Login
               </Link>
             </li>
-            <LoginLogoutVenueManager />
+            <li className="nav-item mx-3">
+              <LoginLogoutVenueManager />
+            </li>
           </ul>
           <form className="d-flex" role="search">
             <input

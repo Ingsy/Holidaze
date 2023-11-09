@@ -4,8 +4,8 @@ import { faUser } from "@fortawesome/free-solid-svg-icons";
 import { Link } from "react-router-dom";
 import LogoutButton from "../../Auth/components/Logout";
 import { removeToken } from "../../Auth/utils/LocalStorage";
-import styles from "./LoginLogoutNav.module.scss";
 import ToggleVenueManager from "../../Pages/Profile/ToggleVenueManager/ToggleVenueManager";
+import styles from "../../Styles/LoginLogoutNav.module.scss";
 
 function LoginLogoutVenueManager() {
   const [isLoggedIn, setIsLoggedIn] = useState(false); // State to track login status

@@ -98,11 +98,8 @@ function UserProfile(openCreateVenueForm) {
               </div>
               <div className={`${styles.ButtonContainer} col-12 col-md-4 mb-4`}>
                 <div className="mb-3">{user.email}</div>
-                <div>
-                  <ToggleVenueManager />
-                </div>
                 <div className="mb-3">
-                  Role: {user.venueManager ? "Venue Manager" : "User"}
+                  <ToggleVenueManager />
                 </div>
                 <div>
                   <UpdateAvatar />

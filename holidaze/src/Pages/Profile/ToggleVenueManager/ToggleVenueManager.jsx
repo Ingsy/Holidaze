@@ -48,7 +48,7 @@ function ToggleVenueManager({ isVenueManager }) {
         <div className={styles.toggleSlider} onClick={handleToggle}></div>
       </div>
       <div>
-        <label>{venueManager ? "Venue Manager" : "User"}</label>
+        <label> {venueManager ? "Venue Manager" : "User"}</label>
       </div>
     </div>
   );

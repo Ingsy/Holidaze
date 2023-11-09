@@ -7,7 +7,7 @@ const placeholderImageUrl = "https://picsum.photos/200/300"; // The original ima
 
 function VenueGrid({ venues, loading }) {
   return (
-    <div className={styles.container}>
+    <div>
       {loading ? (
         <p>Loading...</p>
       ) : (

@@ -1,8 +1,8 @@
 import React from "react";
 import PropTypes from "prop-types";
-import styles from "./Modal.module.scss";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faXmark } from "@fortawesome/free-solid-svg-icons";
+import styles from "../../Styles/Modal.module.scss";
 
 const Modal = ({ isOpen, onClose, children }) => {
   if (!isOpen) {
