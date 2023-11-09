@@ -1,44 +1,38 @@
 import React, { useState, useEffect } from "react";
-import VenueGrid from "../../Components/VenueGrid";
-import { ProfileBookingsUrl } from "../../Auth/constants";
-import { headers } from "../../Auth/utils/authFetch";
+import YourVenueGrid from "../../Components/VenueGrid/YourVenueGrid";
+import { useHolidaizApi } from "../../Auth/constants";
+import BookingList from "../../Components/Booking/BookingList";
 
-function ProfileBookings() {
-  const [venues, setVenues] = useState([]);
+export const ProfileBookings = () => {
+  const [bookings, setBookings] = useState([]);
   const [loading, setLoading] = useState(true);
+  const { bookings: holidaizBookings } = useHolidaizApi(); // Using 'holidaizBookings' to avoid redeclaration
 
   useEffect(() => {
-    async function fetchData() {
+    async function fetchUserBookings() {
       try {
-        const requestOptions = {
-          method: "GET",
-          headers: headers(),
-        };
+        console.log("Fetching user bookings...");
+        const userBookings = await holidaizBookings.get(); // Use 'GET' to retrieve user bookings
+        console.log("User bookings retrieved:", userBookings);
 
-        const response = await fetch(ProfileBookingsUrl, requestOptions);
-
-        if (!response.ok) {
-          const errorData = await response.json();
-          console.error("Error:", errorData);
-        } else {
-          const data = await response.json();
-          setVenues(data);
-          setLoading(false);
-        }
+        setBookings(userBookings);
+        setLoading(false);
       } catch (error) {
-        console.error("Error fetching data:", error);
+        console.error("Error fetching user bookings:", error);
         setLoading(false);
       }
     }
 
-    fetchData();
-  }, []);
+    fetchUserBookings();
+  }, [holidaizBookings]);
+
+  console.log("Bookings in state:", bookings);
 
   return (
     <div>
-      <VenueGrid venues={venues} loading={loading} />
+      <BookingList bookings={bookings} />
     </div>
   );
-}
+};
 
 export default ProfileBookings;
