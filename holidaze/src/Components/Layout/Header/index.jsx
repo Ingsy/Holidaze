@@ -1,9 +1,9 @@
 import Navbar from "../Nav";
 
-function Header() {
+function Header({ onSearch }) {
   return (
     <header>
-      <Navbar />
+      <Navbar onSearch={onSearch} />
     </header>
   );
 }
