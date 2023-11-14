@@ -25,7 +25,6 @@ export const BookingForm = ({
   const FormSubmit = (event) => {
     event.preventDefault();
     console.log(formData, venueId);
-    // Check if formData and formData.venue are defined
     if (booking && booking.venue) {
       const updatedBooking = {
         ...booking,
@@ -34,8 +33,6 @@ export const BookingForm = ({
       };
       onSave(updatedBooking, booking);
     } else {
-      // Handle the case when formData or formData.venue is undefined
-      // You can show an error message or take appropriate action.
       console.log(booking);
       alert("Form data is missing or invalid. Please check your input.");
     }
