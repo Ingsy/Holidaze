@@ -9,10 +9,14 @@ export const API_HOLIDAZE_URL = `${API_HOST_URL}${API_BASE_URL}${API_HOLIDAZE_BA
 
 const userName = getUserName();
 
+export const Register = `${API_HOLIDAZE_URL}/auth/register`;
+export const Login = `${API_HOLIDAZE_URL}/auth/login`;
+
+
 export const ProfileBaseUrl = `${API_HOLIDAZE_URL}/profiles`;
 export const UserProfile = `${ProfileBaseUrl}/${userName}`;
 export const ProfileVenuesUrl = `${UserProfile}/venues/?_venues=true`;
-export const ProfileBookingsUrl = `${ProfileBaseUrl}/bookings/?_bookings=true`;
+export const ProfileBookingsUrl = `${UserProfile}/bookings?_bookings=true`;
 export const UpdateProfileMedia = `${UserProfile}/media`;
 
 export const BookingBaseUrl = `${API_HOLIDAZE_URL}/bookings`;
@@ -22,6 +26,8 @@ export const BookingsByProfile = `${UserProfile}/bookings/?_bookings=true`;
 
 export const CreateVenueUrl = `${API_HOLIDAZE_URL}/venues`;
 const VenueDetailUrl = `https://api.noroff.dev/api/v1/holidaze/venues/`;
+
+//const baseVenueUrl = `${API_HOLIDAZE_URL}/venues`;
 
 const getConfig = () => {
     return {
@@ -33,7 +39,7 @@ export const useHolidaizApi = () => {
 
     return {
         bookings: {
-            get: () => axios.get(`${BookingsByProfile}`, getConfig()).then(response => response.data),
+            get: () => axios.get(`${ProfileBookingsUrl}`, getConfig()).then(response => response.data),
             create: (data) => axios.post(`${BookingBaseUrl}`, data, getConfig()).then(response => response.data),
             update: (venueId, bookingId, updatedData) => axios.put(`${BookingBaseUrl}${venueId}/${bookingId}`, updatedData, getConfig()).then(response => response.data),
             delete: (venueId, bookingId) => axios.post(`${BookingBaseUrl}${venueId}/${bookingId}`, getConfig()).then(response => response.data)
@@ -44,11 +50,13 @@ export const useHolidaizApi = () => {
             update: (venueId, bookingId, updatedData) => axios.put(`${BookingBaseUrl}${venueId}/${bookingId}`, updatedData, getConfig()).then(response => response.data),
             delete: (venueId, bookingId) => axios.post(`${BookingBaseUrl}${venueId}/${bookingId}`, getConfig()).then(response => response.data)
         },
-        // TODO: Replace with actual URL and params/data
+
         venues: {
+            get: () => axios.get(`${CreateVenueUrl}`, getConfig()).then(response => response.data),
             create: (data) => axios.post(`${VenueDetailUrl}`, data, getConfig()),
             update: (venueId, updatedData) => axios.put(`${VenueDetailUrl}${venueId}`, updatedData, getConfig()).then(response => response.data),
-            delete: (venueId) => axios.delete(`${VenueDetailUrl}${venueId}`, getConfig()).then(response => response.data)
+            delete: (venueId) => axios.delete(`${VenueDetailUrl}${venueId}`, getConfig()).then(response => response.data),
+            //getAll: (query) => axios.get(baseVenueUrl, { params: { query } }).then(response => response.data)
         }
     }
 }
