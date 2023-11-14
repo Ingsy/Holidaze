@@ -2,11 +2,10 @@ import React, { useEffect, useState } from "react";
 import { useAuth } from "../../../Auth/context/AuthContext";
 import Collapse from "../../../Components/Collapse";
 import ProfileVenues from "../ProfileVenues";
-import ProfileBookings from "../ProfileBookings";
+import ProfileBookingsTest from "../ProfileBookings";
 import UpdateAvatar from "../Avatar";
 import { VenueCreate } from "../../../Components/Venue/VenueCreate";
 import styles from "../../../Styles/Profile.module.scss";
-import ToggleVenueManager from "../ToggleVenueManager/ToggleVenueManager";
 
 function UserProfile(openCreateVenueForm) {
   const { user, token } = useAuth();
@@ -99,7 +98,7 @@ function UserProfile(openCreateVenueForm) {
               <div className={`${styles.ButtonContainer} col-12 col-md-4 mb-4`}>
                 <div className="mb-3">{user.email}</div>
                 <div className="mb-3">
-                  <ToggleVenueManager />
+                  Role: {user.venueManager ? "Venue Manager" : "User"}
                 </div>
                 <div>
                   <UpdateAvatar />
@@ -144,7 +143,7 @@ function UserProfile(openCreateVenueForm) {
                     setOpenSection("yourBookings");
                   }}
                 >
-                  <ProfileBookings />
+                  <ProfileBookingsTest />
                 </Collapse>
               )}
             </div>
