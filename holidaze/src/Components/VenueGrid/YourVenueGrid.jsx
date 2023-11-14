@@ -19,11 +19,11 @@ function VenueGrid({ venues, loading }) {
             >
               <div className={styles.YourVenueCard} tabIndex="0">
                 <h2 className={`${styles.venueName} text-center`}>
-                  {venue.name.length > 30
+                  {venue.name && venue.name.length > 30
                     ? `${venue.name.substring(0, 30)}...`
                     : venue.name}
                 </h2>
-                {venue.media.length > 0 ? (
+                {venue.media && venue.media.length > 0 ? (
                   <img
                     src={venue.media[0]}
                     alt={`Venue Media`}
@@ -44,7 +44,9 @@ function VenueGrid({ venues, loading }) {
                   </p>
                   <StarRating rating={venue.rating} />
                 </div>
-                {venue.location.city && venue.location.country ? (
+                {venue.location &&
+                venue.location.city &&
+                venue.location.country ? (
                   <p className={styles.YourVenueLocation}>
                     {venue.location.country}, {venue.location.city}
                   </p>

@@ -7,18 +7,8 @@ import styles from "../../../Styles/Nav.modules.scss";
 
 function Navbar({ onSearch }) {
   const { venues } = useHolidaizApi();
-  const [searchResults, setSearchResults] = useState([]);
 
   const location = useLocation();
-
-  const handleSearch = async (query) => {
-    try {
-      const results = await venues.get(query);
-      setSearchResults(results);
-    } catch (error) {
-      console.error("Error fetching search results:", error);
-    }
-  };
 
   return (
     <nav className="navbar navbar-expand-lg bg-body-tertiary">
@@ -72,19 +62,11 @@ function Navbar({ onSearch }) {
           </ul>
           {location.pathname === "/" && (
             <>
-              <div
-                className={`d-lg-none ${
-                  searchResults.length > 0 ? "mb-3" : "d-none"
-                }`}
-              >
-                <Search venues={venues} onSearch={handleSearch} />
+              <div className={`d-lg-none`}>
+                <Search venues={venues} onSearch={onSearch} />
               </div>
-              <div
-                className={`ml-auto d-none d-lg-flex ${
-                  searchResults.length > 0 ? "" : "d-none"
-                }`}
-              >
-                <Search venues={venues} onSearch={handleSearch} />
+              <div className={`ml-auto d-none d-lg-flex`}>
+                <Search venues={venues} onSearch={onSearch} />
               </div>
             </>
           )}

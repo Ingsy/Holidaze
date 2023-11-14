@@ -17,10 +17,7 @@ import Logout from './Pages/Logout';
 function App() {
 
   const [venues, setVenues] = useState([]);
-
-  const onVenueSearch = (filteredSuggestions) => {
-    setVenues(filteredSuggestions);
-  }
+  const [searchResults, setSearchResults] = useState([]);
 
   useEffect(() => {
     fetch(`https://api.noroff.dev/api/v1/holidaze/venues`)
@@ -29,10 +26,14 @@ function App() {
       .catch((error) => console.error(`Error fetching products:`, error));
   }, []);
 
+  const onSearch = (filteredSuggestions) => {
+    setSearchResults(filteredSuggestions);
+  }
+
   return (
     <Routes>
-      <Route path="/" element={<Layout onSearch={onVenueSearch} venues={venues} />} >
-        <Route index element={<Home filterVenue={venues} />} />
+      <Route path="/" element={<Layout onSearch={onSearch} venues={venues} />} >
+        <Route index element={<Home filterVenue={venues} searchResults={searchResults} />} />
         <Route path="login" element={<Login />} />
         <Route path="logout" element={<Logout />} />
         <Route path="register" element={<Register />} />
