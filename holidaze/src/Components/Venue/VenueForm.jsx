@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrash } from "@fortawesome/free-solid-svg-icons";
 import BaseButton from "../Buttons";
@@ -30,7 +30,7 @@ const defaultVenueData = {
   },
 };
 
-export const VenueForm = ({ venueData, onSave, onClose }) => {
+export const VenueForm = ({ venueData, onSave, onClose, editVenue }) => {
   const [venue, setVenue] = useState(venueData || defaultVenueData);
 
   const formSubmit = (event) => {
@@ -107,6 +107,15 @@ export const VenueForm = ({ venueData, onSave, onClose }) => {
       },
     });
   };
+
+  useEffect(() => {
+    if (editVenue) {
+      const confirmUpdate = window.confirm("Are you happy with your changes?");
+      if (confirmUpdate) {
+      } else {
+      }
+    }
+  }, [editVenue]);
 
   return (
     <form>
