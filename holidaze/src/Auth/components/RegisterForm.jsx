@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { setToken } from "../utils/LocalStorage";
 import { headers } from "../utils/authFetch";
 import BaseButton from "../../Components/Buttons";
+import { Link } from "react-router-dom";
 import styles from "../../Styles/VenueForm.module.scss";
 
 function RegisterForm() {
@@ -141,6 +142,11 @@ function RegisterForm() {
         />
       </div>
       <BaseButton type="submit">Register</BaseButton>
+      <div>
+        <Link to="/Login" className={styles.Link}>
+          Login
+        </Link>
+      </div>
     </form>
   );
 }

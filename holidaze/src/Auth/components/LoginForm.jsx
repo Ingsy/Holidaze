@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { getToken, setToken } from "../utils/LocalStorage";
 import BaseButton from "../../Components/Buttons";
+import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import styles from "../../Styles/VenueForm.module.scss";
 
 function LoginForm() {
@@ -8,6 +10,8 @@ function LoginForm() {
     email: "",
     password: "",
   });
+
+  const navigate = useNavigate();
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -50,7 +54,7 @@ function LoginForm() {
 
   const existingToken = getToken();
   if (existingToken) {
-    //redirect to Profile
+    navigate("/profile");
   }
 
   return (
@@ -84,6 +88,11 @@ function LoginForm() {
         />
       </div>
       <BaseButton type="submit">Login</BaseButton>
+      <div>
+        <Link to="/Register" className={styles.Link}>
+          Register account
+        </Link>
+      </div>
     </form>
   );
 }
