@@ -8,6 +8,7 @@ import Alert from "../Alert";
 import { VenueUpdate } from "./VenueUpdate";
 import BookingCreate from "../Booking/BookingCreate";
 import { useHolidaizApi } from "../../Auth/constants";
+import { useNavigate } from "react-router-dom";
 import styles from "../../Styles/Venue.module.css";
 
 function Venue({ existingVenueData }) {
@@ -27,6 +28,7 @@ function Venue({ existingVenueData }) {
     guests: 1,
   });
 
+  const navigate = useNavigate();
   const [isUserOwner, setIsUserOwner] = useState(false);
 
   useEffect(() => {
@@ -84,6 +86,11 @@ function Venue({ existingVenueData }) {
               setShowAlert(true);
               setSuccessMessage("Venue is successfully deleted");
               setAlertType("success");
+
+              setTimeout(() => {
+                setShowAlert(false);
+                navigate("/profile");
+              }, 4000);
             })
             .catch((error) => {
               console.error("Error deleting venue:", error);
