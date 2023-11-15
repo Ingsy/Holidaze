@@ -8,31 +8,45 @@ import { VenueCreate } from "../../../Components/Venue/VenueCreate";
 import styles from "../../../Styles/Profile.module.scss";
 
 function UserProfile(openCreateVenueForm) {
-  const { user, token } = useAuth();
+  const { user, token, setUser } = useAuth();
   const [loading, setLoading] = useState(true);
   const [openSection, setOpenSection] = useState(null);
+  const [venuesCount, setVenuesCount] = useState(0);
+  const [bookingsCount, setBookingsCount] = useState(0);
 
   useEffect(() => {
-    if (user && token) {
-      // Fetch user data here
-      fetchUserData(token)
-        .then((userData) => {
+    const fetchData = async () => {
+      console.log("Component rerendered");
+      if (user && token) {
+        console.log("Fetching user data...");
+        try {
+          const userData = await fetchUserData(token);
           console.log("User Data:", userData);
+
+          setUser(userData);
+          setVenuesCount(userData._count.venues);
+          setBookingsCount(userData._count.bookings);
+
+          console.log("Venues Count:", venuesCount);
+          console.log("Bookings Count:", bookingsCount);
+
           setLoading(false);
-        })
-        .catch((error) => {
+        } catch (error) {
           console.error("Error fetching user data:", error);
           setLoading(false);
-        });
-    } else {
-      setLoading(false);
-    }
-  }, [user, token]);
+        }
+      } else {
+        setLoading(false);
+      }
+    };
+
+    fetchData();
+  }, [user, token, setUser, bookingsCount, venuesCount]);
 
   const fetchUserData = async (token) => {
     try {
       const response = await fetch(
-        `https://api.noroff.dev/api/v1/holidaze/profiles`,
+        `https://api.noroff.dev/api/v1/holidaze/profiles/?_bookings=true&_venues=true`,
         {
           headers: {
             "Content-Type": "application/json",
@@ -48,8 +62,10 @@ function UserProfile(openCreateVenueForm) {
       }
 
       const userData = await response.json();
+      console.log("API Response:", userData);
       return userData;
     } catch (error) {
+      console.error("Error fetching user data:", error);
       throw error;
     }
   };
@@ -79,7 +95,7 @@ function UserProfile(openCreateVenueForm) {
                   className={styles.Button}
                   onClick={() => setOpenSection("yourVenues")}
                 >
-                  Your Venues
+                  Venues ({venuesCount})
                 </button>
                 <button
                   className={styles.Button}
@@ -87,7 +103,7 @@ function UserProfile(openCreateVenueForm) {
                     setOpenSection("yourBookings");
                   }}
                 >
-                  Your Bookings
+                  Bookings ({bookingsCount})
                 </button>
               </div>
               <div className="col-12 col-md-4 mb-4 d-flex align-items-center justify-content-center">

@@ -1,0 +1,29 @@
+.bookingsContainer {
+    margin-top: 20px;
+  }
+  
+  .bookingItem {
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+  }
+
+  .paginationContainer {
+    margin-top: 20px;
+    display: flex;
+    align-items: center;
+  }
+  
+  .paginationContainer button {
+    margin-right: 10px;
+    cursor: pointer;
+    padding: 5px 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+  }
+  
+  .paginationContainer button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }

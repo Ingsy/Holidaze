@@ -9,25 +9,33 @@ export const API_HOLIDAZE_URL = `${API_HOST_URL}${API_BASE_URL}${API_HOLIDAZE_BA
 
 const userName = getUserName();
 
+export const VenueBaseUrl = `${API_HOLIDAZE_URL}/venues`;
+export const VenueDetailUrl = `https://api.noroff.dev/api/v1/holidaze/venues/`;
+
 export const Register = `${API_HOLIDAZE_URL}/auth/register`;
 export const Login = `${API_HOLIDAZE_URL}/auth/login`;
 
 
 export const ProfileBaseUrl = `${API_HOLIDAZE_URL}/profiles`;
 export const UserProfile = `${ProfileBaseUrl}/${userName}`;
+
 export const ProfileVenuesUrl = `${UserProfile}/venues/?_venues=true`;
-export const ProfileBookingsUrl = `${UserProfile}/bookings?_bookings=true`;
+export const ProfileBookingsUrl = `${UserProfile}/bookings/?_bookings=true&_venue=true`;
+
 export const UpdateProfileMedia = `${UserProfile}/media`;
 
 export const BookingBaseUrl = `${API_HOLIDAZE_URL}/bookings`;
 export const BookingCustomerUrl = `${BookingBaseUrl}?_customer=true`;
-export const BookingVenueUrl = `${BookingBaseUrl}?_venue=true`;
-export const BookingsByProfile = `${UserProfile}/bookings/?_bookings=true`;
+export const BookingVenueUrl = `${BookingBaseUrl}/?_venue=true`;
 
-export const CreateVenueUrl = `${API_HOLIDAZE_URL}/venues`;
-const VenueDetailUrl = `https://api.noroff.dev/api/v1/holidaze/venues/`;
+export const BookingsByProfile = `${BookingBaseUrl}/${userName}/bookings`;
 
-//const baseVenueUrl = `${API_HOLIDAZE_URL}/venues`;
+export const BookingsForVenueUrl = `${BookingBaseUrl}?_bookings=true&_customer=true`;
+
+
+
+
+
 
 const getConfig = () => {
     return {
@@ -52,7 +60,7 @@ export const useHolidaizApi = () => {
         },
 
         venues: {
-            get: () => axios.get(`${CreateVenueUrl}`, getConfig()).then(response => response.data),
+            get: () => axios.get(`${VenueBaseUrl}`, getConfig()).then(response => response.data),
             create: (data) => axios.post(`${VenueDetailUrl}`, data, getConfig()),
             update: (venueId, updatedData) => axios.put(`${VenueDetailUrl}${venueId}`, updatedData, getConfig()).then(response => response.data),
             delete: (venueId) => axios.delete(`${VenueDetailUrl}${venueId}`, getConfig()).then(response => response.data),
