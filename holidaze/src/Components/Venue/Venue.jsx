@@ -111,6 +111,15 @@ function Venue({ existingVenueData }) {
     alert("Error updating");
   };
 
+  const isValidURL = (url) => {
+    try {
+      new URL(url);
+      return true;
+    } catch (error) {
+      return false;
+    }
+  };
+
   /* if fetching user form auth0 or venues from api */
   if (isLoading || loading) return null;
   /* if editing venue */
@@ -126,7 +135,7 @@ function Venue({ existingVenueData }) {
   return (
     <div className={`${styles.detailsContainer} mx-auto`}>
       <>
-        <h2 className={`${styles.venueName} text-end`}>{venue.name}</h2>
+        <h2 className={`${styles.venueName} text-center`}>{venue.name}</h2>
         <div className={styles.header}>
           <div className={styles.titleLine}></div>
         </div>
@@ -216,10 +225,8 @@ function Venue({ existingVenueData }) {
             Accommodates: {venue.maxGuests} guests
           </p>
         )}
-        <p className={styles.venueDescription}>
-          Description: {venue.description}
-        </p>
-        <div className="mt-3">
+
+        <div>
           <p>Amenities:</p>
           {venue &&
             venue.meta &&
@@ -232,11 +239,30 @@ function Venue({ existingVenueData }) {
               return null;
             })}
         </div>
-        {venue.rating !== undefined && (
-          <div className="text-end">
-            <StarRating rating={venue.rating} />
+        <p className={`${styles.venueDescription} mt-2`}>
+          Description: {venue.description}
+        </p>
+        <div className={styles.header}>
+          <div className={styles.titleLine}></div>
+        </div>
+        <div className={styles.ownerInfo}>
+          <div>
+            {venue.owner.avatar && isValidURL(venue.owner.avatar) && (
+              <img
+                src={venue.owner.avatar}
+                alt={`Host Avatar`}
+                className={styles.hostAvatar}
+              />
+            )}
+            <p className={styles.venueDescription}>{venue.owner.name}</p>
+            <p className={styles.venueDescription}>{venue.owner.email}</p>
           </div>
-        )}
+          {venue.rating !== undefined && (
+            <div className={styles.starRating}>
+              <StarRating rating={venue.rating} />
+            </div>
+          )}
+        </div>
       </>
       {isModalOpen && (
         <Modal isOpen={isModalOpen} onClose={closeModal}>

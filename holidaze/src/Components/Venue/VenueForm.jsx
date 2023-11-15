@@ -22,9 +22,9 @@ const defaultVenueData = {
   location: {
     address: "",
     city: "",
-    zip: "Unknown",
+    zip: "",
     country: "",
-    continent: "Unknown",
+    continent: "",
     lat: 0,
     lng: 0,
   },

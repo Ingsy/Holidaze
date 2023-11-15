@@ -9,8 +9,10 @@ const userName = getUserName();
 
 export const ProfileBaseUrl = `${API_HOLIDAZE_URL}/profiles`;
 export const UserProfile = `${ProfileBaseUrl}/${userName}`;
+
 export const ProfileVenuesUrl = `${UserProfile}/venues/?_venues=true`;
-export const ProfileBookingsUrl = `${UserProfile}/bookings/?_bookings=true`;
+
+export const ProfileBookingsUrl = `${UserProfile}/venues/?_bookings=true`;
 export const UpdateProfileMedia = `${UserProfile}/media`;
 
 export const BookingBaseUrl = `${API_HOLIDAZE_URL}/bookings`;
