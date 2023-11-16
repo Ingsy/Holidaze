@@ -10,7 +10,6 @@
 .venueCard {
   margin-bottom: 20px;
   min-height: 500px;
-  min-width: 250px;
   max-height: 500px;
   padding: 10px;
   background-color: white;
@@ -85,4 +84,16 @@ p {
   font-size: 12px;
   margin-top: 10px;
   margin-bottom: 10px;
+}
+
+.ButtonsBooking {
+  background-color: transparent;
+  color: #000000;
+  border: none;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.ButtonsBooking:hover {
+  text-decoration: underline;
 }

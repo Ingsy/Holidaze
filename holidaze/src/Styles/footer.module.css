@@ -3,8 +3,8 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  min-height: 80px;
-  position: sticky;
+  min-height: 40px;
+  position: fixed;
   bottom: 0;
   width: 100%;
   margin-top: 20px;
