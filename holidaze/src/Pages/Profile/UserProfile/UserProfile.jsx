@@ -16,7 +16,6 @@ function UserProfile(openCreateVenueForm) {
 
   useEffect(() => {
     const fetchData = async () => {
-      console.log("Component rerendered");
       if (user && token) {
         console.log("Fetching user data...");
         try {
@@ -121,6 +120,7 @@ function UserProfile(openCreateVenueForm) {
                 </div>
               </div>
             </div>
+            <div className={styles.titleLine}></div>
           </div>
           <div className={`${styles.containerCollapse} text-center col`}>
             <div className="col-12">
