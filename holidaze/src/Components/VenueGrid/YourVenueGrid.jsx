@@ -1,23 +1,32 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import StarRating from "../StarRating";
+import BookingsForVenue from "../Booking/BookingsForVenue";
+import Modal from "../Modal";
 import styles from "../../Styles/VenueGrid.module.css";
 
 const placeholderImageUrl = "https://picsum.photos/200/300"; // The original image size
 
 function VenueGrid({ venues, loading }) {
+  const [selectedVenue, setSelectedVenue] = useState(null);
+
+  const handleBookingsClick = (venueId) => {
+    setSelectedVenue(venueId);
+  };
+
+  const handleCloseModal = () => {
+    setSelectedVenue(null);
+  };
+
   return (
     <div>
       {loading ? (
         <p>Loading...</p>
       ) : (
-        <div className="row">
+        <div className="row justify-content-center">
           {venues.map((venue) => (
-            <div
-              key={venue.id}
-              className="col d-flex justify-content-center align-items-center"
-            >
-              <div className={styles.YourVenueCard} tabIndex="0">
+            <div key={venue.id} className="col-lg-4 col-md-6 col-sm-12 mb-5">
+              <div className={`${styles.YourVenueCard} mx-auto`} tabIndex="0">
                 <h2 className={`${styles.venueName} text-center`}>
                   {venue.name && venue.name.length > 30
                     ? `${venue.name.substring(0, 30)}...`
@@ -64,10 +73,21 @@ function VenueGrid({ venues, loading }) {
                   </Link>
                 </div>
               </div>
+              <div className="col-12 mt-3 text-center">
+                <button
+                  className={styles.ButtonsBooking}
+                  onClick={() => handleBookingsClick(venue.id)}
+                >
+                  Bookings
+                </button>
+              </div>
             </div>
           ))}
         </div>
       )}
+      <Modal isOpen={selectedVenue !== null} onClose={handleCloseModal}>
+        {selectedVenue && <BookingsForVenue venueId={selectedVenue} />}
+      </Modal>
     </div>
   );
 }
