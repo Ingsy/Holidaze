@@ -3,4 +3,10 @@
     cursor: pointer;
     background-color: transparent;
     color: black;
+    font-size: 14px;
+    margin-top: 5px;
+}
+
+.LogoutButton:hover{
+    text-decoration:underline;
 }

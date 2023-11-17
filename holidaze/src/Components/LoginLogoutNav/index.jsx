@@ -26,26 +26,23 @@ function LoginLogoutVenueManager() {
   }, []);
 
   return (
-    <div>
-      {isLoggedIn ? (
-        <div className={styles.componentWrapper}>
-          <div className={styles.FontLog}>
-            <FontAwesomeIcon icon={faUser} />
-
-            <LogoutButton onLogout={handleLogout} />
-          </div>
-          <ToggleVenueManager />
-        </div>
-      ) : (
-        <div>
-          <Link className={styles.LoginButton} to="/login">
-            Login
-          </Link>
-          <button onClick={() => alert("Please login or register")}>
-            Toggle Venue Manager
-          </button>
-        </div>
-      )}
+    <div className={`${styles.componentWrapper} text-center`}>
+      <div className={styles.FontLog}>
+        <FontAwesomeIcon icon={faUser} />
+        {isLoggedIn ? (
+          <LogoutButton onLogout={handleLogout} />
+        ) : (
+          <>
+            <Link className={styles.LoginButton} to="/login">
+              Login
+            </Link>
+            <Link className={styles.LoginButton} to="/register">
+              Register
+            </Link>
+          </>
+        )}
+      </div>
+      {isLoggedIn && <ToggleVenueManager />}
     </div>
   );
 }

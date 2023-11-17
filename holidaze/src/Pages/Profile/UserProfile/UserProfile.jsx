@@ -77,10 +77,15 @@ function UserProfile(openCreateVenueForm) {
         <div className="row d-flex align-items-center justify-content-center">
           <div className={`${styles.ProfileContainer} col-12`}>
             <div className="col-12">
-              <h2 className={`${styles.nameContainer} text-end`}>
-                {user.name}
-                <div className={styles.titleLine}></div>
-              </h2>
+              <div
+                className={`${styles.nameContainer} d-flex justify-content-between`}
+              >
+                <div className="text-start">
+                  {user.venueManager ? "Venue Manager" : "User"}
+                </div>
+                <div className="text-end">{user.name}</div>
+              </div>
+              <div className={styles.titleLine}></div>
             </div>
             <div className={`${styles.ProfileInfoContainer} text-center`}>
               <div className={`${styles.ButtonContainer} col-12 col-md-4 mb-4`}>
