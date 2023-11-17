@@ -56,7 +56,7 @@ function Navbar({ onSearch }) {
                 Profile
               </Link>
             </li>
-            <li className="nav-item m-2 me-5">
+            <li className="nav-item m-2">
               <LoginLogoutVenueManager />
             </li>
           </ul>
