@@ -12,15 +12,21 @@ export const BookingDelete = ({
   const { bookings } = useHolidaizApi();
 
   const onDelete = (bookingId) => {
-    bookings
-      .delete(bookingId)
-      .then(() => {
-        navigate("/profile");
-      })
-      .catch((error) => {
-        console.log("Delete booking error", error);
-        if (onBookingDeleteError) onBookingDeleteError(error);
-      });
+    const isConfirmed = window.confirm(
+      "Are you sure you want to delete this booking?"
+    );
+
+    if (isConfirmed) {
+      bookings
+        .delete(bookingId)
+        .then(() => {
+          navigate("/profile");
+        })
+        .catch((error) => {
+          console.log("Delete booking error", error);
+          if (onBookingDeleteError) onBookingDeleteError(error);
+        });
+    }
   };
 
   return (
