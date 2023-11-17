@@ -80,6 +80,9 @@ export const BookingForm = ({
             required
           />
         </div>
+        <div className={styles.maxGuestsSection}>
+          <p>This Venue accommodates {maxGuests} guests</p>
+        </div>
         <div className={styles.formGroup}>
           <label htmlFor="guests">Number of guests:</label>
           <input
