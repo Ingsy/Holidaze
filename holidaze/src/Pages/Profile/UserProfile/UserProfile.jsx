@@ -84,25 +84,35 @@ function UserProfile(openCreateVenueForm) {
             </div>
             <div className={`${styles.ProfileInfoContainer} text-center`}>
               <div className={`${styles.ButtonContainer} col-12 col-md-4 mb-4`}>
+                {user.venueManager && (
+                  <button
+                    className={`${styles.Button} ${
+                      openSection === "createVenue" ? styles.activeButton : ""
+                    }`}
+                    onClick={() => setOpenSection("createVenue")}
+                  >
+                    Create Venue
+                  </button>
+                )}
+                {user.venueManager && (
+                  <button
+                    className={`${styles.Button} ${
+                      openSection === "yourVenues" ? styles.activeButton : ""
+                    }`}
+                    onClick={() => setOpenSection("yourVenues")}
+                  >
+                    Your venues ({venuesCount})
+                  </button>
+                )}
                 <button
-                  className={styles.Button}
-                  onClick={() => setOpenSection("createVenue")}
-                >
-                  Create Venue
-                </button>
-                <button
-                  className={styles.Button}
-                  onClick={() => setOpenSection("yourVenues")}
-                >
-                  Venues ({venuesCount})
-                </button>
-                <button
-                  className={styles.Button}
+                  className={`${styles.Button} ${
+                    openSection === "yourBookings" ? styles.activeButton : ""
+                  }`}
                   onClick={() => {
                     setOpenSection("yourBookings");
                   }}
                 >
-                  Bookings ({bookingsCount})
+                  Your bookings ({bookingsCount})
                 </button>
               </div>
               <div className="col-12 col-md-4 mb-4 d-flex align-items-center justify-content-center">
