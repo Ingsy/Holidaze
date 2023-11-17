@@ -18,6 +18,8 @@ export const BookingCreate = ({ onCreateError, venueId, maxGuests }) => {
     bookings
       .create(booking)
       .then((data) => {
+        const alertMessage = `Booking successful!\n\nDetails:\nVenue ID: ${booking.venueId}\nCheck-in: ${booking.dateFrom}\nCheck-out: ${booking.dateTo}\nGuests: ${booking.guests}`;
+        window.alert(alertMessage);
         window.location.reload();
       })
       .catch((error) => {
