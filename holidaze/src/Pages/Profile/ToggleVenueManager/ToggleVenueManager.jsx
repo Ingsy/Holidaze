@@ -33,6 +33,7 @@ function ToggleVenueManager({ isVenueManager }) {
         return updatedValue;
       })
       .catch((error) => {
+        setVenueManager(!updatedValue);
         console.error("Error toggling Manager/normal-user:", error);
         throw error;
       });
