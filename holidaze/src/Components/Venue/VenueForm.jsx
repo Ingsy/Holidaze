@@ -57,7 +57,9 @@ export const VenueForm = ({ venueData, onSave, onClose, editVenue }) => {
     const image = new Image();
     image.src = value;
     image.onload = () => {
-      const updatedPreviews = [...venue.mediaPreviews, image.src];
+      const updatedPreviews = Array.isArray(venue.mediaPreviews)
+        ? [...venue.mediaPreviews, image.src]
+        : [image.src];
       console.log("Current mediaPreviews:", venue.mediaPreviews);
       console.log("Image source:", image.src);
       console.log("Updated mediaPreviews:", updatedPreviews);
