@@ -99,3 +99,13 @@
   border-radius: 50%;
   object-fit: cover;
 }
+
+.Link {
+  text-decoration: none;
+  font-size: 14px;
+  color: black;
+}
+
+.Link:hover {
+  text-decoration: underline;
+}

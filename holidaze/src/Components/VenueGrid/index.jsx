@@ -6,7 +6,14 @@ import ButtonsAndLinks from "../../Styles/ButtonsAndLinks.module.scss";
 
 const placeholderImageUrl = "https://picsum.photos/200/300";
 
-function VenueGrid({ venues, loading }) {
+function VenueGrid({ venues, loading, error }) {
+  if (loading) {
+    return <p>Loading...</p>;
+  }
+
+  if (error) {
+    return <p>Error loading venues</p>;
+  }
   return (
     <div className={styles.container}>
       {loading ? (

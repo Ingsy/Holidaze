@@ -6,7 +6,7 @@ function Layout({ onSearch }) {
   return (
     <div>
       <Header onSearch={onSearch} />
-      <main>
+      <main className="d-flex justify-content-center">
         <Outlet />
       </main>
       <Footer />

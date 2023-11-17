@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import BaseButton from "../Buttons";
 import Modal from "../Modal";
 import StarRating from "../StarRating";
@@ -327,6 +327,11 @@ function Venue({ existingVenueData }) {
           </BaseButton>
         </div>
       )}
+      <div className="text-center mt-4">
+        <Link to="/" className={styles.Link}>
+          Explore venues
+        </Link>{" "}
+      </div>
     </div>
   );
 }
