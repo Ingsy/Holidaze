@@ -17,8 +17,8 @@ function VenueGrid({ venues, loading }) {
             <div key={venue.id} className="col-lg-3 col-md-4 col-sm-6 col-12">
               <div className={styles.venueCard} tabIndex="0">
                 <h2 className={`${styles.venueName} text-center`}>
-                  {venue.name.length > 30
-                    ? `${venue.name.substring(0, 30)}...`
+                  {venue.name.length > 20
+                    ? `${venue.name.substring(0, 20)}...`
                     : venue.name}
                 </h2>
                 {venue.media.length > 0 ? (

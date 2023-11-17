@@ -1,0 +1,14 @@
+.Brand {
+  width: 200px;
+}
+
+.navLink {
+  color: #858484;
+  text-decoration: none;
+
+  &.active {
+    color: #000000;
+    font-weight: bold;
+  }
+}
+
