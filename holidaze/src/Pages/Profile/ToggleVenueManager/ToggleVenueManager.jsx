@@ -40,12 +40,13 @@ function ToggleVenueManager({ isVenueManager }) {
 
   return (
     <div className={styles.toggleWrapper}>
-      <div
-        className={`${styles.toggleContainer} ${
-          venueManager ? styles.active : ""
-        }`}
-      >
-        <div className={styles.toggleSlider} onClick={handleToggle}></div>
+      <div className={styles.toggleContainer}>
+        <div
+          className={`${styles.toggleSlider} ${
+            venueManager ? styles.active : ""
+          }`}
+          onClick={handleToggle}
+        ></div>
       </div>
       <div>
         <label> {venueManager ? "Venue Manager" : "User"}</label>
