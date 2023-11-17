@@ -67,6 +67,7 @@ function Venue({ existingVenueData }) {
     closeModal();
   };
 
+  const CheckoutBooking = () => {};
   const handleUpdate = () => setEditVenue(true);
 
   const { venues } = useHolidaizApi();
@@ -143,11 +144,19 @@ function Venue({ existingVenueData }) {
         {venue.media && (
           <div className="row">
             <div className="col-12 col-md-6 text-center">
-              <img
-                src={venue.media[0]}
-                alt={`Venue 1`}
-                className={styles.firstPhoto}
-              />
+              {venue.media.length > 0 && isValidURL(venue.media[0]) ? (
+                <img
+                  src={venue.media[0]}
+                  alt={`Venue 1`}
+                  className={styles.firstPhoto}
+                />
+              ) : (
+                <img
+                  src="https://picsum.photos/id/678/200/300"
+                  alt="Placeholder first"
+                  className={styles.firstPhoto}
+                />
+              )}
             </div>
             <div className="col-12 col-md-3 d-flex justify-content-center flex-wrap flex-md-row">
               {venue.media.length > 1 ? (
@@ -247,15 +256,25 @@ function Venue({ existingVenueData }) {
         </div>
         <div className={styles.ownerInfo}>
           <div>
-            {venue.owner.avatar && isValidURL(venue.owner.avatar) && (
-              <img
-                src={venue.owner.avatar}
-                alt={`Host Avatar`}
-                className={styles.hostAvatar}
-              />
+            {console.log("venue:", venue)}
+            {venue.owner && (
+              <>
+                {console.log("venue.owner:", venue.owner)}
+                {venue.owner.avatar && isValidURL(venue.owner.avatar) && (
+                  <img
+                    src={venue.owner.avatar}
+                    alt={`Host Avatar`}
+                    className={styles.hostAvatar}
+                  />
+                )}
+                {venue.owner.name && (
+                  <p className={styles.venueDescription}>{venue.owner.name}</p>
+                )}
+                {venue.owner.email && (
+                  <p className={styles.venueDescription}>{venue.owner.email}</p>
+                )}
+              </>
             )}
-            <p className={styles.venueDescription}>{venue.owner.name}</p>
-            <p className={styles.venueDescription}>{venue.owner.email}</p>
           </div>
           {venue.rating !== undefined && (
             <div className={styles.starRating}>
@@ -291,6 +310,9 @@ function Venue({ existingVenueData }) {
         <div className="text-center m-3">
           <BaseButton onClick={handleUpdate} className={styles.bookButton}>
             Update Venue
+          </BaseButton>
+          <BaseButton onClick={CheckoutBooking} className={styles.bookButton}>
+            Bookings
           </BaseButton>
           <BaseButton onClick={handleDelete} className={styles.bookButton}>
             Delete Venue
