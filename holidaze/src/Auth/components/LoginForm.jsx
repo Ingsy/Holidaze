@@ -1,8 +1,7 @@
 import React, { useState } from "react";
 import { getToken, setToken } from "../utils/LocalStorage";
 import BaseButton from "../../Components/Buttons";
-import { Link } from "react-router-dom";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import styles from "../../Styles/VenueForm.module.scss";
 
 function LoginForm() {
@@ -11,6 +10,7 @@ function LoginForm() {
     password: "",
   });
 
+  const [loginError, setLoginError] = useState(null);
   const navigate = useNavigate();
 
   const handleInputChange = (e) => {
@@ -47,18 +47,21 @@ function LoginForm() {
       setToken(accessToken, userName);
       console.log("User Name:", userName);
       console.log("Access Token:", accessToken);
+
+      const existingToken = getToken();
+      if (existingToken) {
+        navigate("/profile");
+        window.location.reload();
+      }
     } catch (error) {
       console.error("Login error:", error);
+      setLoginError("Invalid email or password. Please try again.");
     }
   };
 
-  const existingToken = getToken();
-  if (existingToken) {
-    navigate("/profile");
-  }
-
   return (
     <form onSubmit={handleSubmit}>
+      {loginError && <div className={styles.error}>{loginError}</div>}
       <div className="mt-4">
         <label htmlFor="email" className={styles.label}>
           Email:
