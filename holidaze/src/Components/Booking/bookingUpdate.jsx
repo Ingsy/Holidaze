@@ -1,24 +1,37 @@
 import React, { useState } from "react";
 import { BookingForm } from "./bookingForm";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useHolidaizApi } from "../../Auth/constants";
 import Alert from "../Alert";
 import styles from "../../Styles/Booking.module.scss";
 
-export const BookingUpdate = ({ FormData, onVenueUpdateError, onClose }) => {
-  const { id: BookingId } = useParams();
+export const BookingUpdate = ({
+  selectedBookingId,
+  bookingId,
+  FormData,
+  onFormChange,
+  onVenueUpdateError,
+  onClose,
+}) => {
+  console.log("Props in BookingUpdate:", { selectedBookingId, bookingId });
   const navigate = useNavigate();
   const { bookings } = useHolidaizApi();
   const [editBooking, setEditBooking] = useState(false);
   const [alert, setAlert] = useState({ message: "", type: "" });
 
   const onSave = async (booking) => {
+    console.log("Selected Booking ID:", selectedBookingId);
     setEditBooking(true);
 
     try {
-      await bookings.update(booking.id, booking);
+      console.log("Saving booking:", booking);
+      await bookings.update(selectedBookingId, {
+        dateFrom: booking.dateFrom,
+        dateTo: booking.dateTo,
+        guests: booking.guests,
+      });
       setAlert({ message: "Booking updated successfully", type: "success" });
-      navigate(`/venue/${BookingId}`);
+      navigate(`/booking/${selectedBookingId}`);
     } catch (error) {
       console.log("Update booking error", error);
       if (onVenueUpdateError) onVenueUpdateError(error);
@@ -34,7 +47,11 @@ export const BookingUpdate = ({ FormData, onVenueUpdateError, onClose }) => {
         onSave={onSave}
         onClose={onClose}
         editBooking={editBooking}
+        onFormChange={onFormChange}
+        bookingId={selectedBookingId}
       />
     </div>
   );
 };
+
+export default BookingUpdate;

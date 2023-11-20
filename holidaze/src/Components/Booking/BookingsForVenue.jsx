@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { AllBookingsByProfile } from "../../Auth/constants";
 import { headers } from "../../Auth/utils/authFetch";
-import { BookingUpdate } from "./BookingUpdate";
-//import { useAuth } from "../../Auth/context/AuthContext";
 import styles from "../../Styles/BookingsForVenue.module.scss";
+import { BookingUpdate } from "./BookingUpdate";
 
 function formatDate(dateString) {
   const options = { day: "2-digit", month: "2-digit", year: "numeric" };
@@ -16,11 +15,15 @@ function formatDate(dateString) {
 
 function BookingsForVenue({ venueId }) {
   const [bookings, setBookings] = useState([]);
-  //const { user, isLoading } = useAuth();
   const [loading, setLoading] = useState(true);
   const [page, setPage] = useState(1);
   const [editBooking, setEditBooking] = useState(false);
   const [pageSize, setPageSize] = useState(10);
+  const [selectedBookingId, setSelectedBookingId] = useState(null);
+
+  const handleFormChange = (updatedBooking) => {
+    console.log("Form changes within BookingsForVenue:", updatedBooking);
+  };
 
   useEffect(() => {
     async function fetchBookings() {
@@ -53,21 +56,29 @@ function BookingsForVenue({ venueId }) {
     setPage(newPage);
   };
 
-  const handleUpdate = () => setEditBooking(true);
+  const handleUpdate = (bookingId) => {
+    setSelectedBookingId(bookingId);
+    setEditBooking(true);
+  };
+
   const handleDelete = () => {};
 
   const onBookingUpdateError = (error) => {
     alert("Error updating");
   };
 
-  if (editBooking)
+  if (editBooking) {
+    console.log("Rendering BookingUpdate with Booking ID:", selectedBookingId);
     return (
       <BookingUpdate
+        selectedBookingId={selectedBookingId}
         BookingData={bookings}
         onBookingUpdateError={onBookingUpdateError}
+        onFormChange={handleFormChange}
         onClose={() => setEditBooking(false)}
       />
     );
+  }
 
   return (
     <div className={styles.bookingsContainer}>
@@ -76,29 +87,41 @@ function BookingsForVenue({ venueId }) {
       ) : (
         <div>
           <ul className="mt-5 text-center">
-            {bookings.map((booking) => (
-              <li key={booking.id} className={`${styles.bookingItem} mb-4`}>
-                {/* Display booking information here */}
-                <p className={`${styles.BookingId} text-start`}>
-                  Booking ID: {booking.id}
-                </p>
-                <p className="text-start">
-                  Check-in Date: {formatDate(booking.dateFrom)}
-                </p>
-                <p className="text-start">
-                  Check-out Date: {formatDate(booking.dateTo)}
-                </p>
-                <p className="text-start">Guests: {booking.guests}</p>
-                <div className="d-flex justify-content-center mt-3">
-                  <button onClick={handleUpdate} className={styles.pagButton}>
-                    Edit booking
-                  </button>
-                  <button onClick={handleDelete} className={styles.pagButton}>
-                    Delete booking
-                  </button>
-                </div>
-              </li>
-            ))}
+            {bookings.map((booking) => {
+              console.log("Booking ID:", booking.id);
+              return (
+                <li key={booking.id} className={`${styles.bookingItem} mb-4`}>
+                  {/* Display booking information here */}
+                  <p className={`${styles.BookingId} text-start`}>
+                    Booking ID: {booking.id}
+                  </p>
+                  <p className="text-start">
+                    Check-in Date: {formatDate(booking.dateFrom)}
+                  </p>
+                  <p className="text-start">
+                    Check-out Date: {formatDate(booking.dateTo)}
+                  </p>
+                  <p className="text-start">Guests: {booking.guests}</p>
+                  <div className="d-flex justify-content-center mt-3">
+                    <button
+                      onClick={() => {
+                        console.log(
+                          "Clicked Edit booking with id:",
+                          booking.id
+                        );
+                        handleUpdate(booking.id);
+                      }}
+                      className={styles.pagButton}
+                    >
+                      Edit booking
+                    </button>
+                    <button onClick={handleDelete} className={styles.pagButton}>
+                      Delete booking
+                    </button>
+                  </div>
+                </li>
+              );
+            })}
           </ul>
           <div
             className={`${styles.paginationContainer} justify-content-center`}

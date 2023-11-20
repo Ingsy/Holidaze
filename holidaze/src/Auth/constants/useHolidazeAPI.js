@@ -54,7 +54,7 @@ export const useHolidaizApi = () => {
             get: () => axios.get(`${AllBookingsByProfile}`, getConfig()).then(response => response.data),
             getSingle: (venueId) => axios.get(`${BookingBaseUrl}/${venueId}`, getConfig()).then(response => response.data),
             create: (data) => axios.post(`${BookingBaseUrl}`, data, getConfig()).then(response => response.data),
-            update: (venueId, bookingId, updatedData) => axios.put(`${BookingBaseUrl}${venueId}/${bookingId}`, updatedData, getConfig()).then(response => response.data),
+            update: (bookingId, updatedData) => axios.put(`${BookingBaseUrl}/${bookingId}`, updatedData, getConfig()).then(response => response.data),
             delete: (venueId, bookingId) => axios.delete(`${BookingBaseUrl}${venueId}/${bookingId}`, getConfig()).then(response => response.data)
         },
         // TODO: Replace with actual URL and params/data

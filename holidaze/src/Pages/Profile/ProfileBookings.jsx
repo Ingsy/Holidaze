@@ -22,6 +22,7 @@ function ProfileBookings() {
             console.error("Error fetching bookings - API error:", errorData);
           } else {
             const bookingsData = await response.json();
+            console.log("Bookings data:", bookingsData);
             setBookings(bookingsData);
           }
         }
