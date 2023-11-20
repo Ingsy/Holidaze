@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { headers } from "../../../Auth/utils/authFetch";
 import Modal from "../../../Components/Modal";
-import { UpdateProfileMedia } from "../../../Auth/constants";
+import { UpdateProfileMedia } from "../../../Auth/constants/useHolidazeAPI";
 import styles from "../../../Styles/Avatar.module.css";
 
 function UpdateAvatar() {

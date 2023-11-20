@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import YourVenueGrid from "../../Components/VenueGrid/YourVenueGrid";
-import { ProfileVenuesUrl } from "../../Auth/constants";
+import { ProfileVenuesUrl } from "../../Auth/constants/useHolidazeAPI";
 import { headers } from "../../Auth/utils/authFetch";
 
 function ProfileVenues(openCreateVenueForm) {
@@ -11,14 +11,13 @@ function ProfileVenues(openCreateVenueForm) {
     async function fetchData() {
       try {
         const requestOptions = {
-          method: "GET", 
+          method: "GET",
           headers: headers(),
         };
 
         const response = await fetch(ProfileVenuesUrl, requestOptions);
 
         if (!response.ok) {
-       
           const errorData = await response.json();
           console.error("Error:", errorData);
         } else {

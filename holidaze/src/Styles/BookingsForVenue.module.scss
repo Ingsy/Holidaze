@@ -1,0 +1,52 @@
+.bookingsContainer {
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+    justify-items: center;
+  }
+  
+  .bookingItem {
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid  #F8C143;
+    border-radius: 5px;
+    background-color: white;
+  }
+
+  .BookingId{
+    font-size: 13px;
+    margin-bottom: 5px;
+  }
+
+  .paginationContainer {
+    margin-top: 20px;
+    display: flex;
+    align-items: center;
+  }
+  
+  .paginationContainer button {
+    cursor: pointer;
+    border: none;
+  }
+  
+  .paginationContainer button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+
+  ul {
+    list-style-type: none;
+  }
+
+  .pagButton {
+    background-color: transparent;
+    border-color: none;
+    color:black;
+    margin-left: 7px;
+    margin-right: 7px;
+    border: none; 
+  }
+
+  .pagButton:hover{
+    font-weight: bold;
+  }

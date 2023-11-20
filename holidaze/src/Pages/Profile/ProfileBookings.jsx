@@ -1,34 +1,39 @@
 import React, { useState, useEffect } from "react";
-import YourVenueGrid from "../../Components/VenueGrid/YourVenueGrid";
-import { useHolidaizApi } from "../../Auth/constants";
-//import BookingList from "../../Components/Booking/BookingList";
+import BookingsForVenue from "../../Components/Booking/BookingsForVenue";
+import { AllBookingsByProfile } from "../../Auth/constants/useHolidazeAPI";
+import { useAuth } from "../../Auth/context/AuthContext";
+import { headers } from "../../Auth/utils/authFetch";
 
-export const ProfileBookings = () => {
-  //const [bookings, setBookings] = useState([]);
-  const [venues, setVenues] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const { bookings: holidaizBookings } = useHolidaizApi();
+function ProfileBookings() {
+  const { user, isLoading } = useAuth();
+  const [bookings, setBookings] = useState([]);
 
   useEffect(() => {
-    async function fetchUserBookings() {
+    async function fetchData() {
       try {
-        const userBookings = await holidaizBookings.get({ _bookings: true });
-        setVenues(userBookings);
-        setLoading(false);
+        if (user.token) {
+          const response = await fetch(AllBookingsByProfile, {
+            method: "GET",
+            headers: headers(),
+          });
+
+          if (!response.ok) {
+            const errorData = await response.json();
+            console.error("Error fetching bookings - API error:", errorData);
+          } else {
+            const bookingsData = await response.json();
+            setBookings(bookingsData);
+          }
+        }
       } catch (error) {
-        console.error("Error fetching user bookings:", error);
-        setLoading(false);
+        console.error("Error fetching data:", error);
       }
     }
 
-    fetchUserBookings();
-  }, [holidaizBookings]);
+    fetchData();
+  }, [user.token]);
 
-  return (
-    <div>
-      <YourVenueGrid venues={venues} loading={loading} />
-    </div>
-  );
-};
+  return <BookingsForVenue bookings={bookings} loading={isLoading} />;
+}
 
 export default ProfileBookings;

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useAuth } from "../../../Auth/context/AuthContext";
 import Collapse from "../../../Components/Collapse";
 import ProfileVenues from "../ProfileVenues";
-import ProfileBookingsTest from "../ProfileBookings";
+import ProfileBookings from "../ProfileBookings";
 import UpdateAvatar from "../Avatar";
 import { VenueCreate } from "../../../Components/Venue/VenueCreate";
 import styles from "../../../Styles/Profile.module.scss";
@@ -174,7 +174,7 @@ function UserProfile(openCreateVenueForm) {
                     setOpenSection("yourBookings");
                   }}
                 >
-                  <ProfileBookingsTest />
+                  <ProfileBookings />
                 </Collapse>
               )}
             </div>

@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from "react";
-import { BookingsForVenueUrl } from "../../Auth/constants";
+import { AllBookingsByProfile } from "../../Auth/constants";
 import { headers } from "../../Auth/utils/authFetch";
-import styles from "../../Styles/BookingsForVenue.scss";
+import { BookingUpdate } from "./BookingUpdate";
+//import { useAuth } from "../../Auth/context/AuthContext";
+import styles from "../../Styles/BookingsForVenue.module.scss";
 
 function formatDate(dateString) {
   const options = { day: "2-digit", month: "2-digit", year: "numeric" };
@@ -14,9 +16,11 @@ function formatDate(dateString) {
 
 function BookingsForVenue({ venueId }) {
   const [bookings, setBookings] = useState([]);
+  //const { user, isLoading } = useAuth();
   const [loading, setLoading] = useState(true);
   const [page, setPage] = useState(1);
-  const [pageSize, setPageSize] = useState(5);
+  const [editBooking, setEditBooking] = useState(false);
+  const [pageSize, setPageSize] = useState(10);
 
   useEffect(() => {
     async function fetchBookings() {
@@ -26,12 +30,7 @@ function BookingsForVenue({ venueId }) {
           headers: headers(),
         };
 
-        const response = await fetch(
-          `${BookingsForVenueUrl}?venueId=${venueId}&limit=${pageSize}&offset=${
-            (page - 1) * pageSize
-          }`,
-          requestOptions
-        );
+        const response = await fetch(`${AllBookingsByProfile}`, requestOptions);
 
         if (!response.ok) {
           const errorData = await response.json();
@@ -54,37 +53,69 @@ function BookingsForVenue({ venueId }) {
     setPage(newPage);
   };
 
+  const handleUpdate = () => setEditBooking(true);
+  const handleDelete = () => {};
+
+  const onBookingUpdateError = (error) => {
+    alert("Error updating");
+  };
+
+  if (editBooking)
+    return (
+      <BookingUpdate
+        BookingData={bookings}
+        onBookingUpdateError={onBookingUpdateError}
+        onClose={() => setEditBooking(false)}
+      />
+    );
+
   return (
     <div className={styles.bookingsContainer}>
       {loading ? (
         <p>Loading bookings...</p>
       ) : (
         <div>
-          <ul className="mt-5">
+          <ul className="mt-5 text-center">
             {bookings.map((booking) => (
               <li key={booking.id} className={`${styles.bookingItem} mb-4`}>
                 {/* Display booking information here */}
-                <p>Booking ID: {booking.id}</p>
-                <p>Check-in Date: {formatDate(booking.dateFrom)}</p>
-                <p>Check-out Date: {formatDate(booking.dateTo)}</p>
-                <p>Guests: {booking.guests}</p>
-                <hr />
-                {/* Add more details as needed */}
+                <p className={`${styles.BookingId} text-start`}>
+                  Booking ID: {booking.id}
+                </p>
+                <p className="text-start">
+                  Check-in Date: {formatDate(booking.dateFrom)}
+                </p>
+                <p className="text-start">
+                  Check-out Date: {formatDate(booking.dateTo)}
+                </p>
+                <p className="text-start">Guests: {booking.guests}</p>
+                <div className="d-flex justify-content-center mt-3">
+                  <button onClick={handleUpdate} className={styles.pagButton}>
+                    Edit booking
+                  </button>
+                  <button onClick={handleDelete} className={styles.pagButton}>
+                    Delete booking
+                  </button>
+                </div>
               </li>
             ))}
           </ul>
-          <div className={styles.paginationContainer}>
-            {/* Pagination controls */}
+          <div
+            className={`${styles.paginationContainer} justify-content-center`}
+          >
             <button
-              className="mx-3"
+              className={styles.pagButton}
               onClick={() => handlePageChange(page - 1)}
               disabled={page === 1}
             >
-              Previous Page
+              Previous
             </button>
-            <span>Page {page}</span>
-            <button className="m-3" onClick={() => handlePageChange(page + 1)}>
-              Next Page
+            <span className="ms-2 me-2">{page}</span>
+            <button
+              className={styles.pagButton}
+              onClick={() => handlePageChange(page + 1)}
+            >
+              Next
             </button>
           </div>
         </div>
