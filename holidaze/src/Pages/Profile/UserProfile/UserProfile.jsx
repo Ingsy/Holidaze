@@ -17,17 +17,12 @@ function UserProfile(openCreateVenueForm) {
   useEffect(() => {
     const fetchData = async () => {
       if (user && token) {
-        console.log("Fetching user data...");
         try {
           const userData = await fetchUserData(token);
-          console.log("User Data:", userData);
 
           setUser(userData);
           setVenuesCount(userData._count.venues);
           setBookingsCount(userData._count.bookings);
-
-          console.log("Venues Count:", venuesCount);
-          console.log("Bookings Count:", bookingsCount);
 
           setLoading(false);
         } catch (error) {
@@ -61,7 +56,6 @@ function UserProfile(openCreateVenueForm) {
       }
 
       const userData = await response.json();
-      console.log("API Response:", userData);
       return userData;
     } catch (error) {
       console.error("Error fetching user data:", error);
@@ -144,7 +138,6 @@ function UserProfile(openCreateVenueForm) {
                   title="Create Venue"
                   isCollapsed={openSection !== "createVenue"}
                   onToggle={() => {
-                    console.log("Toggled 'Create Venue' section");
                     setOpenSection("createVenue");
                   }}
                 >

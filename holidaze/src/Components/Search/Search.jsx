@@ -24,7 +24,6 @@ function Search({ venues, onSearch }) {
         );
       });
 
-      console.log("Filtered Suggestions:", filteredSuggestions);
       onSearch(filteredSuggestions);
     } catch (error) {
       console.error("Error fetching search results:", error);

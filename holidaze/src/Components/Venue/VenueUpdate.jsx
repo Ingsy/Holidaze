@@ -17,15 +17,12 @@ export const VenueUpdate = ({ venueData, onVenueUpdateError, onClose }) => {
 
     try {
       await venues.update(venue.id, venue);
-      console.log("Venue updated successfully");
       setAlert({ message: "Venue updated successfully", type: "success" });
 
       setTimeout(() => {
-        console.log("Navigating to", `/venue/${venueId}`);
         navigate(`/venue/${venueId}`);
       }, 4000);
     } catch (error) {
-      console.log("Update venue error", error);
       if (onVenueUpdateError) onVenueUpdateError(error);
 
       setAlert({ message: "Failed to update venue", type: "error" });

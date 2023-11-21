@@ -25,7 +25,6 @@ export const BookingForm = ({
 
   const FormSubmit = (event) => {
     event.preventDefault();
-    console.log(formData, venueId);
     if (booking && booking.venue) {
       const updatedBooking = {
         ...booking,
@@ -34,7 +33,6 @@ export const BookingForm = ({
       };
       onSave(updatedBooking, booking);
     } else {
-      console.log(booking);
       alert("Form data is missing or invalid. Please check your input.");
     }
   };

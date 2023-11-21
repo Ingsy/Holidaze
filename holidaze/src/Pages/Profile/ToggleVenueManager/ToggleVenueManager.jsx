@@ -29,7 +29,6 @@ function ToggleVenueManager({ isVenueManager }) {
           console.error("Toggle update failed");
           throw new Error("Toggle update failed");
         }
-        console.log("Toggle successful");
         return updatedValue;
       })
       .catch((error) => {

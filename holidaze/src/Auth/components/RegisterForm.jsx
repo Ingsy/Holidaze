@@ -34,7 +34,6 @@ function RegisterForm() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("Form successfully registered:", formData);
 
     try {
       const response = await fetch(
@@ -54,19 +53,15 @@ function RegisterForm() {
       }
 
       const data = await response.json();
-      console.log("Response Data:", data);
+
       const token = data.token;
 
       const userName = data.name;
 
       // redirect the user to the login..
       setToken(token, userName);
-
-      console.log("Token:", token);
-      console.log("User Name:", userName);
     } catch (error) {
       console.error("Registration error:", error);
-      console.log("Error caught:", error);
     }
   };
 

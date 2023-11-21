@@ -6,13 +6,10 @@ import { useHolidaizApi } from "../../Auth/constants";
 import styles from "../../Styles/Booking.module.scss";
 
 export const BookingCreate = ({ onCreateError, venueId, maxGuests }) => {
-  console.log("Venue ID in BookingCreate:", venueId);
   //const navigate = useNavigate();
   const { bookings } = useHolidaizApi();
 
-  const handleFormChange = (formData) => {
-    console.log("Form data changed:", formData);
-  };
+  const handleFormChange = (formData) => {};
 
   const onSave = (booking) => {
     bookings
@@ -23,7 +20,6 @@ export const BookingCreate = ({ onCreateError, venueId, maxGuests }) => {
         window.location.reload();
       })
       .catch((error) => {
-        console.log("Create booking error", error);
         if (onCreateError) onCreateError(error);
       });
   };

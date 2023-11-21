@@ -34,7 +34,6 @@ export function load(key) {
         }
         return value;
     } catch (err) {
-        console.log(err);
         return null;
     }
 }

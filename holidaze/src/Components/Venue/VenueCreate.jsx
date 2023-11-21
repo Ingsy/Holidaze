@@ -15,7 +15,6 @@ export const VenueCreate = ({ onCreateError }) => {
         navigate(`/venue/${data.id}`);
       })
       .catch((error) => {
-        console.log("Create venue error", error);
         if (onCreateError) onCreateError(error);
       });
   };

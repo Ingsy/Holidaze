@@ -9,7 +9,6 @@ const AuthContext = createContext();
 const username = getUserName();
 
 const token = load("token") || getToken();
-console.log("Token (loaded from localStorage):", token);
 
 export function AuthProvider({ children }) {
   const [user, setUser] = useState({
@@ -53,7 +52,6 @@ export function AuthProvider({ children }) {
             avatar: userData.avatar,
             venueManager: userData.venueManager,
           }));
-          console.log("User state after update:", user);
         })
         .catch((error) => {
           console.error("Error parsing user data:", error);

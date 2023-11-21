@@ -45,8 +45,6 @@ function LoginForm() {
       const userName = data.name;
 
       setToken(accessToken, userName);
-      console.log("User Name:", userName);
-      console.log("Access Token:", accessToken);
 
       const existingToken = getToken();
       if (existingToken) {

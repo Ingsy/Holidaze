@@ -43,7 +43,6 @@ function Venue({ existingVenueData }) {
     fetch(fetchUrl)
       .then((response) => response.json())
       .then((data) => {
-        console.log("API Response:", data);
         setVenue(data);
         setIsUserOwner(data.owner?.email === user.email);
         setLoading(false);
@@ -63,7 +62,6 @@ function Venue({ existingVenueData }) {
   };
 
   const handleBookingSubmit = () => {
-    console.log("Booking data:", formData);
     closeModal();
   };
 
@@ -83,7 +81,6 @@ function Venue({ existingVenueData }) {
           venues
             .delete(id, user.token)
             .then((response) => {
-              console.log("Venue deleted successfully.");
               setShowAlert(true);
               setSuccessMessage("Venue is successfully deleted");
               setAlertType("success");
@@ -256,10 +253,8 @@ function Venue({ existingVenueData }) {
         </div>
         <div className={styles.ownerInfo}>
           <div>
-            {console.log("venue:", venue)}
             {venue.owner && (
               <>
-                {console.log("venue.owner:", venue.owner)}
                 {venue.owner.avatar && isValidURL(venue.owner.avatar) && (
                   <img
                     src={venue.owner.avatar}

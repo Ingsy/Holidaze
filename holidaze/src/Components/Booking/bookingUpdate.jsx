@@ -37,7 +37,6 @@ export const BookingUpdate = ({
         navigate(`/profile`);
       }, 4000);
     } catch (error) {
-      console.log("Update booking error", error);
       if (onVenueUpdateError) onVenueUpdateError(error);
       setAlert((prevAlert) => ({
         ...prevAlert,

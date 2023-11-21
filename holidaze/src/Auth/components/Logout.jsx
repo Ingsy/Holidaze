@@ -4,7 +4,6 @@ import styles from "../../Styles/Logout.module.scss";
 
 function LogoutButton() {
   const handleLogout = () => {
-    console.log("Logout button clicked");
     removeToken();
 
     window.location.href = "/login";
