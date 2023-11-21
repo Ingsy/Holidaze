@@ -3,9 +3,11 @@ import { AllBookingsByProfile } from "../../Auth/constants";
 import { headers } from "../../Auth/utils/authFetch";
 import styles from "../../Styles/BookingsForVenue.module.scss";
 import { BookingUpdate } from "./BookingUpdate";
+import { useNavigate } from "react-router-dom";
+import { useHolidaizApi } from "../../Auth/constants";
 
 function formatDate(dateString) {
-  const options = { day: "2-digit", month: "2-digit", year: "numeric" };
+  const options = { day: "2-digit", month: "2-digit", year: "2-digit" };
   const formattedDate = new Date(dateString).toLocaleDateString(
     "en-US",
     options
@@ -16,9 +18,9 @@ function formatDate(dateString) {
 function BookingsForVenue({ venueId }) {
   const [bookings, setBookings] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [page, setPage] = useState(1);
+  const { bookings: BookingsApi } = useHolidaizApi();
+  const navigate = useNavigate();
   const [editBooking, setEditBooking] = useState(false);
-  const [pageSize, setPageSize] = useState(10);
   const [selectedBookingId, setSelectedBookingId] = useState(null);
 
   const handleFormChange = (updatedBooking) => {
@@ -50,10 +52,17 @@ function BookingsForVenue({ venueId }) {
     }
 
     fetchBookings();
-  }, [venueId, page, pageSize]);
+  }, [venueId]);
 
-  const handlePageChange = (newPage) => {
-    setPage(newPage);
+  const handleCheckoutVenue = (bookingId) => {
+    BookingsApi.getSingle(bookingId).then((response) => {
+      const venueId = response?.venue?.id;
+      if (venueId) {
+        navigate(`/venue/${venueId}`);
+      } else {
+        console.error("Venue ID not found in the booking details:", response);
+      }
+    });
   };
 
   const handleUpdate = (bookingId) => {
@@ -61,14 +70,26 @@ function BookingsForVenue({ venueId }) {
     setEditBooking(true);
   };
 
-  const handleDelete = () => {};
+  const handleDelete = (bookingId) => {
+    const confirmDelete = window.confirm(
+      "Are you sure you want to delete this venue?"
+    );
+    if (confirmDelete) {
+      BookingsApi.delete(bookingId)
+        .then((response) => {
+          window.location.reload();
+        })
+        .catch((error) => {
+          console.error("Error deleting venue:", error);
+        });
+    }
+  };
 
   const onBookingUpdateError = (error) => {
     alert("Error updating");
   };
 
   if (editBooking) {
-    console.log("Rendering BookingUpdate with Booking ID:", selectedBookingId);
     return (
       <BookingUpdate
         selectedBookingId={selectedBookingId}
@@ -85,63 +106,58 @@ function BookingsForVenue({ venueId }) {
       {loading ? (
         <p>Loading bookings...</p>
       ) : (
-        <div>
-          <ul className="mt-5 text-center">
-            {bookings.map((booking) => {
-              console.log("Booking ID:", booking.id);
-              return (
-                <li key={booking.id} className={`${styles.bookingItem} mb-4`}>
-                  {/* Display booking information here */}
-                  <p className={`${styles.BookingId} text-start`}>
-                    Booking ID: {booking.id}
-                  </p>
-                  <p className="text-start">
-                    Check-in Date: {formatDate(booking.dateFrom)}
-                  </p>
-                  <p className="text-start">
-                    Check-out Date: {formatDate(booking.dateTo)}
-                  </p>
-                  <p className="text-start">Guests: {booking.guests}</p>
-                  <div className="d-flex justify-content-center mt-3">
-                    <button
-                      onClick={() => {
-                        console.log(
-                          "Clicked Edit booking with id:",
-                          booking.id
-                        );
-                        handleUpdate(booking.id);
-                      }}
-                      className={styles.pagButton}
-                    >
-                      Edit booking
-                    </button>
-                    <button onClick={handleDelete} className={styles.pagButton}>
-                      Delete booking
-                    </button>
-                  </div>
-                </li>
-              );
-            })}
-          </ul>
-          <div
-            className={`${styles.paginationContainer} justify-content-center`}
-          >
-            <button
-              className={styles.pagButton}
-              onClick={() => handlePageChange(page - 1)}
-              disabled={page === 1}
-            >
-              Previous
-            </button>
-            <span className="ms-2 me-2">{page}</span>
-            <button
-              className={styles.pagButton}
-              onClick={() => handlePageChange(page + 1)}
-            >
-              Next
-            </button>
-          </div>
-        </div>
+        <ul className="mt-5">
+          {bookings.map((booking) => {
+            return (
+              <li key={booking.id} className={`${styles.bookingItem} mb-4`}>
+                <p className={`${styles.BookingId} text-start`}>
+                  Booking ID: {booking.id}
+                </p>
+                <div className={styles.BookingId}>
+                  <span className="me-2">
+                    created: {formatDate(booking.created)}
+                  </span>
+                  <span>updated: {formatDate(booking.updated)}</span>
+                </div>
+                <hr />
+                <button
+                  onClick={() => {
+                    handleCheckoutVenue(booking.id);
+                  }}
+                  className={styles.venueButton}
+                >
+                  Checkout Venue
+                </button>
+                <p className="mt-3">
+                  Check-in Date: {formatDate(booking.dateFrom)}
+                </p>
+                <p className="mt-1">
+                  Check-out Date: {formatDate(booking.dateTo)}
+                </p>
+                <p className="mt-1">Guests: {booking.guests}</p>
+                <hr />
+                <div className="d-flex justify-content-center mt-3">
+                  <button
+                    onClick={() => {
+                      handleUpdate(booking.id);
+                    }}
+                    className={styles.pagButton}
+                  >
+                    Edit booking
+                  </button>
+                  <button
+                    onClick={() => {
+                      handleDelete(booking.id);
+                    }}
+                    className={styles.pagButton}
+                  >
+                    Delete booking
+                  </button>
+                </div>
+              </li>
+            );
+          })}
+        </ul>
       )}
     </div>
   );

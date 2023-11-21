@@ -13,29 +13,37 @@ export const BookingUpdate = ({
   onVenueUpdateError,
   onClose,
 }) => {
-  console.log("Props in BookingUpdate:", { selectedBookingId, bookingId });
   const navigate = useNavigate();
   const { bookings } = useHolidaizApi();
   const [editBooking, setEditBooking] = useState(false);
   const [alert, setAlert] = useState({ message: "", type: "" });
 
   const onSave = async (booking) => {
-    console.log("Selected Booking ID:", selectedBookingId);
     setEditBooking(true);
 
     try {
-      console.log("Saving booking:", booking);
       await bookings.update(selectedBookingId, {
         dateFrom: booking.dateFrom,
         dateTo: booking.dateTo,
         guests: booking.guests,
       });
-      setAlert({ message: "Booking updated successfully", type: "success" });
-      navigate(`/booking/${selectedBookingId}`);
+      setAlert((prevAlert) => ({
+        ...prevAlert,
+        message: "Booking updated successfully",
+        type: "success",
+      }));
+
+      setTimeout(() => {
+        navigate(`/profile`);
+      }, 4000);
     } catch (error) {
       console.log("Update booking error", error);
       if (onVenueUpdateError) onVenueUpdateError(error);
-      setAlert({ message: "Failed to update booking", type: "error" });
+      setAlert((prevAlert) => ({
+        ...prevAlert,
+        message: "Failed to update booking",
+        type: "error",
+      }));
     }
   };
 
@@ -49,6 +57,7 @@ export const BookingUpdate = ({
         editBooking={editBooking}
         onFormChange={onFormChange}
         bookingId={selectedBookingId}
+        isUpdating={true}
       />
     </div>
   );

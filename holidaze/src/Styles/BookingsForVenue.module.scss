@@ -1,8 +1,8 @@
 .bookingsContainer {
-    margin-top: 20px;
+  
     display: flex;
     justify-content: center;
-    justify-items: center;
+   
   }
   
   .bookingItem {
@@ -11,6 +11,7 @@
     border: 1px solid  #F8C143;
     border-radius: 5px;
     background-color: white;
+    
   }
 
   .BookingId{
@@ -18,24 +19,12 @@
     margin-bottom: 5px;
   }
 
-  .paginationContainer {
-    margin-top: 20px;
-    display: flex;
-    align-items: center;
-  }
   
-  .paginationContainer button {
-    cursor: pointer;
-    border: none;
-  }
-  
-  .paginationContainer button:disabled {
-    opacity: 0.5;
-    cursor: not-allowed;
-  }
+
 
   ul {
     list-style-type: none;
+    padding: 0;
   }
 
   .pagButton {
@@ -48,5 +37,13 @@
   }
 
   .pagButton:hover{
+    font-weight: bold;
+  }
+
+  .venueButton{
+    background-color: transparent;
+    border-color: none;
+    color:#f7aa04;
+    border: none; 
     font-weight: bold;
   }

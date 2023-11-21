@@ -40,6 +40,7 @@ export const BookingCreate = ({ onCreateError, venueId, maxGuests }) => {
         onSave={onSave}
         onClose={onClose}
         onFormChange={handleFormChange}
+        isUpdating={false}
       />
     </div>
   );

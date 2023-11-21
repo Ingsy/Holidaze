@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { VenueForm } from "./VenueForm";
 import { useNavigate, useParams } from "react-router-dom";
 import { useHolidaizApi } from "../../Auth/constants";
@@ -31,6 +31,18 @@ export const VenueUpdate = ({ venueData, onVenueUpdateError, onClose }) => {
       setAlert({ message: "Failed to update venue", type: "error" });
     }
   };
+
+  useEffect(() => {
+    // Clear the alert after a certain time (e.g., 5000 milliseconds)
+    const timeoutId = setTimeout(() => {
+      setAlert({ message: "", type: "" });
+    }, 5000);
+
+    return () => {
+      // Clear the timeout on component unmount or when alert changes
+      clearTimeout(timeoutId);
+    };
+  }, [alert]);
 
   return (
     <div className={`${styles.detailsContainer} mx-auto`}>

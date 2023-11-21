@@ -18,6 +18,7 @@ export const BookingForm = ({
   maxGuests,
   onSave,
   onClose,
+  isUpdating,
 }) => {
   const [booking, setBooking] = useState(formData || defaultBookingData);
   const user = useAuth();
@@ -56,10 +57,14 @@ export const BookingForm = ({
 
   return (
     <div className={styles.bookingFormContainer}>
-      <h2 className="text-center">Book Venue</h2>
+      <h2 className="text-center">
+        {isUpdating ? "Update Booking" : "Book Venue"}
+      </h2>
       <form onSubmit={FormSubmit}>
         <div className={styles.formGroup}>
-          <label htmlFor="dateFrom">Check-in date:</label>
+          <label className="text-start" htmlFor="dateFrom">
+            Check-in date:
+          </label>
           <input
             type="date"
             id="dateFrom"
@@ -70,7 +75,9 @@ export const BookingForm = ({
           />
         </div>
         <div className={styles.formGroup}>
-          <label htmlFor="dateTo">Check-out date:</label>
+          <label className="text-start" htmlFor="dateTo">
+            Check-out date:
+          </label>
           <input
             type="date"
             id="dateTo"
@@ -80,11 +87,15 @@ export const BookingForm = ({
             required
           />
         </div>
-        <div className={styles.maxGuestsSection}>
-          <p>This Venue accommodates {maxGuests} guests</p>
+        <div>
+          <p className="mt-4 m-0">
+            This Venue accommodates {booking.maxGuests} guests
+          </p>
         </div>
         <div className={styles.formGroup}>
-          <label htmlFor="guests">Number of guests:</label>
+          <label className="text-start" htmlFor="guests">
+            Number of guests:
+          </label>
           <input
             type="number"
             id="guests"
@@ -97,8 +108,11 @@ export const BookingForm = ({
           />
         </div>
         {user ? (
-          <div className={styles.formGroup}>
-            <BaseButton type="submit">Book Now</BaseButton>
+          <div className={`${styles.formGroup} mt-2`}>
+            <BaseButton type="submit">
+              {" "}
+              {isUpdating ? "Update Booking" : "Book Now"}
+            </BaseButton>
             <BaseButton type="button" onClick={formCancel}>
               Cancel
             </BaseButton>
