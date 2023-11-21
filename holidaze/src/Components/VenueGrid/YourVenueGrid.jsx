@@ -1,23 +1,11 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import StarRating from "../StarRating";
-import BookingsForVenue from "../Booking/BookingsForVenue";
-import Modal from "../Modal";
 import styles from "../../Styles/VenueGrid.module.css";
 
 const placeholderImageUrl = "https://picsum.photos/200/300"; // The original image size
 
 function VenueGrid({ venues, loading }) {
-  const [selectedVenue, setSelectedVenue] = useState(null);
-
-  const handleBookingsClick = (venueId) => {
-    setSelectedVenue(venueId);
-  };
-
-  const handleCloseModal = () => {
-    setSelectedVenue(null);
-  };
-
   return (
     <div>
       {loading ? (
@@ -73,21 +61,10 @@ function VenueGrid({ venues, loading }) {
                   </Link>
                 </div>
               </div>
-              <div className="col-12 mt-3 text-center">
-                <button
-                  className={styles.ButtonsBooking}
-                  onClick={() => handleBookingsClick(venue.id)}
-                >
-                  Bookings
-                </button>
-              </div>
             </div>
           ))}
         </div>
       )}
-      <Modal isOpen={selectedVenue !== null} onClose={handleCloseModal}>
-        {selectedVenue && <BookingsForVenue venueId={selectedVenue} />}
-      </Modal>
     </div>
   );
 }

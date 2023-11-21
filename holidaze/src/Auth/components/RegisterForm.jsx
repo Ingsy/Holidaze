@@ -53,9 +53,7 @@ function RegisterForm() {
       }
 
       const data = await response.json();
-
       const token = data.token;
-
       const userName = data.name;
 
       // redirect the user to the login..

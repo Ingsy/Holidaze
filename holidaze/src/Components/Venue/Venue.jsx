@@ -10,6 +10,7 @@ import BookingCreate from "../Booking/BookingCreate";
 import { useHolidaizApi } from "../../Auth/constants";
 import { useNavigate } from "react-router-dom";
 import styles from "../../Styles/Venue.module.css";
+import BookingsForVenue from "../Booking/BookingsForVenue";
 
 function Venue({ existingVenueData }) {
   const { id } = useParams();
@@ -19,6 +20,7 @@ function Venue({ existingVenueData }) {
   const [errorMessage, setErrorMessage] = useState("");
   const [alertType, setAlertType] = useState("success");
   const [venue, setVenue] = useState(null);
+  const [selectedVenue, setSelectedVenue] = useState(null);
   const [loading, setLoading] = useState(true);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [editVenue, setEditVenue] = useState(false);
@@ -38,7 +40,7 @@ function Venue({ existingVenueData }) {
   }, [id, user]);
 
   const fetchVenueDetails = (venueId) => {
-    const fetchUrl = `https://api.noroff.dev/api/v1/holidaze/venues/${venueId}?_owner=true`;
+    const fetchUrl = `https://api.noroff.dev/api/v1/holidaze/venues/${venueId}?_owner=true&_bookings=true`;
 
     fetch(fetchUrl)
       .then((response) => response.json())
@@ -65,7 +67,18 @@ function Venue({ existingVenueData }) {
     closeModal();
   };
 
-  const CheckoutBooking = () => {};
+  const handleBookingsClick = (venueId) => {
+    setSelectedVenue(venueId);
+    venues
+      .getVenueBookings(venueId)
+      .then((response) => {
+        console.log("Bookings for venue:", response);
+      })
+      .catch((error) => {
+        console.error("Error fetching venue bookings:", error);
+      });
+  };
+
   const handleUpdate = () => setEditVenue(true);
 
   const { venues } = useHolidaizApi();
@@ -306,7 +319,13 @@ function Venue({ existingVenueData }) {
           <BaseButton onClick={handleUpdate} className={styles.bookButton}>
             Update Venue
           </BaseButton>
-          <BaseButton onClick={CheckoutBooking} className={styles.bookButton}>
+          <BaseButton
+            className={styles.ButtonsBooking}
+            onClick={() => {
+              handleBookingsClick(venue.id);
+              openModal();
+            }}
+          >
             Bookings
           </BaseButton>
           <BaseButton onClick={handleDelete} className={styles.bookButton}>
@@ -327,6 +346,10 @@ function Venue({ existingVenueData }) {
           Explore venues
         </Link>{" "}
       </div>
+
+      <Modal isOpen={selectedVenue !== null} onClose={closeModal}>
+        {selectedVenue && <BookingsForVenue venueId={selectedVenue} />}
+      </Modal>
     </div>
   );
 }

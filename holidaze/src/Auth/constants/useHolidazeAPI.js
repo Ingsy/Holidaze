@@ -12,6 +12,7 @@ const userName = getUserName();
 export const VenueBaseUrl = `${API_HOLIDAZE_URL}/venues`;
 export const VenueDetailUrl = `https://api.noroff.dev/api/v1/holidaze/venues/`;
 
+
 export const Register = `${API_HOLIDAZE_URL}/auth/register`;
 export const Login = `${API_HOLIDAZE_URL}/auth/login`;
 
@@ -22,19 +23,14 @@ export const UserProfile = `${ProfileBaseUrl}/${userName}`;
 export const ProfileVenuesUrl = `${UserProfile}/venues/?_venues=true`;
 export const ProfileBookingsUrl = `${UserProfile}/bookings/?_bookings=true&_venue=true`;
 export const ProfileBookingsUrlTest = `${UserProfile}/venues/?_bookings=true`;
-
 export const UpdateProfileMedia = `${UserProfile}/media`;
 
 export const BookingBaseUrl = `${API_HOLIDAZE_URL}/bookings`;
 //export const BookingCustomerUrl = `${BookingBaseUrl}?_customer=true`; (NOT IN USE YET)
 export const BookingVenueUrl = `${BookingBaseUrl}/?_venue=true`;
-//export const BookingSingle = `${BookingBaseUrl}/id`; (Get a single booking )
-
 export const BookingsByProfile = `${BookingBaseUrl}/${userName}/bookings`;
 export const AllBookingsByProfile = `${UserProfile}/bookings/?_venue=true`;
-export const AllBookingsByProfileVenue = `${UserProfile}/bookings/?_venue=true`;
 
-export const BookingsForVenueUrl = `${BookingBaseUrl}?_bookings=true&_customer=true`;
 
 
 
@@ -66,6 +62,7 @@ export const useHolidaizApi = () => {
 
         venues: {
             get: () => axios.get(`${VenueBaseUrl}`, getConfig()).then(response => response.data),
+            getVenueBookings: (venueId) => axios.get(`${VenueBaseUrl}/${venueId}/?_bookings=true`, getConfig()).then(response => response.data),
             create: (data) => axios.post(`${VenueDetailUrl}`, data, getConfig()),
             update: (venueId, updatedData) => axios.put(`${VenueDetailUrl}${venueId}`, updatedData, getConfig()).then(response => response.data),
             delete: (venueId) => axios.delete(`${VenueDetailUrl}${venueId}`, getConfig()).then(response => response.data),

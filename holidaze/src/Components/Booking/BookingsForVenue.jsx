@@ -106,58 +106,62 @@ function BookingsForVenue({ venueId }) {
       {loading ? (
         <p>Loading bookings...</p>
       ) : (
-        <ul className="mt-5">
-          {bookings.map((booking) => {
-            return (
-              <li key={booking.id} className={`${styles.bookingItem} mb-4`}>
-                <p className={`${styles.BookingId} text-start`}>
-                  Booking ID: {booking.id}
-                </p>
-                <div className={styles.BookingId}>
-                  <span className="me-2">
-                    created: {formatDate(booking.created)}
-                  </span>
-                  <span>updated: {formatDate(booking.updated)}</span>
-                </div>
-                <hr />
-                <button
-                  onClick={() => {
-                    handleCheckoutVenue(booking.id);
-                  }}
-                  className={styles.venueButton}
-                >
-                  Checkout Venue
-                </button>
-                <p className="mt-3">
-                  Check-in Date: {formatDate(booking.dateFrom)}
-                </p>
-                <p className="mt-1">
-                  Check-out Date: {formatDate(booking.dateTo)}
-                </p>
-                <p className="mt-1">Guests: {booking.guests}</p>
-                <hr />
-                <div className="d-flex justify-content-center mt-3">
+        <div>
+          {bookings.length > 0 ? (
+            <ul className="mt-5">
+              {bookings.map((booking) => (
+                <li key={booking.id} className={`${styles.bookingItem} mb-4`}>
+                  <p className={`${styles.BookingId} text-start`}>
+                    Booking ID: {booking.id}
+                  </p>
+                  <div className={styles.BookingId}>
+                    <span className="me-2">
+                      created: {formatDate(booking.created)}
+                    </span>
+                    <span>updated: {formatDate(booking.updated)}</span>
+                  </div>
+                  <hr />
                   <button
                     onClick={() => {
-                      handleUpdate(booking.id);
+                      handleCheckoutVenue(booking.id);
                     }}
-                    className={styles.pagButton}
+                    className={styles.venueButton}
                   >
-                    Edit booking
+                    Checkout Venue
                   </button>
-                  <button
-                    onClick={() => {
-                      handleDelete(booking.id);
-                    }}
-                    className={styles.pagButton}
-                  >
-                    Delete booking
-                  </button>
-                </div>
-              </li>
-            );
-          })}
-        </ul>
+                  <p className="mt-3">
+                    Check-in Date: {formatDate(booking.dateFrom)}
+                  </p>
+                  <p className="mt-1">
+                    Check-out Date: {formatDate(booking.dateTo)}
+                  </p>
+                  <p className="mt-1">Guests: {booking.guests}</p>
+                  <hr />
+                  <div className="d-flex justify-content-center mt-3">
+                    <button
+                      onClick={() => {
+                        handleUpdate(booking.id);
+                      }}
+                      className={styles.pagButton}
+                    >
+                      Edit booking
+                    </button>
+                    <button
+                      onClick={() => {
+                        handleDelete(booking.id);
+                      }}
+                      className={styles.pagButton}
+                    >
+                      Delete booking
+                    </button>
+                  </div>
+                </li>
+              ))}
+            </ul>
+          ) : (
+            <p>There are currently no bookings.</p>
+          )}
+        </div>
       )}
     </div>
   );
