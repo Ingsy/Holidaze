@@ -1,6 +1,4 @@
 import React, { useState, useEffect } from "react";
-import { AllBookingsByProfile } from "../../Auth/constants";
-import { headers } from "../../Auth/utils/authFetch";
 import styles from "../../Styles/BookingsForVenue.module.scss";
 import { BookingUpdate } from "./BookingUpdate";
 import { useNavigate } from "react-router-dom";
@@ -18,7 +16,7 @@ function formatDate(dateString) {
 function BookingsForVenue({ venueId }) {
   const [bookings, setBookings] = useState([]);
   const [loading, setLoading] = useState(true);
-  const { bookings: BookingsApi } = useHolidaizApi();
+  const { bookings: BookingsApi, profile, venues } = useHolidaizApi();
   const navigate = useNavigate();
   const [editBooking, setEditBooking] = useState(false);
   const [selectedBookingId, setSelectedBookingId] = useState(null);
@@ -30,21 +28,17 @@ function BookingsForVenue({ venueId }) {
   useEffect(() => {
     async function fetchBookings() {
       try {
-        const requestOptions = {
-          method: "GET",
-          headers: headers(),
-        };
+        let response;
 
-        const response = await fetch(`${AllBookingsByProfile}`, requestOptions);
-
-        if (!response.ok) {
-          const errorData = await response.json();
-          console.error("Error:", errorData);
+        // Choose the appropriate API call based on the presence of venueId
+        if (venueId) {
+          response = await venues.getVenueBookings(venueId);
         } else {
-          const data = await response.json();
-          setBookings(data);
-          setLoading(false);
+          response = await profile.get();
         }
+
+        setBookings(response);
+        setLoading(false);
       } catch (error) {
         console.error("Error fetching bookings:", error);
         setLoading(false);
