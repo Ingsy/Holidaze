@@ -1,3 +1,5 @@
+/* eslint-disable react-hooks/exhaustive-deps */
+
 import React, { useState, useEffect } from "react";
 import styles from "../../Styles/BookingsForVenue.module.scss";
 import { useNavigate } from "react-router-dom";

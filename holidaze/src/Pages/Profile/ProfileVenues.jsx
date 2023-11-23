@@ -1,3 +1,5 @@
+/* eslint-disable react-hooks/exhaustive-deps */
+
 import React, { useState, useEffect } from "react";
 import YourVenueGrid from "../../Components/VenueGrid/YourVenueGrid";
 import { useHolidaizApi } from "../../Auth/constants/useHolidazeAPI";
@@ -20,7 +22,7 @@ function ProfileVenues(openCreateVenueForm) {
     }
 
     fetchProfileVenues();
-  }, [profile]);
+  }, []);
 
   return (
     <div>

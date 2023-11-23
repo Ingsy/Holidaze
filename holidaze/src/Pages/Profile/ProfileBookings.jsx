@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useState, useEffect } from "react";
 import BookingsForVenue from "../../Components/Booking/BookingsForVenue";
 import { useAuth } from "../../Auth/context/AuthContext";
@@ -9,19 +10,20 @@ function ProfileBookings() {
   const [bookings, setBookings] = useState([]);
 
   useEffect(() => {
-    async function fetchProfileBookings() {
-      try {
-        if (user.token) {
-          const bookingsData = await profile.get(user.token);
-          setBookings(bookingsData);
+    if (user.token) {
+      async function fetchProfileBookings() {
+        try {
+          if (user.token) {
+            const bookingsData = await profile.get(user.token);
+            setBookings(bookingsData);
+          }
+        } catch (error) {
+          console.error("Error fetching venues:", error);
         }
-      } catch (error) {
-        console.error("Error fetching venues:", error);
       }
+      fetchProfileBookings();
     }
-
-    fetchProfileBookings();
-  }, [profile, user.token]);
+  }, [user.token]);
 
   return <BookingsForVenue bookings={bookings} loading={isLoading} />;
 }
