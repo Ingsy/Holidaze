@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import BaseButton from "../Buttons";
 import styles from "../../Styles/Booking.module.scss";
 import { useAuth } from "../../Auth/context/AuthContext";
-import { BookingDates } from "./BookingDates";
+//import { BookingDates } from "./BookingDates";
 
 const defaultBookingData = {
   id: "",
@@ -105,9 +105,6 @@ export const BookingForm = ({
             max={maxGuests}
             required
           />
-        </div>
-        <div className={styles.formGroup}>
-          <BookingDates venueId={venueId} />
         </div>
         {user ? (
           <div className={`${styles.formGroup} mt-2`}>
