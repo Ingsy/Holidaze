@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
 import StarRating from "../StarRating";
 import styles from "../../Styles/VenueGrid.module.css";
