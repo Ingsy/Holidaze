@@ -30,7 +30,6 @@ function BookingsForVenue({ venueId }) {
       try {
         let response;
 
-        // Choose the appropriate API call based on the presence of venueId
         if (venueId) {
           response = await venues.getVenueBookings(venueId);
         } else {

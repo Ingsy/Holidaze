@@ -3,7 +3,7 @@ import { VenueForm } from "./VenueForm";
 import { useNavigate, useParams } from "react-router-dom";
 import { useHolidaizApi } from "../../Auth/constants";
 import Alert from "../Alert/Alert";
-import styles from "../../Styles/Venue.module.css";
+import styles from "../../Styles/Venue.module.scss";
 
 export const VenueUpdate = ({ venueData, onVenueUpdateError, onClose }) => {
   const { id: venueId } = useParams(); // Access the 'id' parameter

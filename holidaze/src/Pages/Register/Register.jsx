@@ -1,6 +1,6 @@
 import React from "react";
 import RegisterForm from "../../Auth/components/RegisterForm";
-import styles from "../../Styles/VenueDetails.module.css";
+import styles from "../../Styles/VenueDetails.module.scss";
 
 function Register() {
   return (

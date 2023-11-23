@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import Modal from "../../../Components/Modal/Modal";
-import styles from "../../../Styles/Avatar.module.css";
+import styles from "../../../Styles/Avatar.module.scss";
 import { useHolidaizApi } from "../../../Auth/constants/useHolidazeAPI.js";
 import Alert from "../../../Components/Alert/Alert";
 

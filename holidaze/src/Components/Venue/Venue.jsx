@@ -9,7 +9,7 @@ import { VenueUpdate } from "./VenueUpdate";
 import BookingCreate from "../Booking/BookingCreate";
 import { useHolidaizApi } from "../../Auth/constants";
 import { useNavigate } from "react-router-dom";
-import styles from "../../Styles/Venue.module.css";
+import styles from "../../Styles/Venue.module.scss";
 import BookingsForVenue from "../Booking/BookingsForVenue";
 
 function Venue({ existingVenueData }) {
