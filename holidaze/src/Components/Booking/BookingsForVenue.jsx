@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import styles from "../../Styles/BookingsForVenue.module.scss";
-import { BookingUpdate } from "./BookingUpdate";
 import { useNavigate } from "react-router-dom";
 import { useHolidaizApi } from "../../Auth/constants";
+import { BookingUpdate } from "./BookingUpdate";
 
 function formatDate(dateString) {
   const options = { day: "2-digit", month: "2-digit", year: "2-digit" };
