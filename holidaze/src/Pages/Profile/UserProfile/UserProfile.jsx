@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { useAuth } from "../../../Auth/context/AuthContext";
-import Collapse from "../../../Components/Collapse";
+import Collapse from "../../../Components/Collapse/Collapse";
 import ProfileVenues from "../ProfileVenues";
 import ProfileBookings from "../ProfileBookings";
-import UpdateAvatar from "../Avatar";
+import UpdateAvatar from "../Avatar/Avatar";
 import { VenueCreate } from "../../../Components/Venue/VenueCreate";
 import styles from "../../../Styles/Profile.module.scss";
 

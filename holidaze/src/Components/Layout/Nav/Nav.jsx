@@ -1,6 +1,6 @@
 import React from "react";
 import { Link, useLocation } from "react-router-dom";
-import LoginLogoutVenueManager from "../../LoginLogoutNav";
+import LoginLogoutVenueManager from "../../LoginLogoutNav/LoginLogoutNav";
 import Search from "../../Search/Search";
 import { useHolidaizApi } from "../../../Auth/constants";
 import { useAuth } from "../../../Auth/context/AuthContext";

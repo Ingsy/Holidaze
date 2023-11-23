@@ -1,46 +1,38 @@
 import React, { useState, useEffect } from "react";
 import YourVenueGrid from "../../Components/VenueGrid/YourVenueGrid";
-import { ProfileVenuesUrl } from "../../Auth/constants/useHolidazeAPI";
-import { headers } from "../../Auth/utils/authFetch";
+import { useHolidaizApi } from "../../Auth/constants/useHolidazeAPI";
 
 function ProfileVenues(openCreateVenueForm) {
+  const { profile } = useHolidaizApi();
   const [venues, setVenues] = useState([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    async function fetchData() {
+    async function fetchProfileVenues() {
       try {
-        const requestOptions = {
-          method: "GET",
-          headers: headers(),
-        };
-
-        const response = await fetch(ProfileVenuesUrl, requestOptions);
-
-        if (!response.ok) {
-          const errorData = await response.json();
-          console.error("Error:", errorData);
-        } else {
-          const data = await response.json();
-          setVenues(data);
-          setLoading(false);
-        }
+        const venuesData = await profile.getVenues();
+        setVenues(venuesData);
+        setLoading(false);
       } catch (error) {
-        console.error("Error fetching data:", error);
+        console.error("Error fetching venues:", error);
         setLoading(false);
       }
     }
 
-    fetchData();
-  }, []);
+    fetchProfileVenues();
+  }, [profile]);
 
   return (
     <div>
-      <YourVenueGrid
-        venues={venues}
-        loading={loading}
-        openCreateVenueForm={openCreateVenueForm}
-      />
+      {loading ? (
+        <p>Loading...</p>
+      ) : (
+        <YourVenueGrid
+          venues={venues}
+          loading={loading}
+          openCreateVenueForm={openCreateVenueForm}
+        />
+      )}
     </div>
   );
 }

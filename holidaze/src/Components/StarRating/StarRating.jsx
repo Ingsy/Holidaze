@@ -1,5 +1,5 @@
 import React from "react";
-import styles from "./star.module.css";
+import styles from "../../Styles/star.module.css";
 
 function StarRating({ rating }) {
   const ratingText = rating !== null ? `${rating}/5` : "0/5";

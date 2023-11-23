@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import StarRating from "../StarRating";
+import StarRating from "../StarRating/StarRating";
 import styles from "../../Styles/VenueGrid.module.css";
 
 const placeholderImageUrl = "https://picsum.photos/200/300"; // The original image size

@@ -1,37 +1,27 @@
 import React, { useState, useEffect } from "react";
 import BookingsForVenue from "../../Components/Booking/BookingsForVenue";
-import { AllBookingsByProfile } from "../../Auth/constants/useHolidazeAPI";
 import { useAuth } from "../../Auth/context/AuthContext";
-import { headers } from "../../Auth/utils/authFetch";
+import { useHolidaizApi } from "../../Auth/constants/useHolidazeAPI";
 
 function ProfileBookings() {
+  const { profile } = useHolidaizApi();
   const { user, isLoading } = useAuth();
   const [bookings, setBookings] = useState([]);
 
   useEffect(() => {
-    async function fetchData() {
+    async function fetchProfileBookings() {
       try {
         if (user.token) {
-          const response = await fetch(AllBookingsByProfile, {
-            method: "GET",
-            headers: headers(),
-          });
-
-          if (!response.ok) {
-            const errorData = await response.json();
-            console.error("Error fetching bookings - API error:", errorData);
-          } else {
-            const bookingsData = await response.json();
-            setBookings(bookingsData);
-          }
+          const bookingsData = await profile.get(user.token);
+          setBookings(bookingsData);
         }
       } catch (error) {
-        console.error("Error fetching data:", error);
+        console.error("Error fetching venues:", error);
       }
     }
 
-    fetchData();
-  }, [user.token]);
+    fetchProfileBookings();
+  }, [profile, user.token]);
 
   return <BookingsForVenue bookings={bookings} loading={isLoading} />;
 }

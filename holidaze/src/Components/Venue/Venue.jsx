@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
-import BaseButton from "../Buttons";
-import Modal from "../Modal";
-import StarRating from "../StarRating";
+import BaseButton from "../Buttons/BaseButton";
+import Modal from "../Modal/Modal";
+import StarRating from "../StarRating/StarRating";
 import { useAuth } from "../../Auth/context/AuthContext";
-import Alert from "../Alert";
+import Alert from "../Alert/Alert";
 import { VenueUpdate } from "./VenueUpdate";
 import BookingCreate from "../Booking/BookingCreate";
 import { useHolidaizApi } from "../../Auth/constants";

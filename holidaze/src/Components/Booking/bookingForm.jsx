@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import BaseButton from "../Buttons";
+import BaseButton from "../Buttons/BaseButton";
 import styles from "../../Styles/Booking.module.scss";
 import { useAuth } from "../../Auth/context/AuthContext";
 //import { BookingDates } from "./BookingDates";

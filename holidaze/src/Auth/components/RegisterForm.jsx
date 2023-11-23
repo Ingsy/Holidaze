@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { setToken } from "../utils/LocalStorage";
 import { headers } from "../utils/authFetch";
-import BaseButton from "../../Components/Buttons";
+import BaseButton from "../../Components/Buttons/BaseButton";
 import { Link } from "react-router-dom";
 import styles from "../../Styles/VenueForm.module.scss";
 

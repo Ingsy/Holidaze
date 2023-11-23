@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { VenueForm } from "./VenueForm";
 import { useNavigate, useParams } from "react-router-dom";
 import { useHolidaizApi } from "../../Auth/constants";
-import Alert from "../Alert";
+import Alert from "../Alert/Alert";
 import styles from "../../Styles/Venue.module.css";
 
 export const VenueUpdate = ({ venueData, onVenueUpdateError, onClose }) => {

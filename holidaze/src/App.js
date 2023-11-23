@@ -4,15 +4,14 @@ import React, { useEffect, useState } from 'react';
 import { Routes, Route } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.min.js';
-import Layout from "./Components/Layout";
-import Home from "./Pages/Home";
-import Login from "./Pages/Login";
-import Register from "./Pages/Register";
-import Profile from "./Pages/Profile";
+import Layout from "./Components/Layout/Layout";
+import Home from "./Pages/Home/Home";
+import Login from "./Pages/Login/Login";
+import Register from "./Pages/Register/Register";
+import Profile from "./Pages/Profile/Profile";
 import { Venue } from "./Components/Venue";
-import RouteNotFound from "./Components/Layout/RouteNotFound";
-
-import Logout from './Pages/Logout';
+import RouteNotFound from "./Components/Layout/RouteNotFound/RouteNotFound";
+import Logout from './Pages/Logout/Logout';
 
 function App() {
 

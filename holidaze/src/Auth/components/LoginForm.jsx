@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { getToken, setToken } from "../utils/LocalStorage";
-import BaseButton from "../../Components/Buttons";
+import BaseButton from "../../Components/Buttons/BaseButton";
 import { Link, useNavigate } from "react-router-dom";
 import styles from "../../Styles/VenueForm.module.scss";
 
