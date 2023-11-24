@@ -35,7 +35,7 @@ function UserProfile(openCreateVenueForm) {
     };
 
     fetchData();
-  }, [user, token, setUser, bookingsCount, venuesCount]);
+  }, [user, token, setUser]);
 
   const fetchUserData = async (token) => {
     try {

@@ -6,7 +6,7 @@ import Alert from "../Alert/Alert";
 import styles from "../../Styles/Venue.module.scss";
 
 export const VenueUpdate = ({ venueData, onVenueUpdateError, onClose }) => {
-  const { id: venueId } = useParams(); // Access the 'id' parameter
+  //const { id: venueId } = useParams();
   const navigate = useNavigate();
   const { venues } = useHolidaizApi();
   const [editVenue, setEditVenue] = useState(false);
@@ -19,9 +19,12 @@ export const VenueUpdate = ({ venueData, onVenueUpdateError, onClose }) => {
       await venues.update(venue.id, venue);
       setAlert({ message: "Venue updated successfully", type: "success" });
 
-      setTimeout(() => {
-        navigate(`/venue/${venueId}`);
-      }, 4000);
+      console.log("Data from create venue:", venue);
+      console.log("Venue ID:", venue.id);
+
+      const venueId = venue.id;
+
+      navigate(`/venue/${venueId}`);
     } catch (error) {
       if (onVenueUpdateError) onVenueUpdateError(error);
 
