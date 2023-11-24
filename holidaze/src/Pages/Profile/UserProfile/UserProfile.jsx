@@ -68,7 +68,9 @@ function UserProfile(openCreateVenueForm) {
       {loading ? (
         <p className={styles.loading}>Loading user profile...</p>
       ) : user ? (
-        <div className="row d-flex align-items-center justify-content-center">
+        <div
+          className={`${styles.EntireProfileContainer} row d-flex align-items-center justify-content-center`}
+        >
           <div className={`${styles.ProfileContainer} col-12`}>
             <div className="col-12">
               <div
