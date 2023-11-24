@@ -12,7 +12,11 @@ export const VenueCreate = ({ onCreateError }) => {
     venues
       .create(venue)
       .then((data) => {
-        navigate(`/venue/${data.id}`);
+        console.log("Data from create venue:", data);
+        console.log("Venue ID:", data.data.id);
+        setTimeout(() => {
+          navigate(`/venues/${data.data.id}`);
+        }, 2000);
       })
       .catch((error) => {
         if (onCreateError) onCreateError(error);

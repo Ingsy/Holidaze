@@ -30,13 +30,11 @@ export const VenueUpdate = ({ venueData, onVenueUpdateError, onClose }) => {
   };
 
   useEffect(() => {
-    // Clear the alert after a certain time (e.g., 5000 milliseconds)
     const timeoutId = setTimeout(() => {
       setAlert({ message: "", type: "" });
     }, 5000);
 
     return () => {
-      // Clear the timeout on component unmount or when alert changes
       clearTimeout(timeoutId);
     };
   }, [alert]);

@@ -170,7 +170,7 @@ function Venue({ existingVenueData }) {
                 />
               )}
             </div>
-            <div className="col-12 col-md-3 d-flex flex-wrap flex-md-row">
+            <div className="col-12 col-md-3 d-flex flex-wrap flex-md-row mt-2 mb-2 mt-md-0 mb-md-0">
               {venue.media.length > 1 ? (
                 <div className={styles.smallPhotosContainer}>
                   {venue.media.slice(1).map((photo, index) => (
@@ -191,7 +191,9 @@ function Venue({ existingVenueData }) {
                     </div>
                   ) : null}
                   {venue.media.length < 2 ? (
-                    <div className={`${styles.smallPhoto} ms-2 me-2`}>
+                    <div
+                      className={`${styles.smallPhoto} ms-2 me-2 ms-md-0 me-md-0 mt-md-2 mb-md-2`}
+                    >
                       <img
                         src="https://picsum.photos/id/225/200/300"
                         alt="Placeholder 2"
