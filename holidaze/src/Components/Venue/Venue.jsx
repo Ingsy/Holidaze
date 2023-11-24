@@ -172,7 +172,7 @@ function Venue({ existingVenueData }) {
             </div>
             <div className="col-12 col-md-3 d-flex flex-wrap flex-md-row mt-2 mb-2 mt-md-0 mb-md-0">
               {venue.media.length > 1 ? (
-                <div className={styles.smallPhotosContainer}>
+                <div className={`${styles.smallPhotosContainer} overflow-auto`}>
                   {venue.media.slice(1).map((photo, index) => (
                     <div key={index} className={styles.smallPhoto}>
                       <img src={photo} alt={`Venue ${index + 2}`} />
@@ -181,7 +181,7 @@ function Venue({ existingVenueData }) {
                 </div>
               ) : null}
               {venue.media.length < 4 ? (
-                <div className={styles.smallPhotosContainer}>
+                <div className={`${styles.smallPhotosContainer} overflow-auto`}>
                   {venue.media.length < 3 ? (
                     <div className={styles.smallPhoto}>
                       <img
@@ -211,6 +211,7 @@ function Venue({ existingVenueData }) {
                 </div>
               ) : null}
             </div>
+
             <div className="col-12 col-md-3 d-flex flex-column">
               {venue.location && venue.location.address && (
                 <div
