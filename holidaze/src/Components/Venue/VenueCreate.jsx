@@ -12,10 +12,10 @@ export const VenueCreate = ({ onCreateError }) => {
     venues
       .create(venue)
       .then((data) => {
-        console.log("Data from create venue:", data);
-        console.log("Venue ID:", data.data.id);
+        const venueId = data.data.id;
+
         setTimeout(() => {
-          navigate(`/venues/${data.data.id}`);
+          navigate(`/venue/${venueId}`);
         }, 2000);
       })
       .catch((error) => {
