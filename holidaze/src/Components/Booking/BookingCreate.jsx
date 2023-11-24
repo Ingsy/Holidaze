@@ -1,5 +1,5 @@
 import React from "react";
-import { BookingForm } from "./bookingForm";
+import { BookingForm } from "./BookingForm";
 //import { createBooking } from "./bookingsAPI";
 //import { useNavigate } from "react-router-dom";
 import { useHolidaizApi } from "../../Auth/constants";
