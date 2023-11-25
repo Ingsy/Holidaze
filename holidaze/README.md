@@ -1,74 +1,90 @@
-# Getting Started with Create React App
+# Holidaze
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Table of Contents
 
-## Available Scripts
+- [Introduction](#introduction)
+- [Technologies Used](#technologies-used)
+- [API](#API)
+- [Project Structure](#project-structure)
+- [Setup](#setup)
+- [Scripts](#scripts)
+- [Linting](#linting)
+- [Deployment](#deployment)
+- [GitHub Repository](#github-repository)
+- [Style Guide](#style-guide)
+- [Design Prototype](#Prototype)
 
-In the project directory, you can run:
+## Introduction
 
-### `npm start`
+////ADD
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## Technologies Used
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+The following technologies and libraries are used in this project:
 
-### `npm test`
+// ADD DEV DEP
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## API
 
-### `npm run build`
+The API for the application can be found [here](https://docs.noroff.dev/) under Holidaze Endpoints
+The API used for fetshing data: [https://api.noroff.dev/api/v1/holidaze]
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## Project Structure
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+The project is organized into the following directories and files:
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+- **src**: Contains the source code of the application.
+  **Auth**:
+  - Components
+  - Constants
+  - Context
+  - Utils
+    **components**: Reusable React components used throughout the project.
+    **pages**:
+  - Home
+  - Login
+  - Logout
+  - Profile
+  - Register
+    **Styles**: all styling modules
+    **App.js**: The main application component responsible for routing.
+    **index.js**: The entry point of the application.
 
-### `npm run eject`
+## Setup
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+To run this project locally, follow these steps:
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+1. Clone the repository from GitHub.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+2. Navigate to the project directory.
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+3. Install dependencies using `npm install`.
 
-## Learn More
+4. Start the development server using `npm start`.
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+## Scripts
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+- **start**: Launches the development server for local development.
+- **build**: Builds the production-ready version of the application.
+- **test**: Runs tests using the testing library.
+- **eject**: Ejects from Create React App, allowing more advanced configuration.
 
-### Code Splitting
+## Linting
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+This project uses ESLint for code linting and follows the configuration provided by `react-app`. Linting helps maintain code quality and consistency.
 
-### Analyzing the Bundle Size
+## Deployment
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+This project is deployed on [Netlify](ADD LINK) and can be accessed [here](ADD LINK).
 
-### Making a Progressive Web App
+## GitHub Repository
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+The public GitHub repository for this project can be found [here](ADD LINK).
 
-### Advanced Configuration
+## Style Guide
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+The style Guide for this project can be found [here](https://xd.adobe.com/view/1397bb78-6f8b-4eee-b64a-f2269c7563b6-46c4/)
 
-### Deployment
+## Design Prototype
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
-
-## Litteratur
-
-https://teefarm.ch/ (FreeImage)
+The Prototype for this project can be found [here](https://xd.adobe.com/view/6bf9582a-4249-4f45-9e3f-b9b316472e9d-3eaa/)
