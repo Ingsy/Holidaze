@@ -88,3 +88,11 @@ The style Guide for this project can be found [here](https://xd.adobe.com/view/1
 ## Design Prototype
 
 The Prototype for this project can be found [here](https://xd.adobe.com/view/6bf9582a-4249-4f45-9e3f-b9b316472e9d-3eaa/)
+
+## Gantt chart
+
+The Gantt chart for project timing can be found [here](ADD LINK)
+
+## Kanban project board
+
+The kanban project board can be found [here](https://trello.com/b/ynk4OU6m/project-exam-2)
