@@ -1,6 +1,6 @@
 import React from "react";
 import { useHolidaizApi } from "../../Auth/constants";
-import { BookingForm } from "./bookingForm";
+import { BookingForm } from "./BookingForm";
 import styles from "../../Styles/Booking.module.scss";
 
 export const BookingSingle = ({ venueId, maxGuests }) => {
