@@ -34,21 +34,21 @@ The API used for fetshing data: [https://api.noroff.dev/api/v1/holidaze]
 The project is organized into the following directories and files:
 
 - **src**: Contains the source code of the application.
-  **Auth**:
+- **Auth**:
   - Components
   - Constants
   - Context
   - Utils
-    **components**: Reusable React components used throughout the project.
-    **pages**:
+  - **components**: Reusable React components used throughout the project.
+  - **pages**:
   - Home
   - Login
   - Logout
   - Profile
   - Register
-    **Styles**: all styling modules
-    **App.js**: The main application component responsible for routing.
-    **index.js**: The entry point of the application.
+  - **Styles**: all styling modules
+  - **App.js**: The main application component responsible for routing.
+  - **index.js**: The entry point of the application.
 
 ## Setup
 
@@ -79,7 +79,7 @@ This project is deployed on [Netlify](ADD LINK) and can be accessed [here](ADD L
 
 ## GitHub Repository
 
-The public GitHub repository for this project can be found [here](ADD LINK).
+The public GitHub repository for this project can be found [here](https://github.com/Ingsy/Holidaze/tree/e3d5f4ed795924b209e04841cd84de75e7754350/holidaze)
 
 ## Style Guide
 
