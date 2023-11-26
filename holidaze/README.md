@@ -3,6 +3,7 @@
 ## Table of Contents
 
 - [Introduction](#introduction)
+- [Features](#features)
 - [Technologies Used](#technologies-used)
 - [API](#API)
 - [Project Structure](#project-structure)
@@ -16,7 +17,23 @@
 
 ## Introduction
 
-////ADD
+Holidaze is a web application designed to provide users with a seamless experience for managing venues and bookings. Whether you're a venue manager or a user looking to book a space, Holidaze offers a user-friendly interface to meet your needs.
+
+## Features
+
+1. User Authentication: Allow users to create accounts, log in, and manage their profiles.
+
+2. Venue Management: For venue managers, provide the ability to add, edit, and delete venues.
+
+3. Booking System: Enable users to browse venues and make bookings for specific dates.
+
+4. Profile Management: Users and venue managers can update their role (venue manager/ user) and avatars.
+
+5. Responsive Design: Ensure a seamless user experience across various devices and screen sizes.
+
+6. Search and Filters: Allow users to search for venues based on location and venue-names.
+
+7. Venue managers: Provide venue managers with a dashboard to view bookings, create and manage venues
 
 ## Technologies Used
 
