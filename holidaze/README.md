@@ -91,7 +91,8 @@ The Prototype for this project can be found [here](https://xd.adobe.com/view/6bf
 
 ## Gantt chart
 
-The Gantt chart for project timing can be found [here](ADD LINK)
+The Gantt chart for project timing can be found [here](https://trello.com/b/ynk4OU6m/project-exam-2/timeline)
+Powerup Gantt chart by Trello can be found [here](https://placker.com/app#/gantt/view/shs3bhuopefpd?e=b&s=p4eaed
 
 ## Kanban project board
 
