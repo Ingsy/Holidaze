@@ -34,6 +34,7 @@ function Venue({ existingVenueData }) {
 
   const navigate = useNavigate();
   const [isUserOwner, setIsUserOwner] = useState(false);
+  const { venues: holidaizVenues } = useHolidaizApi();
 
   useEffect(() => {
     if (user) {
@@ -41,20 +42,17 @@ function Venue({ existingVenueData }) {
     }
   }, [id, user]);
 
-  const fetchVenueDetails = (venueId) => {
-    const fetchUrl = `https://api.noroff.dev/api/v1/holidaze/venues/${venueId}?_owner=true&_bookings=true`;
+  const fetchVenueDetails = async (venueId) => {
+    try {
+      const venueData = await holidaizVenues.getVenueId(venueId);
 
-    fetch(fetchUrl)
-      .then((response) => response.json())
-      .then((data) => {
-        setVenue(data);
-        setIsUserOwner(data.owner?.email === user.email);
-        setLoading(false);
-      })
-      .catch((error) => {
-        console.error("Error fetching venue details:", error);
-        setLoading(false);
-      });
+      setVenue(venueData);
+      setIsUserOwner(venueData.owner?.email === user.email);
+      setLoading(false);
+    } catch (error) {
+      console.error("Error fetching venue details:", error);
+      setLoading(false);
+    }
   };
 
   const openModal = () => {

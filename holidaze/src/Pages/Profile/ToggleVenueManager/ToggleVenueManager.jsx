@@ -1,41 +1,26 @@
 import React, { useState } from "react";
-import { headers } from "../../../Auth/utils/authFetch";
-import { getUserName } from "../../../Auth/utils/LocalStorage";
 import { useAuth } from "../../../Auth/context/AuthContext";
+import { useHolidaizApi } from "../../../Auth/constants/useHolidazeAPI";
 import styles from "../../../Styles/Toggle.module.scss";
 
 function ToggleVenueManager({ isVenueManager }) {
   const [venueManager, setVenueManager] = useState(isVenueManager);
-  const userName = getUserName();
+  const [previousValue, setPreviousValue] = useState(isVenueManager);
   const { updateUserRole } = useAuth();
+  const { profile } = useHolidaizApi();
 
-  const handleToggle = () => {
+  const handleToggle = async () => {
     const updatedValue = !venueManager;
-    setVenueManager(updatedValue);
-    updateUserRole(updatedValue);
 
-    const managerUrl = `https://api.noroff.dev/api/v1/holidaze/profiles/${userName}`;
-    const requestOptions = {
-      method: "PUT",
-      headers: headers(),
-      body: JSON.stringify({
-        venueManager: updatedValue,
-      }),
-    };
-
-    fetch(managerUrl, requestOptions)
-      .then((response) => {
-        if (!response.ok) {
-          console.error("Toggle update failed");
-          throw new Error("Toggle update failed");
-        }
-        return updatedValue;
-      })
-      .catch((error) => {
-        setVenueManager(!updatedValue);
-        console.error("Error toggling Manager/normal-user:", error);
-        throw error;
-      });
+    try {
+      setPreviousValue(venueManager);
+      await profile.updateRole({ venueManager: updatedValue });
+      await updateUserRole(updatedValue);
+      setVenueManager(updatedValue);
+    } catch (error) {
+      console.error("Error toggling Manager/normal-user:", error);
+      setVenueManager(previousValue);
+    }
   };
 
   return (

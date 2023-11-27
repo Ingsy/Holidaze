@@ -20,6 +20,7 @@ export const Login = `${API_HOLIDAZE_URL}/auth/login`;
 export const ProfileBaseUrl = `${API_HOLIDAZE_URL}/profiles`;
 export const UserProfile = `${ProfileBaseUrl}/${userName}`;
 
+export const ProfileInfo = `${ProfileBaseUrl}/?_bookings=true&_venues=true`
 export const ProfileVenuesUrl = `${UserProfile}/venues/?_venues=true`;
 export const ProfileBookingsUrl = `${UserProfile}/bookings/?_bookings=true&_venue=true`;
 export const UpdateProfileMedia = `${UserProfile}/media`;
@@ -52,21 +53,26 @@ export const useHolidaizApi = () => {
             update: (bookingId, updatedData) => axios.put(`${BookingBaseUrl}/${bookingId}`, updatedData, getConfig()).then(response => response.data),
             delete: (bookingId) => axios.delete(`${BookingBaseUrl}/${bookingId}`, getConfig()).then(response => response.data)
         },
-        // TODO: Replace with actual URL and params/data
         profile: {
             get: () => axios.get(`${AllBookingsByProfile}`, getConfig()).then(response => response.data),
             getVenues: () => axios.get(`${ProfileVenuesUrl}`, getConfig()).then(response => response.data),
-            create: (data) => axios.post(`${BookingBaseUrl}`, data, getConfig()).then(response => response.data),
+            getProfile: () => axios.get(`${ProfileInfo}`, getConfig()).then(response => response.data),
             update: (updatedData) => axios.put(`${UpdateProfileMedia}`, updatedData, getConfig()).then(response => response.data),
-            delete: (venueId, bookingId) => axios.post(`${BookingBaseUrl}${venueId}/${bookingId}`, getConfig()).then(response => response.data)
+            updateRole: (updatedValue) => axios.put(`${UserProfile}`, updatedValue, getConfig()).then(response => response.data),
         },
 
         venues: {
             get: () => axios.get(`${VenueBaseUrl}`, getConfig()).then(response => response.data),
             getVenueBookings: (venueId) => axios.get(`${VenueBaseUrl}/${venueId}/?_bookings=true`, getConfig()).then(response => response.data),
+            getVenueId: (venueId) => axios.get(`${VenueBaseUrl}/${venueId}/?_owner=true&_bookings=true`, getConfig()).then(response => response.data),
             create: (data) => axios.post(`${VenueDetailUrl}`, data, getConfig()),
             update: (venueId, updatedData) => axios.put(`${VenueDetailUrl}${venueId}`, updatedData, getConfig()).then(response => response.data),
             delete: (venueId) => axios.delete(`${VenueDetailUrl}${venueId}`, getConfig()).then(response => response.data),
+        },
+        auth: {
+            login: () => axios.post(`${Login}`, getConfig()).then(response => response.data),
+            createAccount: () => axios.post(`${Register}`, getConfig()).then(response => response.data),
+
             //getAll: (query) => axios.get(baseVenueUrl, { params: { query } }).then(response => response.data)
         }
     }

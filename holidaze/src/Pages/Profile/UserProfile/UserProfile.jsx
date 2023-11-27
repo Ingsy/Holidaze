@@ -5,6 +5,7 @@ import ProfileVenues from "../ProfileVenues";
 import ProfileBookings from "../ProfileBookings";
 import UpdateAvatar from "../Avatar/Avatar";
 import { VenueCreate } from "../../../Components/Venue/VenueCreate";
+import { useHolidaizApi } from "../../../Auth/constants/useHolidazeAPI";
 import styles from "../../../Styles/Profile.module.scss";
 
 function UserProfile(openCreateVenueForm) {
@@ -13,12 +14,13 @@ function UserProfile(openCreateVenueForm) {
   const [openSection, setOpenSection] = useState(null);
   const [venuesCount, setVenuesCount] = useState(0);
   const [bookingsCount, setBookingsCount] = useState(0);
+  const { profile } = useHolidaizApi();
 
   useEffect(() => {
     const fetchData = async () => {
       if (user && token) {
         try {
-          const userData = await fetchUserData(token);
+          const userData = await profile.getProfile();
 
           setUser(userData);
           setVenuesCount(userData._count.venues);
@@ -35,33 +37,7 @@ function UserProfile(openCreateVenueForm) {
     };
 
     fetchData();
-  }, [user, token, setUser]);
-
-  const fetchUserData = async (token) => {
-    try {
-      const response = await fetch(
-        `https://api.noroff.dev/api/v1/holidaze/profiles/?_bookings=true&_venues=true`,
-        {
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
-
-      if (!response.ok) {
-        throw new Error(
-          `User data retrieval failed with status ${response.status}`
-        );
-      }
-
-      const userData = await response.json();
-      return userData;
-    } catch (error) {
-      console.error("Error fetching user data:", error);
-      throw error;
-    }
-  };
+  }, [user, token, setUser, profile]);
 
   return (
     <div className="container text-center">
