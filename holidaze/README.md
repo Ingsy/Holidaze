@@ -106,7 +106,7 @@ To run this project locally, follow these steps:
 
 ## Linting
 
-This project uses ESLint for code linting and follows the configuration provided by `react-app`. Linting helps maintain code quality and consistency.
+This project uses ESLint for code linting and follows the configuration provided by `react-app`.
 
 ## Deployment
 
@@ -123,6 +123,8 @@ The style Guide for this project can be found [here](https://xd.adobe.com/view/1
 ## Design Prototype
 
 The Prototype for this project can be found [here](https://xd.adobe.com/view/6bf9582a-4249-4f45-9e3f-b9b316472e9d-3eaa/)
+
+The Prototype for mobile can be found [here](https://xd.adobe.com/view/206e3fb4-cb8a-49ab-a88a-f2d155dcec1b-753d/)
 
 ## Gantt chart
 

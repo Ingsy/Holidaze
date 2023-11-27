@@ -19,6 +19,8 @@ export function AuthProvider({ children }) {
   useEffect(() => {
     if (token) {
       fetchUserData(token);
+    } else {
+      setIsLoading(false);
     }
   }, [token]);
 

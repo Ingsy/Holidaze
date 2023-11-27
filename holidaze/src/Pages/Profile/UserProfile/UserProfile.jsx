@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import { useAuth } from "../../../Auth/context/AuthContext";
 import Collapse from "../../../Components/Collapse/Collapse";
 import ProfileVenues from "../ProfileVenues";
 import ProfileBookings from "../ProfileBookings";
@@ -8,40 +7,34 @@ import { VenueCreate } from "../../../Components/Venue/VenueCreate";
 import { useHolidaizApi } from "../../../Auth/constants/useHolidazeAPI";
 import styles from "../../../Styles/Profile.module.scss";
 
-function UserProfile(openCreateVenueForm) {
-  const { user, token, setUser } = useAuth();
-  const [loading, setLoading] = useState(true);
+function UserProfile({ openCreateVenueForm }) {
+  const { profile, user } = useHolidaizApi();
+  const [isUserProfileLoading, setLoading] = useState(true);
+
   const [openSection, setOpenSection] = useState(null);
   const [venuesCount, setVenuesCount] = useState(0);
   const [bookingsCount, setBookingsCount] = useState(0);
-  const { profile } = useHolidaizApi();
 
   useEffect(() => {
     const fetchData = async () => {
-      if (user && token) {
+      if (user.name) {
         try {
-          const userData = await profile.getProfile();
-
-          setUser(userData);
+          const userData = await profile.getProfile(user.name);
           setVenuesCount(userData._count.venues);
           setBookingsCount(userData._count.bookings);
-
-          setLoading(false);
         } catch (error) {
           console.error("Error fetching user data:", error);
-          setLoading(false);
         }
-      } else {
         setLoading(false);
       }
     };
 
     fetchData();
-  }, [user, token, setUser, profile]);
+  }, [user.name]);
 
   return (
     <div className="container text-center">
-      {loading ? (
+      {isUserProfileLoading ? (
         <p className={styles.loading}>Loading user profile...</p>
       ) : user ? (
         <div
@@ -116,7 +109,11 @@ function UserProfile(openCreateVenueForm) {
                   title="Create Venue"
                   isCollapsed={openSection !== "createVenue"}
                   onToggle={() => {
-                    setOpenSection("createVenue");
+                    setOpenSection((sectionAlreadyOpen) =>
+                      sectionAlreadyOpen === "createVenue"
+                        ? null
+                        : "createVenue"
+                    );
                   }}
                 >
                   <VenueCreate openCreateVenueForm={openCreateVenueForm} />
@@ -129,7 +126,9 @@ function UserProfile(openCreateVenueForm) {
                   title="Your Venues"
                   isCollapsed={openSection !== "yourVenues"}
                   onToggle={() => {
-                    setOpenSection("yourVenues");
+                    setOpenSection((sectionAlreadyOpen) =>
+                      sectionAlreadyOpen === "yourVenues" ? null : "yourVenues"
+                    );
                   }}
                 >
                   <ProfileVenues openCreateVenueForm={openCreateVenueForm} />
@@ -142,7 +141,11 @@ function UserProfile(openCreateVenueForm) {
                   title="Your Bookings"
                   isCollapsed={openSection !== "yourBookings"}
                   onToggle={() => {
-                    setOpenSection("yourBookings");
+                    setOpenSection((sectionAlreadyOpen) =>
+                      sectionAlreadyOpen === "yourBookings"
+                        ? null
+                        : "yourBookings"
+                    );
                   }}
                 >
                   <ProfileBookings />

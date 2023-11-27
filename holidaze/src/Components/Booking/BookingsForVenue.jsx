@@ -5,8 +5,9 @@ import styles from "../../Styles/BookingsForVenue.module.scss";
 import { useNavigate } from "react-router-dom";
 import BookingUpdate from "./BookingUpdate";
 import { useHolidaizApi } from "../../Auth/constants";
+import { useAuth } from "../../Auth/context/AuthContext";
 
-function formatDate(dateString) {
+export function formatDate(dateString) {
   const options = { day: "2-digit", month: "2-digit", year: "2-digit" };
   const formattedDate = new Date(dateString).toLocaleDateString(
     "en-US",
@@ -22,6 +23,7 @@ function BookingsForVenue({ venueId }) {
   const navigate = useNavigate();
   const [editBooking, setEditBooking] = useState(false);
   const [selectedBookingId, setSelectedBookingId] = useState(null);
+  const { user } = useAuth();
 
   const handleFormChange = (updatedBooking) => {
     console.log("Form changes within BookingsForVenue:", updatedBooking);
@@ -33,11 +35,12 @@ function BookingsForVenue({ venueId }) {
         let response;
 
         if (venueId) {
-          response = await venues.getVenueBookings(venueId);
+          const venueData = await venues.getVenueBookings(venueId);
+          response = venueData.bookings;
         } else {
           response = await profile.get();
         }
-
+        console.log("Fetched bookings:", response);
         setBookings(response);
         setLoading(false);
       } catch (error) {
@@ -156,6 +159,9 @@ function BookingsForVenue({ venueId }) {
           ) : (
             <p>There are currently no bookings.</p>
           )}
+          {/* Log bookings array and its first item here */}
+          {console.log("Bookings array:", bookings)}
+          {bookings.length > 0 && console.log("First booking:", bookings[0])}
         </div>
       )}
     </div>

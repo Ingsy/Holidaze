@@ -1,4 +1,6 @@
+import React, { useEffect } from 'react';
 import axios from "axios";
+import { useAuth } from "../context/AuthContext";
 import { getUserName } from "../utils/LocalStorage";
 import { headers } from "../../Auth/utils/authFetch";
 
@@ -20,7 +22,6 @@ export const Login = `${API_HOLIDAZE_URL}/auth/login`;
 export const ProfileBaseUrl = `${API_HOLIDAZE_URL}/profiles`;
 export const UserProfile = `${ProfileBaseUrl}/${userName}`;
 
-export const ProfileInfo = `${ProfileBaseUrl}/?_bookings=true&_venues=true`
 export const ProfileVenuesUrl = `${UserProfile}/venues/?_venues=true`;
 export const ProfileBookingsUrl = `${UserProfile}/bookings/?_bookings=true&_venue=true`;
 export const UpdateProfileMedia = `${UserProfile}/media`;
@@ -32,11 +33,6 @@ export const BookingsByProfile = `${BookingBaseUrl}/${userName}/bookings`;
 export const AllBookingsByProfile = `${UserProfile}/bookings/?_venue=true`;
 
 
-
-
-
-
-
 const getConfig = () => {
     return {
         headers: headers()
@@ -44,8 +40,11 @@ const getConfig = () => {
 }
 
 export const useHolidaizApi = () => {
+    const { user, isLoading: isUserLoading } = useAuth();
 
     return {
+        user,
+        isUserLoading,
         bookings: {
             get: () => axios.get(`${AllBookingsByProfile}`, getConfig()).then(response => response.data),
             getSingle: (bookingId) => axios.get(`${BookingBaseUrl}/${bookingId}/?_venue=true`, getConfig()).then(response => response.data),
@@ -56,21 +55,21 @@ export const useHolidaizApi = () => {
         profile: {
             get: () => axios.get(`${AllBookingsByProfile}`, getConfig()).then(response => response.data),
             getVenues: () => axios.get(`${ProfileVenuesUrl}`, getConfig()).then(response => response.data),
-            getProfile: () => axios.get(`${ProfileInfo}`, getConfig()).then(response => response.data),
+            getProfile: (userName) => axios.get(`${ProfileBaseUrl}/${userName}?_bookings=true&_venues=true`, getConfig()).then(response => response.data),
             update: (updatedData) => axios.put(`${UpdateProfileMedia}`, updatedData, getConfig()).then(response => response.data),
             updateRole: (updatedValue) => axios.put(`${UserProfile}`, updatedValue, getConfig()).then(response => response.data),
         },
 
         venues: {
             get: () => axios.get(`${VenueBaseUrl}`, getConfig()).then(response => response.data),
-            getVenueBookings: (venueId) => axios.get(`${VenueBaseUrl}/${venueId}/?_bookings=true`, getConfig()).then(response => response.data),
-            getVenueId: (venueId) => axios.get(`${VenueBaseUrl}/${venueId}/?_owner=true&_bookings=true`, getConfig()).then(response => response.data),
+            getVenueBookings: (venueId) => axios.get(`${VenueBaseUrl}/${venueId}?_bookings=true&_customer=true`, getConfig()).then(response => response.data),
+            getVenueId: (venueId) => axios.get(`${VenueBaseUrl}/${venueId}?_owner=true&_bookings=true`, getConfig()).then(response => response.data),
             create: (data) => axios.post(`${VenueDetailUrl}`, data, getConfig()),
             update: (venueId, updatedData) => axios.put(`${VenueDetailUrl}${venueId}`, updatedData, getConfig()).then(response => response.data),
             delete: (venueId) => axios.delete(`${VenueDetailUrl}${venueId}`, getConfig()).then(response => response.data),
         },
         auth: {
-            login: () => axios.post(`${Login}`, getConfig()).then(response => response.data),
+            login: (data) => axios.post(`${Login}`, data, getConfig()).then(response => response.data),
             createAccount: () => axios.post(`${Register}`, getConfig()).then(response => response.data),
 
             //getAll: (query) => axios.get(baseVenueUrl, { params: { query } }).then(response => response.data)

@@ -14,9 +14,12 @@ import { useNavigate } from "react-router-dom";
 import styles from "../../Styles/Venue.module.scss";
 import BookingsForVenue from "../Booking/BookingsForVenue";
 
-function Venue({ existingVenueData }) {
+function Venue() {
   const { id } = useParams();
+
+  const { venues } = useHolidaizApi();
   const { user, isLoading } = useAuth();
+
   const [showAlert, setShowAlert] = useState(false);
   const [successMessage, setSuccessMessage] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
@@ -37,17 +40,19 @@ function Venue({ existingVenueData }) {
   const { venues: holidaizVenues } = useHolidaizApi();
 
   useEffect(() => {
-    if (user) {
+    // Wait until we know we are logged in or not to fetch venue details
+    if (!isLoading) {
       fetchVenueDetails(id);
     }
-  }, [id, user]);
+  }, [id, isLoading]);
 
   const fetchVenueDetails = async (venueId) => {
     try {
       const venueData = await holidaizVenues.getVenueId(venueId);
 
       setVenue(venueData);
-      setIsUserOwner(venueData.owner?.email === user.email);
+      console.log(venueData.owner?.email === user?.email);
+      setIsUserOwner(venueData.owner?.email === user?.email);
       setLoading(false);
     } catch (error) {
       console.error("Error fetching venue details:", error);
@@ -60,6 +65,7 @@ function Venue({ existingVenueData }) {
   };
 
   const closeModal = () => {
+    setSelectedVenue(null);
     setIsModalOpen(false);
   };
 
@@ -80,8 +86,6 @@ function Venue({ existingVenueData }) {
   };
 
   const handleUpdate = () => setEditVenue(true);
-
-  const { venues } = useHolidaizApi();
 
   const handleDelete = () => {
     if (user.token) {
@@ -300,6 +304,7 @@ function Venue({ existingVenueData }) {
             venueId={venue.id}
             formData={formData}
             onFormChange={setFormData}
+            maxGuests={venue.maxGuests}
             onBookingSubmit={handleBookingSubmit}
           />
         </Modal>
@@ -326,7 +331,7 @@ function Venue({ existingVenueData }) {
             className={styles.ButtonsBooking}
             onClick={() => {
               handleBookingsClick(venue.id);
-              openModal();
+              //openModal();
             }}
           >
             Bookings

@@ -20,10 +20,6 @@ export const VenueUpdate = ({ venueData, onVenueUpdateError, onClose }) => {
 
       console.log("Data from create venue:", venue);
       console.log("Venue ID:", venue.id);
-
-      const venueId = venue.id;
-
-      navigate(`/venue/${venueId}`);
     } catch (error) {
       if (onVenueUpdateError) onVenueUpdateError(error);
 
@@ -32,18 +28,23 @@ export const VenueUpdate = ({ venueData, onVenueUpdateError, onClose }) => {
   };
 
   useEffect(() => {
-    const timeoutId = setTimeout(() => {
-      setAlert({ message: "", type: "" });
-    }, 5000);
+    if (alert.message.length > 0) {
+      const timeoutId = setTimeout(() => {
+        setAlert({ message: "", type: "" });
+        navigate(0);
+      }, 3000);
 
-    return () => {
-      clearTimeout(timeoutId);
-    };
+      return () => {
+        clearTimeout(timeoutId);
+      };
+    }
   }, [alert]);
 
   return (
     <div className={`${styles.detailsContainer} mx-auto`}>
-      {alert.message && <Alert type={alert.type}>{alert.message}</Alert>}
+      {alert.message.length > 0 && (
+        <Alert type={alert.type}>{alert.message}</Alert>
+      )}
       <VenueForm
         venueData={venueData}
         onSave={onSave}

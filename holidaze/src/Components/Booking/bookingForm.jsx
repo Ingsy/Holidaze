@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import BaseButton from "../Buttons/BaseButton";
 import styles from "../../Styles/Booking.module.scss";
 import { useAuth } from "../../Auth/context/AuthContext";
-//import { BookingDates } from "./BookingDates";
+import { BookingDates } from "./BookingDates";
 
 const defaultBookingData = {
   id: "",
@@ -25,6 +25,7 @@ export const BookingForm = ({
   const user = useAuth();
 
   const FormSubmit = (event) => {
+    console.log(booking);
     event.preventDefault();
     if (booking && booking.venue) {
       const updatedBooking = {
@@ -43,7 +44,13 @@ export const BookingForm = ({
     onClose();
   };
 
-  const handleInputChange = (e) => {
+  const handleInputChange = (e, date) => {
+    // Datepicker don't pass event, so this is workaround for that
+    if (date) {
+      setBooking((booking) => ({ ...booking, [e]: date }));
+      return;
+    }
+    // All other types of input change
     const { name, value, type } = e.target;
     const updatedBooking = {
       ...booking,
@@ -59,16 +66,17 @@ export const BookingForm = ({
       <h2 className="text-center">
         {isUpdating ? "Update Booking" : "Book Venue"}
       </h2>
+
       <form onSubmit={FormSubmit}>
         <div className={styles.formGroup}>
           <label className="text-start" htmlFor="dateFrom">
             Check-in date:
           </label>
-          <input
-            type="date"
+          <BookingDates
+            venueId={venueId}
             id="dateFrom"
             name="dateFrom"
-            value={booking.dateFrom}
+            selected={booking.dateFrom}
             onChange={handleInputChange}
             required
           />
@@ -77,19 +85,17 @@ export const BookingForm = ({
           <label className="text-start" htmlFor="dateTo">
             Check-out date:
           </label>
-          <input
-            type="date"
+          <BookingDates
+            venueId={venueId}
             id="dateTo"
             name="dateTo"
-            value={booking.dateTo}
+            selected={booking.dateTo}
             onChange={handleInputChange}
             required
           />
         </div>
         <div>
-          <p className="mt-4 m-0">
-            This Venue accommodates {booking.maxGuests} guests
-          </p>
+          <p className="mt-4 m-0">This Venue accommodates {maxGuests} guests</p>
         </div>
         <div className={styles.formGroup}>
           <label className="text-start" htmlFor="guests">

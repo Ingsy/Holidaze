@@ -12,12 +12,8 @@ const Modal = ({ isOpen, onClose, children }) => {
   return (
     <div className={styles.customModal}>
       <div className={styles.modalContent}>
-        <div className={styles.closeButtonContainer}>
-          <FontAwesomeIcon
-            icon={faXmark}
-            className={styles.closeButton}
-            onClick={onClose}
-          />
+        <div className={styles.closeButtonContainer} onClick={onClose}>
+          <FontAwesomeIcon icon={faXmark} className={styles.closeButton} />
           <p className={styles.closeText}>Close</p>
         </div>
         {children}

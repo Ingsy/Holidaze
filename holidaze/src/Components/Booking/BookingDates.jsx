@@ -5,7 +5,7 @@ import classnames from "classnames";
 import { useHolidaizApi } from "../../Auth/constants";
 import styles from "../../Styles/Booking.module.scss";
 
-export const BookingDates = ({ venueId }) => {
+export const BookingDates = ({ venueId, selected, onChange, name }) => {
   const [startDate, setStartDate] = useState(new Date());
   const [bookedDates, setBookedDates] = useState([]);
   const { venues } = useHolidaizApi();
@@ -41,18 +41,17 @@ export const BookingDates = ({ venueId }) => {
   };
 
   return (
-    <div>
-      <DatePicker
-        selected={startDate}
-        onChange={(date) => setStartDate(date)}
-        filterDate={(date) => !isDateBooked(date)}
-        dayClassName={(date) =>
-          classnames({
-            [styles.bookedDate]: isDateBooked(date),
-          })
-        }
-      />
-    </div>
+    <DatePicker
+      selected={selected}
+      onChange={(date) => onChange(name, date)}
+      filterDate={(date) => !isDateBooked(date)}
+      dayClassName={(date) =>
+        classnames({
+          [styles.bookedDate]: isDateBooked(date),
+        })
+      }
+      wrapperClassName={styles.datepicker}
+    />
   );
 };
 

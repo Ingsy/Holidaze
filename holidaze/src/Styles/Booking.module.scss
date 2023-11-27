@@ -16,6 +16,7 @@
       width: 100%;
     }
 
+    input[type="text"],
     input[type="date"],
     input[type="number"] {
       width: 100%;
@@ -45,4 +46,8 @@
     
   }
 
+}
+
+.datepicker{
+  width: 100%;
 }
