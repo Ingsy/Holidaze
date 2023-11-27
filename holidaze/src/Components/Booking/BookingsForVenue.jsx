@@ -16,18 +16,20 @@ export function formatDate(dateString) {
   return formattedDate;
 }
 
+// Booking for a venue OR profile
 function BookingsForVenue({ venueId }) {
   const [bookings, setBookings] = useState([]);
   const [loading, setLoading] = useState(true);
   const { bookings: BookingsApi, profile, venues } = useHolidaizApi();
   const navigate = useNavigate();
-  const [editBooking, setEditBooking] = useState(false);
-  const [selectedBookingId, setSelectedBookingId] = useState(null);
-  const { user } = useAuth();
+
+  const [selectedBooking, setSelectedBooking] = useState(null);
 
   const handleFormChange = (updatedBooking) => {
     console.log("Form changes within BookingsForVenue:", updatedBooking);
   };
+
+  console.log("bookings for venue", venueId);
 
   useEffect(() => {
     async function fetchBookings() {
@@ -63,9 +65,8 @@ function BookingsForVenue({ venueId }) {
     });
   };
 
-  const handleUpdate = (bookingId) => {
-    setSelectedBookingId(bookingId);
-    setEditBooking(true);
+  const handleUpdate = (booking) => {
+    setSelectedBooking(booking);
   };
 
   const handleDelete = (bookingId) => {
@@ -87,14 +88,13 @@ function BookingsForVenue({ venueId }) {
     alert("Error updating");
   };
 
-  if (editBooking) {
+  if (selectedBooking) {
     return (
       <BookingUpdate
-        selectedBookingId={selectedBookingId}
-        BookingData={bookings}
+        selectedBooking={selectedBooking}
         onBookingUpdateError={onBookingUpdateError}
         onFormChange={handleFormChange}
-        onClose={() => setEditBooking(false)}
+        onClose={() => setSelectedBooking(null)}
       />
     );
   }
@@ -138,7 +138,7 @@ function BookingsForVenue({ venueId }) {
                   <div className="d-flex justify-content-center mt-3">
                     <button
                       onClick={() => {
-                        handleUpdate(booking.id);
+                        handleUpdate(booking);
                       }}
                       className={styles.pagButton}
                     >

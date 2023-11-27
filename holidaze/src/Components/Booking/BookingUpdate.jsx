@@ -6,23 +6,24 @@ import Alert from "../Alert/Alert";
 import styles from "../../Styles/Booking.module.scss";
 
 export const BookingUpdate = ({
-  selectedBookingId,
-  bookingId,
-  FormData,
+  selectedBooking,
   onFormChange,
-  onVenueUpdateError,
+  onBookingUpdateError,
   onClose,
 }) => {
   const navigate = useNavigate();
+
   const { bookings } = useHolidaizApi();
   const [editBooking, setEditBooking] = useState(false);
   const [alert, setAlert] = useState({ message: "", type: "" });
+
+  console.log("BookingUpdate", selectedBooking.venue.id);
 
   const onSave = async (booking) => {
     setEditBooking(true);
 
     try {
-      await bookings.update(selectedBookingId, {
+      await bookings.update(selectedBooking.id, {
         dateFrom: booking.dateFrom,
         dateTo: booking.dateTo,
         guests: booking.guests,
@@ -39,7 +40,7 @@ export const BookingUpdate = ({
         console.log("After navigate");
       }, 4000);
     } catch (error) {
-      if (onVenueUpdateError) onVenueUpdateError(error);
+      if (onBookingUpdateError) onBookingUpdateError(error);
       setAlert((prevAlert) => ({
         ...prevAlert,
         message: "Failed to update booking",
@@ -48,17 +49,25 @@ export const BookingUpdate = ({
     }
   };
 
+  if (!selectedBooking) return null;
+
   return (
     <div className={`${styles.detailsContainer} mx-auto`}>
       {alert.message && <Alert type={alert.type}>{alert.message}</Alert>}
       <BookingForm
-        bookingData={FormData}
+        formData={{
+          ...selectedBooking,
+          dateFrom: new Date(selectedBooking.dateFrom),
+          dateTo: new Date(selectedBooking.dateTo),
+        }}
         onSave={onSave}
         onClose={onClose}
         editBooking={editBooking}
         onFormChange={onFormChange}
-        bookingId={selectedBookingId}
+        bookingId={selectedBooking.id}
         isUpdating={true}
+        venueId={selectedBooking.venue.id}
+        maxGuests={selectedBooking.venue.maxGuests}
       />
     </div>
   );

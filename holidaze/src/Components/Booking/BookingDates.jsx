@@ -11,27 +11,30 @@ export const BookingDates = ({ venueId, selected, onChange, name }) => {
   const { venues } = useHolidaizApi();
 
   useEffect(() => {
-    venues
-      .getVenueBookings(venueId)
-      .then((response) => {
-        const bookingsArray = response.bookings;
-        if (!Array.isArray(bookingsArray)) {
-          setBookedDates([]);
-          return;
-        }
+    if (venueId) {
+      venues
+        .getVenueBookings(venueId)
+        .then((response) => {
+          const bookingsArray = response.bookings;
+          if (!Array.isArray(bookingsArray)) {
+            setBookedDates([]);
+            return;
+          }
 
-        const bookedDatesArray = bookingsArray.map((booking) => ({
-          startDate: new Date(booking.dateFrom),
-          endDate: new Date(booking.dateTo),
-          key: "booked",
-          color: "#000000",
-        }));
+          const bookedDatesArray = bookingsArray.map((booking) => ({
+            startDate: new Date(booking.dateFrom),
+            endDate: new Date(booking.dateTo),
+            key: "booked",
+            color: "#000000",
+          }));
 
-        setBookedDates(bookedDatesArray);
-      })
-      .catch((error) => {
-        console.error("Error fetching venue bookings:", error);
-      });
+          setBookedDates(bookedDatesArray);
+          console.log("bookedDatesArray", bookedDatesArray);
+        })
+        .catch((error) => {
+          console.error("Error fetching venue bookings:", error);
+        });
+    }
   }, [venueId]);
 
   const isDateBooked = (date) => {
