@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useState, useEffect } from "react";
 import { VenueForm } from "./VenueForm";
 import { useNavigate } from "react-router-dom";
