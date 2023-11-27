@@ -13,7 +13,8 @@
 - [Deployment](#deployment)
 - [GitHub Repository](#github-repository)
 - [Style Guide](#style-guide)
-- [Design Prototype](#Prototype)
+- [Design Prototype](#prototype)
+- [Acknowledgments](#acknowledgments)
 
 ## Introduction
 
@@ -35,11 +36,24 @@ Holidaze is a web application designed to provide users with a seamless experien
 
 7. Venue managers: Provide venue managers with a dashboard to view bookings, create and manage venues
 
-## Technologies Used
+## Technologies
 
-The following technologies and libraries are used in this project:
-
-// ADD DEV DEP
+- **React**: ^18.2.0, [Documentation](https://reactjs.org/)
+- **React Router DOM**: ^6.17.0, [Documentation](https://reactrouter.com/)
+- **Styled Components**: ^6.1.0, [Documentation](https://styled-components.com/)
+- **Bootstrap**: ^5.3.2, [Documentation](https://getbootstrap.com/)
+- **Font Awesome**: ^6.4.2, [Documentation](https://fontawesome.com/)
+- **Axios**: ^1.6.0, [Documentation](https://axios-http.com/)
+- **React Datepicker**: ^4.23.0, [GitHub](https://github.com/Hacker0x01/react-datepicker)
+- **React Modal**: ^3.16.1, [GitHub](https://github.com/reactjs/react-modal)
+- **Classnames**: ^2.3.2, [GitHub](https://github.com/JedWatson/classnames)
+- **React Scripts**: 5.0.1, [GitHub](https://github.com/facebook/create-react-app)
+- **Testing Libraries**:
+  - **Jest DOM**: ^5.17.0, [GitHub](https://github.com/testing-library/jest-dom)
+  - **React Testing Library**: ^13.4.0, [Documentation](https://testing-library.com/docs/react-testing-library/intro/)
+  - **User Event**: ^13.5.0, [GitHub](https://github.com/testing-library/user-event)
+- **Babel Plugin Proposal Private Property In Object**: ^7.21.11, [GitHub](https://github.com/babel/babel/tree/main/packages/babel-plugin-proposal-private-property-in-object)
+- **ESLint**: Extends "react-app" and "react-app/jest", [Documentation](https://eslint.org/)
 
 ## API
 
@@ -56,16 +70,16 @@ The project is organized into the following directories and files:
   - Constants
   - Context
   - Utils
-  - **components**: Reusable React components used throughout the project.
-  - **pages**:
+- **Components**: Reusable React components used throughout the project.
+- **Pages**:
   - Home
   - Login
   - Logout
   - Profile
   - Register
-  - **Styles**: all styling modules
-  - **App.js**: The main application component responsible for routing.
-  - **index.js**: The entry point of the application.
+- **Styles**: all styling modules
+- **App.js**: The main application component responsible for routing.
+- **index.js**: The entry point of the application.
 
 ## Setup
 
@@ -78,6 +92,10 @@ To run this project locally, follow these steps:
 3. Install dependencies using `npm install`.
 
 4. Start the development server using `npm start`.
+
+5. Build the production-ready version of the application using `npm build`.
+
+6. Run tests using `npm test`.
 
 ## Scripts
 
@@ -114,3 +132,31 @@ Powerup Gantt chart by Trello can be found [here](https://placker.com/app#/gantt
 ## Kanban project board
 
 The kanban project board can be found [here](https://trello.com/b/ynk4OU6m/project-exam-2)
+
+## Acknowledgments
+
+### Placeholder Images
+
+- Source: [Lorem Picsum](https://picsum.photos/id/57/200/300)
+
+  - Description: This image is used as a placeholder when no images are added to a venue in the project.
+
+- Source: [Lorem Picsum](https://picsum.photos/id/225/200/300)
+
+  - Description: Another placeholder image utilized when no venue images are present.
+
+- Source: [Lorem Picsum](https://picsum.photos/id/292/200/300)
+  - Description: The third placeholder image used in scenarios where a venue has no associated images.
+
+### Color Inspiration
+
+- Canva Color Palettes
+
+  - Source: [Canva Color Palettes](https://www.canva.com/colors/color-palettes)
+  - Description: The project's color scheme was inspired by Canva's color palettes
+
+### Natural Language Processing and Code Assistance
+
+- ChatGPT by OpenAI
+  - Source: [ChatGPT](https://www.openai.com/)
+  - Description: The project leveraged ChatGPT by OpenAI for natural language processing, providing assistance in explaining code snippets, generating examples, and facilitating communication during development.

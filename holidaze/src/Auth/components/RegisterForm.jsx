@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { setToken } from "../utils/LocalStorage";
 import { headers } from "../utils/authFetch";
 import BaseButton from "../../Components/Buttons/BaseButton";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import styles from "../../Styles/VenueForm.module.scss";
 
 function RegisterForm() {
@@ -15,6 +15,7 @@ function RegisterForm() {
   });
 
   const [error, setError] = useState("");
+  const navigate = useNavigate();
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -23,7 +24,7 @@ function RegisterForm() {
     if (name === "email" && !isStudNoroffEmail) {
       setError("Please use a valid @stud.noroff.no email address");
     } else {
-      setError(""); // Clear the error if the email is valid
+      setError("");
     }
 
     setFormData({
@@ -56,7 +57,7 @@ function RegisterForm() {
       const token = data.token;
       const userName = data.name;
 
-      // redirect the user to the login..
+      navigate("/login");
       setToken(token, userName);
     } catch (error) {
       console.error("Registration error:", error);

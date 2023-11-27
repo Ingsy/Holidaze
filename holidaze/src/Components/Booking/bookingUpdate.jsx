@@ -34,7 +34,9 @@ export const BookingUpdate = ({
       }));
 
       setTimeout(() => {
-        navigate(`/profile`);
+        console.log("Before navigate");
+        navigate(`/venue/venue.id`);
+        console.log("After navigate");
       }, 4000);
     } catch (error) {
       if (onVenueUpdateError) onVenueUpdateError(error);
