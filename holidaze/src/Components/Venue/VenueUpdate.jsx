@@ -18,9 +18,6 @@ export const VenueUpdate = ({ venueData, onVenueUpdateError, onClose }) => {
     try {
       await venues.update(venue.id, venue);
       setAlert({ message: "Venue updated successfully", type: "success" });
-
-      console.log("Data from create venue:", venue);
-      console.log("Venue ID:", venue.id);
     } catch (error) {
       if (onVenueUpdateError) onVenueUpdateError(error);
 

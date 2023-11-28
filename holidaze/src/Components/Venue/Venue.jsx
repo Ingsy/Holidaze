@@ -51,7 +51,6 @@ function Venue() {
       const venueData = await holidaizVenues.getVenueId(venueId);
 
       setVenue(venueData);
-      console.log(venueData.owner?.email === user?.email);
       setIsUserOwner(venueData.owner?.email === user?.email);
       setLoading(false);
     } catch (error) {
@@ -77,9 +76,7 @@ function Venue() {
     setSelectedVenue(venueId);
     venues
       .getVenueBookings(venueId)
-      .then((response) => {
-        console.log("Bookings for venue:", response);
-      })
+      .then((response) => {})
       .catch((error) => {
         console.error("Error fetching venue bookings:", error);
       });

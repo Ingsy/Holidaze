@@ -17,8 +17,6 @@ export const BookingUpdate = ({
   const [editBooking, setEditBooking] = useState(false);
   const [alert, setAlert] = useState({ message: "", type: "" });
 
-  console.log("BookingUpdate", selectedBooking.venue.id);
-
   const onSave = async (booking) => {
     setEditBooking(true);
 
@@ -35,9 +33,7 @@ export const BookingUpdate = ({
       }));
 
       setTimeout(() => {
-        console.log("Before navigate");
         navigate(0);
-        console.log("After navigate");
       }, 4000);
     } catch (error) {
       if (onBookingUpdateError) onBookingUpdateError(error);

@@ -30,7 +30,6 @@ export const BookingDates = ({ venueId, selected, onChange, name }) => {
           }));
 
           setBookedDates(bookedDatesArray);
-          console.log("bookedDatesArray", bookedDatesArray);
         })
         .catch((error) => {
           console.error("Error fetching venue bookings:", error);

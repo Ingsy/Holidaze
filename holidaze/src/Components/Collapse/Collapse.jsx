@@ -5,7 +5,6 @@ import styles from "../../Styles/Collapse.module.scss";
 function Collapse({ title, isCollapsed, onToggle, children }) {
   const handleToggle = (event) => {
     event.stopPropagation();
-    console.log("Toggle clicked");
     onToggle(!isCollapsed);
   };
 
@@ -23,7 +22,6 @@ function Collapse({ title, isCollapsed, onToggle, children }) {
           <div className={styles.closeButtonContainer}>
             <CloseButton
               onClick={(event) => {
-                console.log("Close button clicked");
                 handleToggle(event);
               }}
             />

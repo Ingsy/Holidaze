@@ -28,8 +28,6 @@ function BookingsForVenue({ venueId }) {
     console.log("Form changes within BookingsForVenue:", updatedBooking);
   };
 
-  console.log("bookings for venue", venueId);
-
   useEffect(() => {
     async function fetchBookings() {
       try {
@@ -41,7 +39,7 @@ function BookingsForVenue({ venueId }) {
         } else {
           response = await profile.get();
         }
-        console.log("Fetched bookings:", response);
+
         setBookings(response);
         setLoading(false);
       } catch (error) {
@@ -158,8 +156,7 @@ function BookingsForVenue({ venueId }) {
           ) : (
             <p>There are currently no bookings.</p>
           )}
-          {/* Log bookings array and its first item here */}
-          {console.log("Bookings array:", bookings)}
+
           {bookings.length > 0 && console.log("First booking:", bookings[0])}
         </div>
       )}

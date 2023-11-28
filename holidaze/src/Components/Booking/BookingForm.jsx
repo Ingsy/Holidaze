@@ -25,7 +25,6 @@ export const BookingForm = ({
   const user = useAuth();
 
   const FormSubmit = (event) => {
-    console.log(booking);
     event.preventDefault();
     if (booking && booking.venue) {
       const updatedBooking = {

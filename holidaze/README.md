@@ -110,7 +110,7 @@ This project uses ESLint for code linting and follows the configuration provided
 
 ## Deployment
 
-This project is deployed on [Netlify](ADD LINK) and can be accessed [here](ADD LINK).
+This project is deployed on [Netlify] and can be accessed [here](https://soft-faun-5457e1.netlify.app/).
 
 ## GitHub Repository
 
