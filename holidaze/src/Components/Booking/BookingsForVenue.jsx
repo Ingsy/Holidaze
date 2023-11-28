@@ -156,8 +156,6 @@ function BookingsForVenue({ venueId }) {
           ) : (
             <p>There are currently no bookings.</p>
           )}
-
-          {bookings.length > 0 && console.log("First booking:", bookings[0])}
         </div>
       )}
     </div>
