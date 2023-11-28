@@ -5,12 +5,11 @@ import styles from "../../Styles/BookingsForVenue.module.scss";
 import { useNavigate } from "react-router-dom";
 import BookingUpdate from "./BookingUpdate";
 import { useHolidaizApi } from "../../Auth/constants";
-import { useAuth } from "../../Auth/context/AuthContext";
 
 export function formatDate(dateString) {
   const options = { day: "2-digit", month: "2-digit", year: "2-digit" };
   const formattedDate = new Date(dateString).toLocaleDateString(
-    "en-US",
+    "en-GB",
     options
   );
   return formattedDate;

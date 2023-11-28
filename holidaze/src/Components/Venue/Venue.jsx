@@ -154,26 +154,20 @@ function Venue() {
         <div className={styles.header}>
           <div className={styles.titleLine}></div>
         </div>
-
         {venue.media && (
           <div className="row">
-            <div className="col-12 col-md-6 text-center">
-              {venue.media.length > 0 && isValidURL(venue.media[0]) ? (
+            {venue.media.length > 0 && (
+              <div className="col-12 col-md-8 text-center">
                 <img
                   src={venue.media[0]}
                   alt={`Venue 1`}
                   className={styles.firstPhoto}
                 />
-              ) : (
-                <img
-                  src="https://picsum.photos/id/678/200/300"
-                  alt="Placeholder first"
-                  className={styles.firstPhoto}
-                />
-              )}
-            </div>
-            <div className="col-12 col-md-3 d-flex flex-wrap flex-md-row mt-2 mb-2 mt-md-0 mb-md-0">
-              {venue.media.length > 1 ? (
+              </div>
+            )}
+
+            {venue.media.length > 1 ? (
+              <div className="col-12 col-md-4 d-flex flex-wrap flex-md-row mt-2 mb-2 mt-md-0 mb-md-0">
                 <div className={`${styles.smallPhotosContainer} overflow-auto`}>
                   {venue.media.slice(1).map((photo, index) => (
                     <div key={index} className={styles.smallPhoto}>
@@ -181,66 +175,36 @@ function Venue() {
                     </div>
                   ))}
                 </div>
-              ) : null}
-              {venue.media.length < 4 ? (
-                <div className={`${styles.smallPhotosContainer} overflow-auto`}>
-                  {venue.media.length < 3 ? (
-                    <div className={styles.smallPhoto}>
-                      <img
-                        src="https://picsum.photos/id/57/200/300"
-                        alt="Placeholder 1"
-                      />
-                    </div>
-                  ) : null}
-                  {venue.media.length < 2 ? (
-                    <div
-                      className={`${styles.smallPhoto} ms-2 me-2 ms-md-0 me-md-0 mt-md-2 mb-md-2`}
-                    >
-                      <img
-                        src="https://picsum.photos/id/225/200/300"
-                        alt="Placeholder 2"
-                      />
-                    </div>
-                  ) : null}
-                  {venue.media.length === 1 ? (
-                    <div className={styles.smallPhoto}>
-                      <img
-                        src="https://picsum.photos/id/292/200/300"
-                        alt="Placeholder 3"
-                      />
-                    </div>
-                  ) : null}
-                </div>
-              ) : null}
-            </div>
-
-            <div className="col-12 col-md-3 d-flex flex-column">
-              {venue.location && venue.location.address && (
-                <div
-                  className={`d-flex flex-column ${styles.locationContainer}`}
-                >
-                  <p className="flex-grow-1">
-                    Address: {venue.location.address}
-                  </p>
-                  <p className="flex-grow-1">City: {venue.location.city}</p>
-                  <p className="flex-grow-1">Zip: {venue.location.zip}</p>
-                  <p className="flex-grow-1">
-                    Country: {venue.location.country}
-                  </p>
-                  {venue.location.continent && (
+              </div>
+            ) : (
+              <div className="col-12 col-md-6 col-md-offset-3 d-flex flex-column mt-4">
+                {venue.location && venue.location.address && (
+                  <div
+                    className={`d-flex flex-column ${styles.locationContainer}`}
+                  >
                     <p className="flex-grow-1">
-                      Continent: {venue.location.continent}
+                      Address: {venue.location.address}
                     </p>
-                  )}
-                  {venue.location.lat !== undefined &&
-                    venue.location.lng !== undefined && (
+                    <p className="flex-grow-1">City: {venue.location.city}</p>
+                    <p className="flex-grow-1">Zip: {venue.location.zip}</p>
+                    <p className="flex-grow-1">
+                      Country: {venue.location.country}
+                    </p>
+                    {venue.location.continent && (
                       <p className="flex-grow-1">
-                        Lat: {venue.location.lat}, Long: {venue.location.lng}
+                        Continent: {venue.location.continent}
                       </p>
                     )}
-                </div>
-              )}
-            </div>
+                    {venue.location.lat !== undefined &&
+                      venue.location.lng !== undefined && (
+                        <p className="flex-grow-1">
+                          Lat: {venue.location.lat}, Long: {venue.location.lng}
+                        </p>
+                      )}
+                  </div>
+                )}
+              </div>
+            )}
           </div>
         )}
         <div className={styles.titleLine}></div>
