@@ -4,6 +4,8 @@ import Collapse from "../../../Components/Collapse/Collapse";
 import ProfileVenues from "../ProfileVenues";
 import ProfileBookings from "../ProfileBookings";
 import UpdateAvatar from "../Avatar/Avatar";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faUser } from "@fortawesome/free-solid-svg-icons";
 import { VenueCreate } from "../../../Components/Venue/VenueCreate";
 import { useHolidaizApi } from "../../../Auth/constants/useHolidazeAPI";
 import styles from "../../../Styles/Profile.module.scss";
@@ -88,7 +90,14 @@ function UserProfile({ openCreateVenueForm }) {
               </div>
               <div className="col-12 col-md-4 mb-4 d-flex align-items-center justify-content-center">
                 <div className={styles.AvatarImg}>
-                  <img src={user.avatar} alt="User Avatar" />
+                  {user.avatar ? (
+                    <img src={user.avatar} alt="User Avatar" />
+                  ) : (
+                    <FontAwesomeIcon
+                      icon={faUser}
+                      className={styles.AvatarFont}
+                    />
+                  )}
                 </div>
               </div>
               <div className={`${styles.ButtonContainer} col-12 col-md-4 mb-4`}>
