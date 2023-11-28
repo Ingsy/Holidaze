@@ -106,13 +106,21 @@ To run this project locally, follow these steps:
 
 ## Linting
 
+![ESLint](https://img.shields.io/badge/ESLint-Configured-brightgreen)
+
 This project uses ESLint for code linting and follows the configuration provided by `react-app`.
 
 ## Deployment
 
+[![Netlify Status](https://api.netlify.com/api/v1/badges/fa3fa2d4-29aa-47bc-9f5c-a5e92269b439/deploy-status)](https://app.netlify.com/sites/soft-faun-5457e1/deploys)
+
 This project is deployed on [Netlify] and can be accessed [here](https://soft-faun-5457e1.netlify.app/).
 
 ## GitHub Repository
+
+![GitHub license](https://img.shields.io/github/license/Ingsy/Holidaze)
+
+![GitHub last commit](https://img.shields.io/github/last-commit/Ingsy/Holidaze)
 
 The public GitHub repository for this project can be found [here](https://github.com/Ingsy/Holidaze/tree/e3d5f4ed795924b209e04841cd84de75e7754350/holidaze)
 
