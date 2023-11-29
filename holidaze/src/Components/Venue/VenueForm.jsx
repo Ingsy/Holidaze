@@ -122,7 +122,7 @@ export const VenueForm = ({ venueData, onSave, onClose, editVenue }) => {
         <div className="col-12 col-md-6 col-lg-6">
           {/* Left side for md and lg devices */}
           <div className={styles.formGroup}>
-            <label htmlFor="name" className={styles.label}>
+            <label htmlFor="name" className={`${styles.label} text-start`}>
               Title:
             </label>
             <input
@@ -136,7 +136,10 @@ export const VenueForm = ({ venueData, onSave, onClose, editVenue }) => {
             />
           </div>
           <div className={styles.formGroup}>
-            <label htmlFor="description" className={styles.label}>
+            <label
+              htmlFor="description"
+              className={`${styles.label} text-start`}
+            >
               Description:
             </label>
             <textarea
@@ -149,7 +152,7 @@ export const VenueForm = ({ venueData, onSave, onClose, editVenue }) => {
             />
           </div>
           <div className={styles.formGroup}>
-            <label htmlFor="price" className={styles.label}>
+            <label htmlFor="price" className={`${styles.label} text-start`}>
               Price:
             </label>
             <input
@@ -163,7 +166,7 @@ export const VenueForm = ({ venueData, onSave, onClose, editVenue }) => {
             />
           </div>
           <div className={styles.formGroup}>
-            <label htmlFor="maxGuests" className={styles.label}>
+            <label htmlFor="maxGuests" className={`${styles.label} text-start`}>
               Max Guests:
             </label>
             <input
@@ -177,7 +180,7 @@ export const VenueForm = ({ venueData, onSave, onClose, editVenue }) => {
             />
           </div>
           <div className={styles.formGroup}>
-            <label htmlFor="media" className={styles.label}>
+            <label htmlFor="media" className={`${styles.label} text-start`}>
               Add photos (Image URLs):
             </label>
             <input
@@ -190,7 +193,7 @@ export const VenueForm = ({ venueData, onSave, onClose, editVenue }) => {
             />
           </div>
           <div className={styles.formGroup}>
-            <label className={styles.label}>Media Items:</label>
+            <label className={`${styles.label} text-start`}>Media Items:</label>
             {venue.media.map((mediaItem, index) => (
               <div key={index} className={styles.mediaItemContainer}>
                 {mediaItem && (
@@ -217,7 +220,10 @@ export const VenueForm = ({ venueData, onSave, onClose, editVenue }) => {
         </div>
         <div className="col-12 col-md-6 col-lg-6">
           <div className={styles.formGroup}>
-            <label htmlFor="locationAddress" className={styles.label}>
+            <label
+              htmlFor="locationAddress"
+              className={`${styles.label} text-start`}
+            >
               Address:
             </label>
             <input
@@ -230,7 +236,10 @@ export const VenueForm = ({ venueData, onSave, onClose, editVenue }) => {
             />
           </div>
           <div className={styles.formGroup}>
-            <label htmlFor="locationCity" className={styles.label}>
+            <label
+              htmlFor="locationCity"
+              className={`${styles.label} text-start`}
+            >
               City:
             </label>
             <input
@@ -243,7 +252,10 @@ export const VenueForm = ({ venueData, onSave, onClose, editVenue }) => {
             />
           </div>
           <div className={styles.formGroup}>
-            <label htmlFor="locationCountry" className={styles.label}>
+            <label
+              htmlFor="locationCountry"
+              className={`${styles.label} text-start`}
+            >
               Country:
             </label>
             <input
@@ -256,7 +268,7 @@ export const VenueForm = ({ venueData, onSave, onClose, editVenue }) => {
             />
           </div>
           <div className={styles.formGroup}>
-            <label className={styles.label}>Amenities:</label>
+            <label className={`${styles.label} text-start`}>Amenities:</label>
             <div className={styles.formCheck}>
               <input
                 type="checkbox"

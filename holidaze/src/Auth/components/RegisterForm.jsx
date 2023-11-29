@@ -67,7 +67,7 @@ function RegisterForm() {
   return (
     <form onSubmit={handleSubmit}>
       <div>
-        <label htmlFor="name" className={styles.label}>
+        <label htmlFor="name" className={`${styles.label} text-start`}>
           Name:
         </label>
         <input
@@ -81,7 +81,7 @@ function RegisterForm() {
         />
       </div>
       <div>
-        <label htmlFor="email" className={styles.label}>
+        <label htmlFor="email" className={`${styles.label} text-start`}>
           Email:
         </label>
         <input
@@ -96,7 +96,7 @@ function RegisterForm() {
       </div>
       {error && <div className="error-message">{error}</div>}
       <div>
-        <label htmlFor="password" className={styles.label}>
+        <label htmlFor="password" className={`${styles.label} text-start`}>
           Password:
         </label>
         <input
@@ -110,7 +110,7 @@ function RegisterForm() {
         />
       </div>
       <div>
-        <label htmlFor="avatar" className={styles.label}>
+        <label htmlFor="avatar" className={`${styles.label} text-start`}>
           Avatar (Optional):
         </label>
         <input

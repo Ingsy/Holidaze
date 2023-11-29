@@ -61,7 +61,7 @@ function LoginForm() {
     <form onSubmit={handleSubmit}>
       {loginError && <div className={styles.error}>{loginError}</div>}
       <div className="mt-4">
-        <label htmlFor="email" className={styles.label}>
+        <label htmlFor="email" className={`${styles.label} text-start`}>
           Email:
         </label>
         <input
@@ -75,7 +75,7 @@ function LoginForm() {
         />
       </div>
       <div className="mt-3 mb-3">
-        <label htmlFor="password" className={styles.label}>
+        <label htmlFor="password" className={`${styles.label} text-start`}>
           Password:
         </label>
         <input
