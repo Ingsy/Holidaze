@@ -133,7 +133,7 @@ This project is deployed on [Netlify] and can be accessed [here](https://soft-fa
 
 ![GitHub last commit](https://img.shields.io/github/last-commit/Ingsy/Holidaze)
 
-The public GitHub repository for this project can be found [here](https://github.com/Ingsy/Holidaze/tree/e3d5f4ed795924b209e04841cd84de75e7754350/holidaze)
+The public GitHub repository for this project can be found [here](https://github.com/Ingsy/Holidaze/tree/master/holidaze)
 
 ## Style Guide
 

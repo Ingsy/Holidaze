@@ -28,12 +28,14 @@ function ProfileVenues(openCreateVenueForm) {
     <div>
       {loading ? (
         <p>Loading...</p>
-      ) : (
+      ) : venues.length > 0 ? (
         <YourVenueGrid
           venues={venues}
           loading={loading}
           openCreateVenueForm={openCreateVenueForm}
         />
+      ) : (
+        <p>There are currently no Venues.</p>
       )}
     </div>
   );
