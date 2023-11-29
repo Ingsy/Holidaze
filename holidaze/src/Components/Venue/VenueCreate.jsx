@@ -27,7 +27,7 @@ export const VenueCreate = ({ onCreateError }) => {
   };
   return (
     <div className={`${styles.detailsContainer} mx-auto`}>
-      <VenueForm onSave={onSave} onClose={onClose} />;
+      <VenueForm onSave={onSave} onClose={onClose} />
     </div>
   );
 };
