@@ -26,7 +26,6 @@ export const ProfileBookingsUrl = `${UserProfile}/bookings/?_bookings=true&_venu
 export const UpdateProfileMedia = `${UserProfile}/media`;
 
 export const BookingBaseUrl = `${API_HOLIDAZE_URL}/bookings`;
-//export const BookingCustomerUrl = `${BookingBaseUrl}?_customer=true`; (NOT IN USE YET)
 export const BookingVenueUrl = `${BookingBaseUrl}/?_venue=true`;
 export const BookingsByProfile = `${BookingBaseUrl}/${userName}/bookings`;
 export const AllBookingsByProfile = `${UserProfile}/bookings/?_venue=true`;
@@ -66,6 +65,7 @@ export const useHolidaizApi = () => {
         isUserLoading,
         bookings: {
             get: () => axios.get(`${AllBookingsByProfile}`, getConfig()).then(response => response.data),
+            getSingle: (bookingId) => axios.get(`${BookingBaseUrl}/${bookingId}/?_venue=true`, getConfig()).then(response => response.data),
             create: (data) => axios.post(`${BookingBaseUrl}`, data, getConfig()).then(response => response.data),
             update: (bookingId, updatedData) => axios.put(`${BookingBaseUrl}/${bookingId}`, updatedData, getConfig()).then(response => response.data),
             delete: (bookingId) => axios.delete(`${BookingBaseUrl}/${bookingId}`, getConfig()).then(response => response.data)

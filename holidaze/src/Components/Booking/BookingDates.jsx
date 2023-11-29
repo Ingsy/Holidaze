@@ -18,12 +18,6 @@ import styles from "../../Styles/Booking.module.scss";
  */
 export const BookingDates = ({ venueId, selected, onChange, name }) => {
   /**
-   * State to track the start date for the date picker.
-   * @type {Date}
-   */
-  const [startDate, setStartDate] = useState(new Date());
-
-  /**
    * State to store the array of booked dates fetched from the API.
    * @type {Array}
    */
