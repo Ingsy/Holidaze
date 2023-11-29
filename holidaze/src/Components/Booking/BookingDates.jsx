@@ -5,12 +5,39 @@ import "react-datepicker/dist/react-datepicker.css";
 import classnames from "classnames";
 import { useHolidaizApi } from "../../Auth/constants";
 import styles from "../../Styles/Booking.module.scss";
-
+/**
+ * Component for selecting booking dates using the `react-datepicker` library.
+ *
+ * @component
+ * @param {Object} props - Component props.
+ * @param {string} props.venueId - The ID of the venue for which bookings are fetched.
+ * @param {Date} props.selected - The selected date.
+ * @param {Function} props.onChange - Callback function called when the selected date changes.
+ * @param {string} props.name - The name of the date input.
+ * @returns {JSX.Element} Rendered React component.
+ */
 export const BookingDates = ({ venueId, selected, onChange, name }) => {
+  /**
+   * State to track the start date for the date picker.
+   * @type {Date}
+   */
   const [startDate, setStartDate] = useState(new Date());
+
+  /**
+   * State to store the array of booked dates fetched from the API.
+   * @type {Array}
+   */
   const [bookedDates, setBookedDates] = useState([]);
+
+  /**
+   * Custom hook to access the Holidaiz API.
+   */
   const { venues } = useHolidaizApi();
 
+  /**
+   * Fetches venue bookings from the API when the `venueId` prop changes.
+   * @param {string} venueId - The ID of the venue.
+   */
   useEffect(() => {
     if (venueId) {
       venues
@@ -37,12 +64,21 @@ export const BookingDates = ({ venueId, selected, onChange, name }) => {
     }
   }, [venueId]);
 
+  /**
+   * Checks if a given date is booked.
+   * @param {Date} date - The date to check.
+   * @returns {boolean} `true` if the date is booked, `false` otherwise.
+   */
   const isDateBooked = (date) => {
     return bookedDates.some(
       (bookedDate) => date >= bookedDate.startDate && date <= bookedDate.endDate
     );
   };
 
+  /**
+   * Renders the date picker component.
+   * @returns {JSX.Element} Rendered date picker.
+   */
   return (
     <DatePicker
       selected={selected}
