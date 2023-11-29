@@ -6,6 +6,7 @@
 - [Features](#features)
 - [Technologies Used](#technologies-used)
 - [API](#API)
+- [Documentation](#Documentation)
 - [Project Structure](#project-structure)
 - [Setup](#setup)
 - [Scripts](#scripts)
@@ -59,6 +60,16 @@ Holidaze is a web application designed to provide users with a seamless experien
 
 The API for the application can be found [here](https://docs.noroff.dev/) under Holidaze Endpoints
 The API used for fetshing data: [https://api.noroff.dev/api/v1/holidaze]
+
+## Documentation
+
+- **JSDoc Comments:** The codebase includes JSDoc comments on some components for improved documentation. These comments provide information about the purpose of functions, expected parameters, and return types.
+
+  If you'd like to contribute to the documentation or follow a consistent JSDoc style, you can enhance your development environment by installing the ESLint JSDoc plugin. This plugin helps enforce JSDoc standards.
+
+  ```bash
+  npm install --save-dev eslint-plugin-jsdoc
+  ```
 
 ## Project Structure
 

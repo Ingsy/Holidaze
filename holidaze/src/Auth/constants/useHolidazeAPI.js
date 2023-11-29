@@ -32,11 +32,31 @@ export const BookingsByProfile = `${BookingBaseUrl}/${userName}/bookings`;
 export const AllBookingsByProfile = `${UserProfile}/bookings/?_venue=true`;
 
 
+/**
+ * Function to get the configuration for API requests.
+ * @function
+ * @returns {object} The configuration object.
+ * @module getConfig
+ */
+
 const getConfig = () => {
     return {
         headers: headers()
     }
 }
+
+/**
+ * Hook for accessing Holidaze API functions.
+ * @function
+ * @returns {object} Object containing various API functions.
+ * @property {object} user - The user object.
+ * @property {boolean} isUserLoading - Flag indicating if the user information is still loading.
+ * @property {object} bookings - Object containing booking-related API functions.
+ * @property {object} profile - Object containing profile-related API functions.
+ * @property {object} venues - Object containing venue-related API functions.
+ * @property {object} auth - Object containing authentication-related API functions.
+ * @module useHolidaizApi
+ */
 
 export const useHolidaizApi = () => {
     const { user, isLoading: isUserLoading } = useAuth();
@@ -70,26 +90,7 @@ export const useHolidaizApi = () => {
             login: (data) => axios.post(`${Login}`, data, getConfig()).then(response => response.data),
             createAccount: () => axios.post(`${Register}`, getConfig()).then(response => response.data),
 
-            //getAll: (query) => axios.get(baseVenueUrl, { params: { query } }).then(response => response.data)
         }
     }
 }
 
-//const deleteVenueBiggerFunction = (venueId, bookingId) => {
-//    const dosome = {};
-    // Show confirm dialogue
-//    return axios.post(`${BookingBaseUrl}${venueId}/${bookingId}`, getConfig()).then(response => response.data)
-//}
-
-
-/*
-3 forskjellige måter å skrive samme funksjonen på
-
-const createBooking = (data) => axios.post(`${BookingBaseUrl}`, data, getConfig());
-const createBooking2 = (data) => {
-    return axios.post(`${BookingBaseUrl}`, data, getConfig());
-}
-function createBooking3(data) {
-    return axios.post(`${BookingBaseUrl}`, data, getConfig());
-}
-*/
