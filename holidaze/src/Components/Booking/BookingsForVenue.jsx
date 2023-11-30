@@ -44,12 +44,7 @@ function BookingsForVenue({ venueId }) {
           response.map(async (booking) => {
             // Fetch customer information for the specific booking
             const customer = await BookingsApi.getCustomer(booking.id);
-            console.log(
-              "Fetched customer for booking",
-              booking.id,
-              ":",
-              customer
-            );
+
             return {
               ...booking,
               customer,
@@ -124,14 +119,18 @@ function BookingsForVenue({ venueId }) {
               {bookings.map((booking) => (
                 <li key={booking.id} className={`${styles.bookingItem} mb-4`}>
                   <div className="d-flex flex-column justify-content-center mt-3">
-                    <button
-                      onClick={() => {
-                        handleCheckoutVenue(booking.id);
-                      }}
-                      className={styles.venueButton}
-                    >
-                      Checkout Venue
-                    </button>
+                    {!venueId ? (
+                      <button
+                        onClick={() => {
+                          handleCheckoutVenue(booking.id);
+                        }}
+                        className={styles.venueButton}
+                      >
+                        Checkout Venue
+                      </button>
+                    ) : (
+                      <h2 className="text-center">Booking</h2>
+                    )}
                     <p className="mt-3">
                       Check-in Date: {formatDate(booking.dateFrom)}
                     </p>
@@ -166,19 +165,13 @@ function BookingsForVenue({ venueId }) {
                       <p className={styles.customerLabel}>Customer:</p>
                       <hr className={styles.hrStyle} />
                       <p className={styles.customerDetail}>
-                        Name: {booking.customer.customer.name}
+                        {booking.customer.customer.name}
                       </p>
                       <p className={styles.customerDetail}>
-                        Email: {booking.customer.customer.email}
+                        {booking.customer.customer.email}
                       </p>
                     </div>
                   )}
-                  {console.log(
-                    "booking.customer:",
-                    JSON.stringify(booking.customer, null, 2)
-                  )}
-                  {console.log("venueId:", venueId)}
-                  {console.log("booking.customer:", booking.customer)}
                 </li>
               ))}
             </ul>
