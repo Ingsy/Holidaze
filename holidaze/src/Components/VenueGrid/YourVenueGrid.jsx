@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import StarRating from "../StarRating/StarRating";
 import styles from "../../Styles/VenueGrid.module.scss";
 
-const placeholderImageUrl = "https://picsum.photos/200/300"; // The original image size
+const placeholderImageUrl = "https://picsum.photos/200/300";
 
 function VenueGrid({ venues, loading }) {
   return (

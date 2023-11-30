@@ -1,6 +1,4 @@
 .bookingFormContainer {
-
-
   h2 {
     margin: 0;
     padding: 0;
@@ -24,7 +22,7 @@
       border: 1px solid #ccc;
       border-radius: 4px;
       font-size: 1rem;
-      box-sizing: border-box; 
+      box-sizing: border-box;
     }
 
     .formGroup + .formGroup {
@@ -41,16 +39,12 @@
   }
 
   .bookedDate {
-    background-color: #F8C143;
+    background-color: #f8c143;
     border-radius: 5px;
     color: black;
-    
   }
-
 }
 
-.datepicker{
+.datepicker {
   width: 100%;
 }
-
-

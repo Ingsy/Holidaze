@@ -120,7 +120,6 @@ export const VenueForm = ({ venueData, onSave, onClose, editVenue }) => {
     <form>
       <div className="row">
         <div className="col-12 col-md-6 col-lg-6">
-          {/* Left side for md and lg devices */}
           <div className={styles.formGroup}>
             <label htmlFor="name" className={`${styles.label} text-start`}>
               Title:

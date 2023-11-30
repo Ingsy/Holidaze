@@ -13,11 +13,6 @@ const userName = getUserName();
 export const VenueBaseUrl = `${API_HOLIDAZE_URL}/venues`;
 export const VenueDetailUrl = `https://api.noroff.dev/api/v1/holidaze/venues/`;
 
-
-export const Register = `${API_HOLIDAZE_URL}/auth/register`;
-export const Login = `${API_HOLIDAZE_URL}/auth/login`;
-
-
 export const ProfileBaseUrl = `${API_HOLIDAZE_URL}/profiles`;
 export const UserProfile = `${ProfileBaseUrl}/${userName}`;
 
@@ -87,11 +82,7 @@ export const useHolidaizApi = () => {
             update: (venueId, updatedData) => axios.put(`${VenueDetailUrl}${venueId}`, updatedData, getConfig()).then(response => response.data),
             delete: (venueId) => axios.delete(`${VenueDetailUrl}${venueId}`, getConfig()).then(response => response.data),
         },
-        auth: {
-            login: (data) => axios.post(`${Login}`, data, getConfig()).then(response => response.data),
-            createAccount: () => axios.post(`${Register}`, getConfig()).then(response => response.data),
 
-        }
     }
 }
 

@@ -33,6 +33,7 @@ function UpdateAvatar() {
       const response = await profile.update(updatedData);
       if (response.status === 200) {
         setSuccessMessage("Avatar updated successfully");
+
         setError("");
       } else {
         setError("Avatar update failed. Please try again.");
