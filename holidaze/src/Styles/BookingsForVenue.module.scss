@@ -3,9 +3,12 @@
     display: flex;
     justify-content: center;
    
+   
   }
   
   .bookingItem {
+    display: flex;
+    flex-direction: column;
     padding: 10px;
     margin-bottom: 10px;
     border: 1px solid  #F8C143;
@@ -46,4 +49,22 @@
     color:#f7aa04;
     border: none; 
     font-weight: bold;
+  }
+
+  .customerInfoContainer {
+    border: 1px solid #e5c10d;
+    padding: 10px;
+    border-radius: 8px;
+  }
+  
+  .hrStyle {
+    border-top: 1px solid #a30606;
+  }
+  
+  .customerLabel {
+    font-weight: bold;
+  }
+  
+  .customerDetail {
+    margin-bottom: 5px;
   }

@@ -65,6 +65,7 @@ export const useHolidaizApi = () => {
         isUserLoading,
         bookings: {
             get: () => axios.get(`${AllBookingsByProfile}`, getConfig()).then(response => response.data),
+            getCustomer: (bookingId) => axios.get(`${BookingBaseUrl}/${bookingId}/?_customer=true`, getConfig()).then(response => response.data),
             getSingle: (bookingId) => axios.get(`${BookingBaseUrl}/${bookingId}/?_venue=true`, getConfig()).then(response => response.data),
             create: (data) => axios.post(`${BookingBaseUrl}`, data, getConfig()).then(response => response.data),
             update: (bookingId, updatedData) => axios.put(`${BookingBaseUrl}/${bookingId}`, updatedData, getConfig()).then(response => response.data),

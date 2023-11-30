@@ -40,7 +40,24 @@ function BookingsForVenue({ venueId }) {
           response = await profile.get();
         }
 
-        setBookings(response);
+        const bookingsWithCustomerInfo = await Promise.all(
+          response.map(async (booking) => {
+            // Fetch customer information for the specific booking
+            const customer = await BookingsApi.getCustomer(booking.id);
+            console.log(
+              "Fetched customer for booking",
+              booking.id,
+              ":",
+              customer
+            );
+            return {
+              ...booking,
+              customer,
+            };
+          })
+        );
+
+        setBookings(bookingsWithCustomerInfo);
         setLoading(false);
       } catch (error) {
         console.error("Error fetching bookings:", error);
@@ -106,50 +123,62 @@ function BookingsForVenue({ venueId }) {
             <ul className="mt-5">
               {bookings.map((booking) => (
                 <li key={booking.id} className={`${styles.bookingItem} mb-4`}>
-                  <p className={`${styles.BookingId} text-start`}>
-                    Booking ID: {booking.id}
-                  </p>
-                  <div className={styles.BookingId}>
-                    <span className="me-2">
-                      created: {formatDate(booking.created)}
-                    </span>
-                    <span>updated: {formatDate(booking.updated)}</span>
-                  </div>
-                  <hr />
-                  <button
-                    onClick={() => {
-                      handleCheckoutVenue(booking.id);
-                    }}
-                    className={styles.venueButton}
-                  >
-                    Checkout Venue
-                  </button>
-                  <p className="mt-3">
-                    Check-in Date: {formatDate(booking.dateFrom)}
-                  </p>
-                  <p className="mt-1">
-                    Check-out Date: {formatDate(booking.dateTo)}
-                  </p>
-                  <p className="mt-1">Guests: {booking.guests}</p>
-                  <hr />
-                  <div className="d-flex justify-content-center mt-3">
+                  <div className="d-flex flex-column justify-content-center mt-3">
                     <button
                       onClick={() => {
-                        handleUpdate(booking);
+                        handleCheckoutVenue(booking.id);
                       }}
-                      className={styles.pagButton}
+                      className={styles.venueButton}
                     >
-                      Edit booking
+                      Checkout Venue
                     </button>
-                    <button
-                      onClick={() => {
-                        handleDelete(booking.id);
-                      }}
-                      className={styles.pagButton}
-                    >
-                      Delete booking
-                    </button>
+                    <p className="mt-3">
+                      Check-in Date: {formatDate(booking.dateFrom)}
+                    </p>
+                    <p className="mt-1">
+                      Check-out Date: {formatDate(booking.dateTo)}
+                    </p>
+                    <p className="mt-1">Guests: {booking.guests}</p>
+                    {!venueId && <hr />}
+                    {!venueId && (
+                      <div className="d-flex justify-content-center mt-3">
+                        <button
+                          onClick={() => {
+                            handleUpdate(booking);
+                          }}
+                          className={styles.pagButton}
+                        >
+                          Edit booking
+                        </button>
+                        <button
+                          onClick={() => {
+                            handleDelete(booking.id);
+                          }}
+                          className={styles.pagButton}
+                        >
+                          Delete booking
+                        </button>
+                      </div>
+                    )}
                   </div>
+                  {venueId && booking.customer && (
+                    <div className={`${styles.customerInfoContainer} mt-3`}>
+                      <p className={styles.customerLabel}>Customer:</p>
+                      <hr className={styles.hrStyle} />
+                      <p className={styles.customerDetail}>
+                        Name: {booking.customer.customer.name}
+                      </p>
+                      <p className={styles.customerDetail}>
+                        Email: {booking.customer.customer.email}
+                      </p>
+                    </div>
+                  )}
+                  {console.log(
+                    "booking.customer:",
+                    JSON.stringify(booking.customer, null, 2)
+                  )}
+                  {console.log("venueId:", venueId)}
+                  {console.log("booking.customer:", booking.customer)}
                 </li>
               ))}
             </ul>
