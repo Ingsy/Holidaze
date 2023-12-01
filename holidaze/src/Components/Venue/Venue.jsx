@@ -60,7 +60,34 @@ function Venue() {
   };
 
   const openModal = () => {
-    setIsModalOpen(true);
+    if (!user || !user.token) {
+      setShowAlert(true);
+      setErrorMessage(
+        <div>
+          Please{" "}
+          <Link
+            to="/login"
+            style={{
+              color: "black",
+              textDecoration: "underline",
+            }}
+          >
+            login
+          </Link>
+          /
+          <Link
+            to="/register"
+            style={{ color: "black", textDecoration: "underline" }}
+          >
+            register
+          </Link>{" "}
+          to book venues.
+        </div>
+      );
+      setAlertType("error");
+    } else {
+      setIsModalOpen(true);
+    }
   };
 
   const closeModal = () => {
@@ -296,7 +323,6 @@ function Venue() {
             className={styles.ButtonsBooking}
             onClick={() => {
               handleBookingsClick(venue.id);
-              //openModal();
             }}
           >
             Bookings

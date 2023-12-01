@@ -1,5 +1,7 @@
 .alert {
-  padding: 5px;
+  display: flex;
+  justify-content: center;
+  padding: 10px;
   margin: 15px;
   border-radius: 8px;
   font-weight: bold;
@@ -12,5 +14,5 @@
 
 .error {
   background-color: #f8c143;
-  color: #fff;
+  color: #000000;
 }
