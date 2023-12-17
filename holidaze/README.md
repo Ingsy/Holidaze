@@ -2,6 +2,7 @@
 
 ## Table of Contents
 
+- [Logo](#Logo)
 - [Introduction](#introduction)
 - [Features](#features)
 - [Technologies Used](#technologies-used)
