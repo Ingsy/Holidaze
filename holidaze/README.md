@@ -17,6 +17,10 @@
 - [Design Prototype](#prototype)
 - [Acknowledgments](#acknowledgments)
 
+## Logo
+
+![Logo](public/Holidaze.png)
+
 ## Introduction
 
 Holidaze is a web application designed to provide users with a seamless experience for managing venues and bookings. Whether you're a venue manager or a user looking to book a space, Holidaze offers a user-friendly interface to meet your needs.
